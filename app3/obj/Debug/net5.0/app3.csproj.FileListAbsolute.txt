@@ -1,0 +1,16 @@
+D:\Dotnet\Projects\app3\bin\Debug\net5.0\app3.exe
+D:\Dotnet\Projects\app3\bin\Debug\net5.0\app3.deps.json
+D:\Dotnet\Projects\app3\bin\Debug\net5.0\app3.runtimeconfig.json
+D:\Dotnet\Projects\app3\bin\Debug\net5.0\app3.runtimeconfig.dev.json
+D:\Dotnet\Projects\app3\bin\Debug\net5.0\app3.dll
+D:\Dotnet\Projects\app3\bin\Debug\net5.0\ref\app3.dll
+D:\Dotnet\Projects\app3\bin\Debug\net5.0\app3.pdb
+D:\Dotnet\Projects\app3\obj\Debug\net5.0\app3.csprojAssemblyReference.cache
+D:\Dotnet\Projects\app3\obj\Debug\net5.0\app3.GeneratedMSBuildEditorConfig.editorconfig
+D:\Dotnet\Projects\app3\obj\Debug\net5.0\app3.AssemblyInfoInputs.cache
+D:\Dotnet\Projects\app3\obj\Debug\net5.0\app3.AssemblyInfo.cs
+D:\Dotnet\Projects\app3\obj\Debug\net5.0\app3.csproj.CoreCompileInputs.cache
+D:\Dotnet\Projects\app3\obj\Debug\net5.0\app3.dll
+D:\Dotnet\Projects\app3\obj\Debug\net5.0\ref\app3.dll
+D:\Dotnet\Projects\app3\obj\Debug\net5.0\app3.pdb
+D:\Dotnet\Projects\app3\obj\Debug\net5.0\app3.genruntimeconfig.cache
