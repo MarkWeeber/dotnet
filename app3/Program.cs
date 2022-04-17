@@ -86,7 +86,7 @@ namespace app3
             }
             else
             {
-                Console.WriteLine($"{number.ToString()} is indeed a prime number!");
+                Console.WriteLine($"{number.ToString()} is indeed  a prime number!");
             }
         }
     }
