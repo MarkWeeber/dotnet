@@ -1,0 +1,12 @@
+D:\Dotnet\Projects\app5\app5\bin\Debug\netcoreapp3.1\app5.exe
+D:\Dotnet\Projects\app5\app5\bin\Debug\netcoreapp3.1\app5.deps.json
+D:\Dotnet\Projects\app5\app5\bin\Debug\netcoreapp3.1\app5.runtimeconfig.json
+D:\Dotnet\Projects\app5\app5\bin\Debug\netcoreapp3.1\app5.runtimeconfig.dev.json
+D:\Dotnet\Projects\app5\app5\bin\Debug\netcoreapp3.1\app5.dll
+D:\Dotnet\Projects\app5\app5\bin\Debug\netcoreapp3.1\app5.pdb
+D:\Dotnet\Projects\app5\app5\obj\Debug\netcoreapp3.1\app5.AssemblyInfoInputs.cache
+D:\Dotnet\Projects\app5\app5\obj\Debug\netcoreapp3.1\app5.AssemblyInfo.cs
+D:\Dotnet\Projects\app5\app5\obj\Debug\netcoreapp3.1\app5.csproj.CoreCompileInputs.cache
+D:\Dotnet\Projects\app5\app5\obj\Debug\netcoreapp3.1\app5.dll
+D:\Dotnet\Projects\app5\app5\obj\Debug\netcoreapp3.1\app5.pdb
+D:\Dotnet\Projects\app5\app5\obj\Debug\netcoreapp3.1\app5.genruntimeconfig.cache
