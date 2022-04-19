@@ -1,0 +1,15 @@
+D:\DotNet\Projects\VSCode\app6\bin\Debug\net6.0\app6.exe
+D:\DotNet\Projects\VSCode\app6\bin\Debug\net6.0\app6.deps.json
+D:\DotNet\Projects\VSCode\app6\bin\Debug\net6.0\app6.runtimeconfig.json
+D:\DotNet\Projects\VSCode\app6\bin\Debug\net6.0\app6.dll
+D:\DotNet\Projects\VSCode\app6\bin\Debug\net6.0\app6.pdb
+D:\DotNet\Projects\VSCode\app6\obj\Debug\net6.0\app6.csproj.AssemblyReference.cache
+D:\DotNet\Projects\VSCode\app6\obj\Debug\net6.0\app6.GeneratedMSBuildEditorConfig.editorconfig
+D:\DotNet\Projects\VSCode\app6\obj\Debug\net6.0\app6.AssemblyInfoInputs.cache
+D:\DotNet\Projects\VSCode\app6\obj\Debug\net6.0\app6.AssemblyInfo.cs
+D:\DotNet\Projects\VSCode\app6\obj\Debug\net6.0\app6.csproj.CoreCompileInputs.cache
+D:\DotNet\Projects\VSCode\app6\obj\Debug\net6.0\app6.dll
+D:\DotNet\Projects\VSCode\app6\obj\Debug\net6.0\refint\app6.dll
+D:\DotNet\Projects\VSCode\app6\obj\Debug\net6.0\app6.pdb
+D:\DotNet\Projects\VSCode\app6\obj\Debug\net6.0\app6.genruntimeconfig.cache
+D:\DotNet\Projects\VSCode\app6\obj\Debug\net6.0\ref\app6.dll
