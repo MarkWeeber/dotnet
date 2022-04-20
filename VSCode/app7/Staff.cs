@@ -1,0 +1,246 @@
+using System;
+using System.IO;
+using System.Text;
+
+namespace app7
+{
+    struct Staff
+    {
+        private int id;
+        public int ID
+        {
+            get {return id;}
+            set {id = value;}
+        }
+        private DateTime recordDate;
+        public DateTime RecordDate
+        {
+            get {return recordDate;}
+        }
+        private string fullName;
+        public string FullName
+        {
+            get {return fullName;}
+        }
+        private int age;
+        public int Age
+        {
+            get {return age;}
+        }
+        private int reach;
+        public int Reach
+        {
+            get {return reach;}
+        }
+        private DateTime dateOfBirth;
+        public DateTime DateOfBirth
+        {
+            get {return dateOfBirth;}
+        }
+        private string birthPlace;
+        public string BirthPlace
+        {
+            get {return birthPlace;}
+        }
+        public Staff(int id, DateTime recordDate, string fullName, int age, DateTime dateOfBirth, int reach, string birthPlace)
+        {
+            this.id = id;
+            this.recordDate = recordDate;
+            this.fullName = fullName;
+            this.age = age;
+            this.dateOfBirth = dateOfBirth;
+            this.reach = reach;
+            this.birthPlace = birthPlace;
+        }
+        public Staff(DateTime recordDate, string fullName, int age, DateTime dateOfBirth, int reach, string birthPlace) :
+        this(-1, DateTime.Now, fullName,  age,  dateOfBirth,  reach,  birthPlace)
+        {
+            
+        }
+        public Staff(string fullName, int age, DateTime dateOfBirth, int reach, string birthPlace) :
+        this(DateTime.Now, fullName,  age,  dateOfBirth,  reach,  birthPlace)
+        {
+            
+        }
+        public string ReadStaff()
+        {
+            return id + "#" + recordDate + "#" + fullName + "#" + age + "#" + dateOfBirth + "#" + reach + "#" + birthPlace;
+        }
+        
+    }
+
+    struct StaffRepository
+    {
+        private Staff[] repo;
+        private string pathToFile;
+        private string fileName;
+        private string filePath;
+        public StaffRepository(string pathToFile, string fileName)
+        {
+            repo = null;
+            this.pathToFile = pathToFile;
+            this.fileName = fileName;
+            this.filePath = pathToFile + fileName;
+        }
+        private bool LoadRepository()
+        {
+            bool result = false;
+            repo = new Staff[0];
+            if (File.Exists(filePath))
+            {
+                int rowCount = 0;
+                using (StreamReader streamReader = new StreamReader(filePath, Encoding.Unicode))
+                {
+                    // get size of file
+                    while (streamReader.ReadLine() != null)
+                    {
+                        rowCount++;
+                    }
+                }
+                using (StreamReader streamReader = new StreamReader(filePath, Encoding.Unicode))
+                {
+                    // resize arrays
+                    Array.Resize(ref repo, rowCount);
+                    // copy the data
+                    for (int i = 0; i < rowCount; i++)
+                    {
+                        string[] rowData = streamReader.ReadLine().Split("#");
+                        repo[i] = new Staff(
+                            int.Parse(rowData[0]),
+                            DateTime.Parse(rowData[1]),
+                            rowData[2],
+                            int.Parse(rowData[3]),
+                            DateTime.Parse(rowData[4]),
+                            int.Parse(rowData[5]),
+                            rowData[6]
+                        );
+                    }
+                }
+                result = true;
+            }
+            return result;
+        }
+
+        public Staff ReadRepository(int index)
+        {
+            bool loadResult = true;
+            if(repo == null)
+            {
+                loadResult = LoadRepository();
+            }
+            if(loadResult)
+            {
+                return repo[Array.IndexOf(repo, index)];
+            }
+            else
+            {
+                return new Staff();
+            }
+        }
+
+        public Staff[] ReadRepository()
+        {
+            bool loadResult = true;
+            if(repo == null)
+            {
+                loadResult = LoadRepository();
+            }
+            if(loadResult)
+            {
+                return repo;
+            }
+            else
+            {
+                return new Staff[0];
+            }
+        }
+
+        public Staff[] ReadRepository(DateTime dateFrom, DateTime dateTo)
+        {
+            bool loadResult = true;
+            if(repo == null)
+            {
+                loadResult = LoadRepository();
+            }
+            if(loadResult)
+            {
+                int size = repo.Length;
+                Staff[] ans = new Staff[size];
+                int actuallSize = 0;
+                for (int i = 0; i < repo.Length; i++)
+                {
+                    if (repo[i].RecordDate > dateFrom && repo[i].RecordDate < dateTo)
+                    {
+                        ans[actuallSize] = repo[i];
+                        actuallSize++;
+                    }
+                }
+                Array.Resize(ref ans, actuallSize);
+                return ans;
+            }
+            else
+            {
+                return new Staff[0];
+            }
+        }
+
+        public void AddStaff(Staff staff)
+        {
+            bool loadResult = true;
+            if(repo == null)
+            {
+                loadResult = LoadRepository();
+            }
+            if(!loadResult)
+            {
+                // brand new file
+                Directory.CreateDirectory(pathToFile);
+                File.Create(filePath).Close();
+                repo = new Staff[0];
+            }
+            int size = repo.Length;
+            staff.ID = GetLastIncrementor()+1;
+            Array.Resize(ref repo, size+1);
+            repo[size] = staff; 
+            // now record to file
+            using (StreamWriter streamWriter = new StreamWriter (filePath, true, Encoding.Unicode))
+            {
+                streamWriter.WriteLine(repo[size].ReadStaff());
+            }
+            // re-load repository
+            LoadRepository();
+        }
+
+        private int GetLastIncrementor()
+        {
+            int ans = -1;
+            if(repo == null)
+            {
+                LoadRepository();
+            }
+            for (int i = 0; i < repo.Length; i++)
+            {
+                if(repo[i].ID > ans)
+                {
+                    ans = repo[i].ID;
+                }
+            }
+            return ans;
+        }
+        public void EditStaff(int index, Staff staff)
+        {
+            repo[index] = staff;
+            // update whole file
+            using (StreamWriter streamWriter = new StreamWriter (filePath, true, Encoding.Unicode))
+            {
+                // clean file
+                streamWriter.Write("");
+                // add each new line
+                foreach (Staff item in repo)
+                {
+                    streamWriter.WriteLine((String.Join("#",item)));
+                }
+            }
+        }
+    }
+}
