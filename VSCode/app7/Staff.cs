@@ -75,16 +75,18 @@ namespace app7
         private string pathToFile;
         private string fileName;
         private string filePath;
+        private bool fileLoaded;
         public StaffRepository(string pathToFile, string fileName)
         {
-            repo = null;
+            repo = new Staff[0];
+            fileLoaded = false;
             this.pathToFile = pathToFile;
             this.fileName = fileName;
             this.filePath = pathToFile + fileName;
         }
-        private bool LoadRepository()
+        private void LoadRepository()
         {
-            bool result = false;
+            fileLoaded = false;
             repo = new Staff[0];
             if (File.Exists(filePath))
             {
@@ -116,19 +118,14 @@ namespace app7
                         );
                     }
                 }
-                result = true;
+                fileLoaded = true;
             }
-            return result;
         }
 
         public Staff ReadRepository(int index)
         {
-            bool loadResult = true;
-            if(repo == null)
-            {
-                loadResult = LoadRepository();
-            }
-            if(loadResult)
+            LoadRepository(); // try to load file
+            if(!fileLoaded) // if still no file found
             {
                 return repo[Array.IndexOf(repo, index)];
             }
@@ -140,12 +137,8 @@ namespace app7
 
         public Staff[] ReadRepository()
         {
-            bool loadResult = true;
-            if(repo == null)
-            {
-                loadResult = LoadRepository();
-            }
-            if(loadResult)
+            LoadRepository(); // try to load file
+            if(fileLoaded)
             {
                 return repo;
             }
@@ -157,12 +150,8 @@ namespace app7
 
         public Staff[] ReadRepository(DateTime dateFrom, DateTime dateTo)
         {
-            bool loadResult = true;
-            if(repo == null)
-            {
-                loadResult = LoadRepository();
-            }
-            if(loadResult)
+            LoadRepository(); // try to load file
+            if(fileLoaded)
             {
                 int size = repo.Length;
                 Staff[] ans = new Staff[size];
@@ -186,15 +175,10 @@ namespace app7
 
         public void AddStaff(Staff staff)
         {
-            bool loadResult = true;
-            if(repo == null)
+            LoadRepository(); // try to load file
+            if(!fileLoaded) // if still no file found
             {
-                loadResult = LoadRepository();
-            }
-            if(!loadResult)
-            {
-                // brand new file
-                Directory.CreateDirectory(pathToFile);
+                Directory.CreateDirectory(pathToFile); // create new file
                 File.Create(filePath).Close();
                 repo = new Staff[0];
             }
@@ -207,17 +191,12 @@ namespace app7
             {
                 streamWriter.WriteLine(repo[size].ReadStaff());
             }
-            // re-load repository
-            LoadRepository();
         }
 
         private int GetLastIncrementor()
         {
             int ans = -1;
-            if(repo == null)
-            {
-                LoadRepository();
-            }
+            LoadRepository();
             for (int i = 0; i < repo.Length; i++)
             {
                 if(repo[i].ID > ans)
@@ -229,16 +208,162 @@ namespace app7
         }
         public void EditStaff(int index, Staff staff)
         {
+            int staffId = repo[index].ID;
             repo[index] = staff;
-            // update whole file
+            repo[index].ID = staffId;
+            // clean file
+            File.WriteAllText(filePath, String.Empty);
             using (StreamWriter streamWriter = new StreamWriter (filePath, true, Encoding.Unicode))
             {
-                // clean file
-                streamWriter.Write("");
                 // add each new line
                 foreach (Staff item in repo)
                 {
-                    streamWriter.WriteLine((String.Join("#",item)));
+                    streamWriter.WriteLine(item.ReadStaff());
+                }
+            }
+        }
+
+        public void DeleteStaff(int index)
+        {
+            // prepare new repo
+            int size = repo.Length;
+            for (int i = index; i < size - 1; i++)
+            {
+                repo[i] = repo[i+1];
+            }
+            Array.Resize(ref repo, size - 1);
+            // clean file
+            File.WriteAllText(filePath, String.Empty);
+            using (StreamWriter streamWriter = new StreamWriter (filePath, true, Encoding.Unicode))
+            {
+                // add each new line
+                foreach (Staff item in repo)
+                {
+                    streamWriter.WriteLine(item.ReadStaff());
+                }
+            }
+        }
+
+        public int RepoSize()
+        {
+            int ans = -1;
+            return repo.Length;
+        }
+
+        public void SortById(bool ascending = true)
+        {
+            if(ascending)
+            {
+                for (int i = repo.Length; i >= 0; i--)
+                {
+                    for (int j = 0; j < i - 1; j++)
+                    {
+                        if(repo[j].ID > repo[j+1].ID)
+                        {
+                            Staff temp = repo[j];
+                            repo[j] = repo[j + 1];
+                            repo[j + 1] = temp;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                for (int i = repo.Length; i >= 0; i--)
+                {
+                    for (int j = 0; j < i - 1; j++)
+                    {
+                        if(repo[j].ID < repo[j+1].ID)
+                        {
+                            Staff temp = repo[j];
+                            repo[j] = repo[j + 1];
+                            repo[j + 1] = temp;
+                        }
+                    }
+                }
+            }
+            ResetRepo();
+        }
+
+        public void SortByRecordDates(bool ascending = true)
+        {
+            if(ascending)
+            {
+                for (int i = repo.Length; i >= 0; i--)
+                {
+                    for (int j = 0; j < i - 1; j++)
+                    {
+                        if(DateTime.Compare(repo[j].RecordDate, repo[j+1].RecordDate) > 0)
+                        {
+                            Staff temp = repo[j];
+                            repo[j] = repo[j + 1];
+                            repo[j + 1] = temp;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                for (int i = repo.Length; i >= 0; i--)
+                {
+                    for (int j = 0; j < i - 1; j++)
+                    {
+                        if(DateTime.Compare(repo[j].RecordDate, repo[j+1].RecordDate) < 0)
+                        {
+                            Staff temp = repo[j];
+                            repo[j] = repo[j + 1];
+                            repo[j + 1] = temp;
+                        }
+                    }
+                }
+            }
+            ResetRepo();
+        }
+        public void SortByBirthDates(bool ascending = true)
+        {
+            if(ascending)
+            {
+                for (int i = repo.Length; i >= 0; i--)
+                {
+                    for (int j = 0; j < i - 1; j++)
+                    {
+                        if(DateTime.Compare(repo[j].DateOfBirth, repo[j+1].DateOfBirth) > 0)
+                        {
+                            Staff temp = repo[j];
+                            repo[j] = repo[j + 1];
+                            repo[j + 1] = temp;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                for (int i = repo.Length; i >= 0; i--)
+                {
+                    for (int j = 0; j < i - 1; j++)
+                    {
+                        if(DateTime.Compare(repo[j].DateOfBirth, repo[j+1].DateOfBirth) < 0)
+                        {
+                            Staff temp = repo[j];
+                            repo[j] = repo[j + 1];
+                            repo[j + 1] = temp;
+                        }
+                    }
+                }
+            }
+            ResetRepo();
+        }
+
+        private void ResetRepo()
+        {
+            // clean file
+            File.WriteAllText(filePath, String.Empty);
+            using (StreamWriter streamWriter = new StreamWriter (filePath, true, Encoding.Unicode))
+            {
+                // add each new line
+                foreach (Staff item in repo)
+                {
+                    streamWriter.WriteLine(item.ReadStaff());
                 }
             }
         }
