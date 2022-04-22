@@ -1,0 +1,15 @@
+D:\DotNet\Projects\VSCode\app8\bin\Debug\net6.0\app8.exe
+D:\DotNet\Projects\VSCode\app8\bin\Debug\net6.0\app8.deps.json
+D:\DotNet\Projects\VSCode\app8\bin\Debug\net6.0\app8.runtimeconfig.json
+D:\DotNet\Projects\VSCode\app8\bin\Debug\net6.0\app8.dll
+D:\DotNet\Projects\VSCode\app8\bin\Debug\net6.0\app8.pdb
+D:\DotNet\Projects\VSCode\app8\obj\Debug\net6.0\app8.csproj.AssemblyReference.cache
+D:\DotNet\Projects\VSCode\app8\obj\Debug\net6.0\app8.GeneratedMSBuildEditorConfig.editorconfig
+D:\DotNet\Projects\VSCode\app8\obj\Debug\net6.0\app8.AssemblyInfoInputs.cache
+D:\DotNet\Projects\VSCode\app8\obj\Debug\net6.0\app8.AssemblyInfo.cs
+D:\DotNet\Projects\VSCode\app8\obj\Debug\net6.0\app8.csproj.CoreCompileInputs.cache
+D:\DotNet\Projects\VSCode\app8\obj\Debug\net6.0\app8.dll
+D:\DotNet\Projects\VSCode\app8\obj\Debug\net6.0\refint\app8.dll
+D:\DotNet\Projects\VSCode\app8\obj\Debug\net6.0\app8.pdb
+D:\DotNet\Projects\VSCode\app8\obj\Debug\net6.0\app8.genruntimeconfig.cache
+D:\DotNet\Projects\VSCode\app8\obj\Debug\net6.0\ref\app8.dll
