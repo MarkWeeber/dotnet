@@ -31,16 +31,16 @@ namespace app8
             {
                 Console.Clear();
                 Console.WriteLine("Enter Person's phone number");
-                inputString = Console.ReadLine().ToString();
-                string phoneNumber = inputString.Trim();
-                if (inputString == "")
+                inputString = Console.ReadLine().ToString().Trim();
+                string phoneNumber = inputString;
+                if (inputString == String.Empty)
                 {
                     break;
                 }
                 Console.WriteLine("Enter Person's name");
-                inputString = Console.ReadLine().ToString();
+                inputString = Console.ReadLine().ToString().Trim();
                 string name = inputString.Trim();
-                if (inputString == "")
+                if (inputString == String.Empty)
                 {
                     break;
                 }
