@@ -1,0 +1,17 @@
+D:\DotNet\Projects\VSCode\app9\obj\Debug\net6.0\app9.csproj.AssemblyReference.cache
+D:\DotNet\Projects\VSCode\app9\obj\Debug\net6.0\app9.GeneratedMSBuildEditorConfig.editorconfig
+D:\DotNet\Projects\VSCode\app9\obj\Debug\net6.0\app9.AssemblyInfoInputs.cache
+D:\DotNet\Projects\VSCode\app9\obj\Debug\net6.0\app9.AssemblyInfo.cs
+D:\DotNet\Projects\VSCode\app9\obj\Debug\net6.0\app9.csproj.CoreCompileInputs.cache
+D:\DotNet\Projects\VSCode\app9\bin\Debug\net6.0\app9.exe
+D:\DotNet\Projects\VSCode\app9\bin\Debug\net6.0\app9.deps.json
+D:\DotNet\Projects\VSCode\app9\bin\Debug\net6.0\app9.runtimeconfig.json
+D:\DotNet\Projects\VSCode\app9\bin\Debug\net6.0\app9.dll
+D:\DotNet\Projects\VSCode\app9\bin\Debug\net6.0\app9.pdb
+D:\DotNet\Projects\VSCode\app9\obj\Debug\net6.0\app9.dll
+D:\DotNet\Projects\VSCode\app9\obj\Debug\net6.0\refint\app9.dll
+D:\DotNet\Projects\VSCode\app9\obj\Debug\net6.0\app9.pdb
+D:\DotNet\Projects\VSCode\app9\obj\Debug\net6.0\app9.genruntimeconfig.cache
+D:\DotNet\Projects\VSCode\app9\obj\Debug\net6.0\ref\app9.dll
+D:\DotNet\Projects\VSCode\app9\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\DotNet\Projects\VSCode\app9\obj\Debug\net6.0\app9.csproj.CopyComplete
