@@ -1,0 +1,5 @@
+D:\Dotnet\Projects\VSCode\app91\obj\Debug\net5.0\app91.csprojAssemblyReference.cache
+D:\Dotnet\Projects\VSCode\app91\obj\Debug\net5.0\app91.GeneratedMSBuildEditorConfig.editorconfig
+D:\Dotnet\Projects\VSCode\app91\obj\Debug\net5.0\app91.AssemblyInfoInputs.cache
+D:\Dotnet\Projects\VSCode\app91\obj\Debug\net5.0\app91.AssemblyInfo.cs
+D:\Dotnet\Projects\VSCode\app91\obj\Debug\net5.0\app91.csproj.CoreCompileInputs.cache

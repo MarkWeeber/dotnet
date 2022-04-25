@@ -1,0 +1,69 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Dotnet\\Projects\\VSCode\\app91\\app91.csproj": {}
+  },
+  "projects": {
+    "D:\\Dotnet\\Projects\\VSCode\\app91\\app91.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Dotnet\\Projects\\VSCode\\app91\\app91.csproj",
+        "projectName": "app91",
+        "projectPath": "D:\\Dotnet\\Projects\\VSCode\\app91\\app91.csproj",
+        "packagesPath": "C:\\Users\\Arcanus\\.nuget\\packages\\",
+        "outputPath": "D:\\Dotnet\\Projects\\VSCode\\app91\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Arcanus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://www.myget.org/F/discord-net/api/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Discord.Net": {
+              "target": "Package",
+              "version": "[3.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
