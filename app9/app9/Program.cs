@@ -1,70 +1,79 @@
 ﻿using System;
-using System.Reflection;
+using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
-using Discord;
-using Discord.Commands;
-using Discord.WebSocket;
-using Microsoft.Extensions.DependencyInjection;
+using Telegram.Bot;
+using Telegram.Bot.Args;
 
 namespace app9
 {
     class Program
     {
-        static void Main(string[] args) => new Program().RunBotAsync().GetAwaiter().GetResult();
-
-        private DiscordSocketClient _client;
-        private CommandService _commands;
-        private IServiceProvider _services;
-
-        public async Task RunBotAsync()
+        private static TelegramBotClient client;
+        private static string saveDirectory;
+        private static string token;
+        static void Main(string[] args)
         {
-            _client = new DiscordSocketClient();
-            _commands = new CommandService();
-
-            _services = new ServiceCollection()
-                .AddSingleton(_client)
-                .AddSingleton(_commands)
-                .BuildServiceProvider();
-
-            string token = "OTY4MTM5NjEzMjAzOTg4NTQy.YmagRg.YFISG664hcl2SkzZCO-xpIYVYk4";
-
-            _client.Log += _client_Log;
-
-            await RegisterCommandsAsync();
-
-            await _client.LoginAsync(TokenType.Bot, token);
-
-            await _client.StartAsync();
-
-            await Task.Delay(-1);
-
+            saveDirectory = Directory.GetCurrentDirectory() + @"\save\";
+            token = File.ReadAllText(Directory.GetCurrentDirectory() + @"\telegramToken.txt");
+            client = new TelegramBotClient(token);
+            client.StartReceiving();
+            client.OnMessage += OnMessageHandler;
+            Console.ReadLine();
+            client.StopReceiving();
         }
 
-        private Task _client_Log(LogMessage arg)
+        private static async void OnMessageHandler(object sender, MessageEventArgs e)
         {
-            Console.WriteLine(arg);
-            return Task.CompletedTask;
-        }
-
-        public async Task RegisterCommandsAsync()
-        {
-            _client.MessageReceived += HandleCommandAsync;
-            await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _services);
-        }
-
-        private async Task HandleCommandAsync(SocketMessage arg)
-        {
-            var message = arg as SocketUserMessage;
-            var context = new SocketCommandContext(_client, message);
-            if (message.Author.IsBot) return;
-
-            int argPos = 0;
-            if (message.HasStringPrefix("!", ref argPos))
+            Telegram.Bot.Types.Enums.MessageType type = e.Message.Type;
+            string prefix = "";
+            string suffix = "";
+            switch (type)
             {
-                var result = await _commands.ExecuteAsync(context, argPos, _services);
-                if (!result.IsSuccess) Console.WriteLine(result.ErrorReason);
-                if (result.Error.Equals(CommandError.UnmetPrecondition)) await message.Channel.SendMessageAsync(result.ErrorReason);
+                case Telegram.Bot.Types.Enums.MessageType.Text:
+                    prefix = "wrote:";
+                    suffix = e.Message.Text;
+                    break;
+                case Telegram.Bot.Types.Enums.MessageType.Document:
+                    prefix = "sent a document, saved with name:";
+                    suffix = e.Message.Document.FileName;
+                    DownloadFile(e.Message.Document.FileId, e.Message.Document.FileName);
+                    break;
+                case Telegram.Bot.Types.Enums.MessageType.Photo:
+                    prefix = "sent a photo, saved with name:";
+                    suffix = "photo_" + e.Message.MessageId + ".png";
+                    DownloadFile(e.Message.Photo[e.Message.Photo.Length - 1].FileId, suffix);
+                    break;
+                case Telegram.Bot.Types.Enums.MessageType.Voice:
+                    prefix = "sent a audio message, saved with name:";
+                    suffix = "audio_" + e.Message.MessageId + ".mp3";
+                    DownloadFile(e.Message.Voice.FileId, suffix);
+                    break;
+                default: break;
+            }
+            
+            string text = $"{DateTime.Now} : {e.Message.Chat.FirstName} {e.Message.Chat.LastName} {prefix} {suffix}";
+            Console.WriteLine(text);
+            // checking for /start command
+            if (e.Message.Text == "/start")
+            {
+                string response = "Already started";
+                await client.SendTextMessageAsync(e.Message.Chat.Id, response);
             }
         }
+
+        private static async void DownloadFile(string fileId, string fileName)
+        {
+            var file = await client.GetFileAsync(fileId);
+            if (!Directory.Exists(saveDirectory))
+            {
+                Directory.CreateDirectory(saveDirectory);
+            }
+            FileStream fileStream = new FileStream(saveDirectory + fileName, FileMode.Create);
+            await client.DownloadFileAsync(file.FilePath, fileStream);
+            fileStream.Close();
+            fileStream.Dispose();
+        }
+
     }
 }
