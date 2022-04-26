@@ -1,57 +1,70 @@
 ﻿using System;
 using System.IO;
-using System.Text;
-using System.Net;
-using System.Net.Http;
-using Newtonsoft.Json.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Telegram.Bot;
+using Telegram.Bot.Args;
 
 namespace app9
 {
     class Program
     {
+        private static TelegramBotClient client;
+        private static string saveDirectory;
+        private static string token;
         static void Main(string[] args)
         {
-            Thread backGroundBot = new Thread(BackGroundBot);
-            backGroundBot.Start();
+            saveDirectory = Directory.GetCurrentDirectory() + @"\save\";
+            token = File.ReadAllText(Directory.GetCurrentDirectory() + @"\telegramToken.txt");
+            client = new TelegramBotClient(token);
+            client.StartReceiving();
+            client.OnMessage += OnMessageHandler;
+            Console.ReadLine();
+            client.StopReceiving();
         }
 
-        public static void BackGroundBot()
+        private static async void OnMessageHandler(object sender, MessageEventArgs e)
         {
-            // webclient
-            string token = "5312751149:AAGuVhdeFApjlBuH2_6gVpxlrnJlpJM0YFs";
-            string startUrl = $@"https://api.telegram.org/bot{token}/";
-
-            WebClient wc = new WebClient() {Encoding = Encoding.UTF8};
-            HttpClient hc = new HttpClient();
-            int updateId = 0;
-
-            while (true)
+            Telegram.Bot.Types.Enums.MessageType type = e.Message.Type;
+            string prefix = "";
+            string suffix = "";
+            switch (type)
             {
-                string url = $"{startUrl}getUpdates?offset={updateId}";
-                var r = wc.DownloadString(url);
-                //Console.WriteLine(r);
-                // breaking down the message json
-                var message = JObject.Parse(r)["result"].ToArray();
-                foreach (dynamic msg in message)
-                {
-                    updateId = Convert.ToInt32(msg.update_id) + 1;
-                    string userMessage = msg.message.text;
-                    string userId = msg.message.from.id;
-                    string userFirstName = msg.message.from.first_name;
-                    string text = $"{userFirstName} {userId} {userMessage}";
-                    Console.WriteLine(text);
-
-                    if (userMessage == "hi")
-                    {
-                        string responseText = $"Hi, {userFirstName}";
-                        url = $"{startUrl}sendMessage?chat_id={userId}&text={responseText}";
-                        Console.WriteLine("+");
-                        wc.DownloadString(url);
-                        Console.WriteLine(text);
-                    }
-                }
-                Thread.Sleep(1000);
+                
+                case Telegram.Bot.Types.Enums.MessageType.Text:
+                prefix = "wrote:";
+                suffix = e.Message.Text;
+                break;
+                case Telegram.Bot.Types.Enums.MessageType.Document:
+                prefix = "sent a document, saved with name:";
+                suffix = e.Message.Document.FileName;
+                DownloadFile(e.Message.Document.FileId, e.Message.Document.FileName);
+                break;
+                case Telegram.Bot.Types.Enums.MessageType.Photo:
+                prefix = "sent a photo, saved with name:";
+                suffix = "photo_" + e.Message.Photo.FileId;
+                DownloadFile(e.Message.Photo.FileId, suffix);
+                break;
+                default: break;
+            }
+            string text = $"{DateTime.Now} : {e.Message.Chat.FirstName} {e.Message.Chat.LastName} {prefix} {suffix}";
+            Console.WriteLine(text);
+            // checking for /start command
+            if(e.Message.Text == "/start")
+            {
+                string response = "Already started";
+                await client.SendTextMessageAsync(e.Message.Chat.Id, response);
             }
         }
+
+        private static async void DownloadFile(string fileId, string fileName)
+        {
+            var file = await client.GetFileAsync(fileId);
+            FileStream fileStream = new FileStream(saveDirectory + fileName, FileMode.Create);
+            await client.DownloadFileAsync(file.FilePath, fileStream);
+            fileStream.Close();
+            fileStream.Dispose();
+        }
+
     }
 }
