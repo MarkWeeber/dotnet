@@ -1,26 +1,29 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Args;
+using Telegram.Bot.Types.InputFiles;
 
 namespace app9
 {
     class Program
     {
-        private static TelegramBotClient client;
-        private static string saveDirectory;
-        private static string token;
+        private static TelegramBotClient Client;
+        private static string SaveDirectory;
+        private static string Token;
         static void Main(string[] args)
         {
-            saveDirectory = Directory.GetCurrentDirectory() + @"\save\";
-            token = File.ReadAllText(Directory.GetCurrentDirectory() + @"\telegramToken.txt");
-            client = new TelegramBotClient(token);
-            client.StartReceiving();
-            client.OnMessage += OnMessageHandler;
+            SaveDirectory = Directory.GetCurrentDirectory() + @"\save\";
+            //Console.WriteLine(Directory.GetCurrentDirectory());
+            Token = File.ReadAllText(Directory.GetCurrentDirectory() + @"\telegramToken.txt");
+            Client = new TelegramBotClient(Token);
+            Client.StartReceiving();
+            Client.OnMessage += OnMessageHandler;
             Console.ReadLine();
-            client.StopReceiving();
+            Client.StopReceiving();
         }
 
         private static async void OnMessageHandler(object sender, MessageEventArgs e)
@@ -30,6 +33,7 @@ namespace app9
             string suffix = "";
             switch (type)
             {
+
                 case Telegram.Bot.Types.Enums.MessageType.Text:
                     prefix = "wrote:";
                     suffix = e.Message.Text;
@@ -51,29 +55,62 @@ namespace app9
                     break;
                 default: break;
             }
-            
             string text = $"{DateTime.Now} : {e.Message.Chat.FirstName} {e.Message.Chat.LastName} {prefix} {suffix}";
             Console.WriteLine(text);
+            // greeting
+            if (e.Message.Text.Trim().ToLower() == "hi")
+            {
+                await Client.SendTextMessageAsync(e.Message.Chat.Id, "Hi, this is telegram bot, you can send me messages, I will save any documment, photo and voice message you send me, if you type /files - I will list all files I saved");
+            }
             // checking for /start command
             if (e.Message.Text == "/start")
             {
-                string response = "Already started";
-                await client.SendTextMessageAsync(e.Message.Chat.Id, response);
+                await Client.SendTextMessageAsync(e.Message.Chat.Id, "Already started");
+            }
+            // listing present files in save directory to user
+            if (e.Message.Text == "/files")
+            {
+                if (!Directory.Exists(SaveDirectory) || !Directory.EnumerateFileSystemEntries(SaveDirectory).Any())
+                {
+                    await Client.SendTextMessageAsync(e.Message.Chat.Id, "No files saved");
+                }
+                else
+                {
+                    DirectoryInfo di = new DirectoryInfo(SaveDirectory);
+                    FileInfo[] filesInDirectory = di.GetFiles("*.*");
+                    if (filesInDirectory.Length > 0)
+                    {
+                        await Client.SendTextMessageAsync(e.Message.Chat.Id, "Here are some files saved in my directory");
+                    }
+                    else
+                    {
+                        await Client.SendTextMessageAsync(e.Message.Chat.Id, "No files saved");
+                    }
+                    foreach (var item in filesInDirectory)
+                    {
+                        string filePath = SaveDirectory + item.Name;
+                        using (FileStream fs = File.Open(filePath, FileMode.Open))
+                        {
+                            InputOnlineFile file = new InputOnlineFile(fs);
+                            file.FileName = item.Name;
+                            await Client.SendDocumentAsync(e.Message.Chat.Id, file, "MESSAGE");
+                        }
+                    }
+                }
             }
         }
 
         private static async void DownloadFile(string fileId, string fileName)
         {
-            var file = await client.GetFileAsync(fileId);
-            if (!Directory.Exists(saveDirectory))
+            var file = await Client.GetFileAsync(fileId);
+            if (!Directory.Exists(SaveDirectory))
             {
-                Directory.CreateDirectory(saveDirectory);
+                Directory.CreateDirectory(SaveDirectory);
             }
-            FileStream fileStream = new FileStream(saveDirectory + fileName, FileMode.Create);
-            await client.DownloadFileAsync(file.FilePath, fileStream);
+            FileStream fileStream = new FileStream(SaveDirectory + fileName, FileMode.Create);
+            await Client.DownloadFileAsync(file.FilePath, fileStream);
             fileStream.Close();
             fileStream.Dispose();
         }
-
     }
 }
