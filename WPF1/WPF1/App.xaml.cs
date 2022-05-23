@@ -13,5 +13,9 @@ namespace WPF1
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            MessageBox.Show("Hello World!","Welcome to Telegram Bot");
+        }
     }
 }

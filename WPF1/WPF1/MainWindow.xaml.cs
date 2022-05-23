@@ -24,5 +24,14 @@ namespace WPF1
         {
             InitializeComponent();
         }
+
+        private void Send_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("CLICK TEST");
+        }
+        private void Clear_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("CLEAR TEST");
+        }
     }
 }
