@@ -20,3 +20,11 @@ D:\Dotnet\Projects\WPF1\WPF1\bin\Debug\MaterialDesignThemes.Wpf.pdb
 D:\Dotnet\Projects\WPF1\WPF1\bin\Debug\MaterialDesignThemes.Wpf.xml
 D:\Dotnet\Projects\WPF1\WPF1\obj\Debug\App.baml
 D:\Dotnet\Projects\WPF1\WPF1\obj\Debug\WPF1.csproj.CopyComplete
+D:\Dotnet\Projects\WPF1\WPF1\bin\Debug\Newtonsoft.Json.dll
+D:\Dotnet\Projects\WPF1\WPF1\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\Dotnet\Projects\WPF1\WPF1\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\Dotnet\Projects\WPF1\WPF1\bin\Debug\Telegram.Bot.dll
+D:\Dotnet\Projects\WPF1\WPF1\bin\Debug\Newtonsoft.Json.xml
+D:\Dotnet\Projects\WPF1\WPF1\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\Dotnet\Projects\WPF1\WPF1\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\Dotnet\Projects\WPF1\WPF1\bin\Debug\Telegram.Bot.xml

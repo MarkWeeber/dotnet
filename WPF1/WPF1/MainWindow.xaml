@@ -14,8 +14,42 @@
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
+        <!--<ListView
+                Grid.Row="0"    
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Margin="10"
+                Background="Aqua"
+                >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>-->
+        <ListBox
+                x:Name="MessageLogListBox"
+                HorizontalAlignment="Stretch"
+                Margin="15"
+                VerticalAlignment="Stretch" Background="#FFDEFDFD">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border
+                            BorderBrush="Black"
+                            Margin="5"
+                            BorderThickness="1"
+                            CornerRadius="15">
+                        <StackPanel Margin="10">
+                            <TextBlock Text="{Binding SenderName}" Margin="0" FontSize="14"/>
+                            <TextBlock Text="{Binding Message}" Margin="0" FontSize="18" TextWrapping="Wrap" />
+                            <TextBlock Text="{Binding Time}" Margin="0" FontSize="11" Foreground="Gray" TextAlignment ="Right"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <Grid Grid.Row="1" ShowGridLines="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" MinWidth="80"/>
@@ -23,14 +57,12 @@
                 <ColumnDefinition Width="80"/>
             </Grid.ColumnDefinitions>
             <Button Content="Send"
-                    HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
-                    Width="65"
-                    Margin="5"
+                    Margin="8,34,0,34"
                     Background="#FF12B0C9"
                     BorderThickness="2"
                     Click="Send_Click"
-                    Grid.Column="1"
+                    Grid.Column="1" HorizontalAlignment="Left" Width="65"
                     />
             <Button Content="Clear"
                     HorizontalAlignment="Stretch"
@@ -42,15 +74,49 @@
                     Click="Clear_Click"
                     Grid.Column="2"
                     />
-            <TextBox
+            <Grid Grid.Column="0" ShowGridLines="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" ShowGridLines="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="*" MinWidth="80"/>
+                    </Grid.ColumnDefinitions>
+                <TextBlock 
+                    HorizontalAlignment="Left"
+                    Text="Send To: "
+                    Margin="10,2,10,2"
+                    Grid.Column="0"
+                    TextWrapping="Wrap"
+                    VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBlock 
+                    HorizontalAlignment="Left"
+                    Text="{Binding ElementName=MessageLogListBox, Path=SelectedItem.SenderName}"
+                    Margin="10,2,10,2"
+                    Grid.Column="1"
+                    TextWrapping="Wrap"
+                    VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBlock 
+                    HorizontalAlignment="Left"
+                    x:Name="SendTo"
+                    Text="{Binding ElementName=MessageLogListBox, Path=SelectedItem.id}"
+                    Grid.Column="1"
+                    Visibility="Hidden"
+                    />
+                </Grid>
+                <TextBox
+                    Grid.Row="1"
+                    x:Name="InputArea"
                     TextWrapping="Wrap"
                     Text=""
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
-                    Margin="10"
+                    Margin="10 5 10 10"
                     BorderThickness="1"
-                    Grid.Column="0"
                     />
+            </Grid>
         </Grid>
     </Grid>
 </Window>

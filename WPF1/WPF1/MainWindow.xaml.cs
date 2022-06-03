@@ -20,18 +20,37 @@ namespace WPF1
     /// </summary>
     public partial class MainWindow : Window
     {
+        TelegramClient client;
         public MainWindow()
         {
             InitializeComponent();
+            client = new TelegramClient(this);
+            MessageLogListBox.ItemsSource = client.chatMessages;
         }
 
         private void Send_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("CLICK TEST");
+            
+            if (InputArea.Text == "")
+            {
+                MessageBox.Show($"Please enter your message text");
+            }
+            else
+            {
+                if(SendTo.Text == "")
+                {
+                    MessageBox.Show($"Please select whom to send message");
+                }
+                else
+                {
+                    client.SendMessage(InputArea.Text, SendTo.Text);
+                    InputArea.Text = "";
+                }
+            }
         }
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("CLEAR TEST");
+            InputArea.Text = "";
         }
     }
 }
