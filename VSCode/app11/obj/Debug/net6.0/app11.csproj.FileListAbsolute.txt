@@ -1,0 +1,15 @@
+D:\DotNet\Projects\VSCode\app11\bin\Debug\net6.0\app11.exe
+D:\DotNet\Projects\VSCode\app11\bin\Debug\net6.0\app11.deps.json
+D:\DotNet\Projects\VSCode\app11\bin\Debug\net6.0\app11.runtimeconfig.json
+D:\DotNet\Projects\VSCode\app11\bin\Debug\net6.0\app11.dll
+D:\DotNet\Projects\VSCode\app11\bin\Debug\net6.0\app11.pdb
+D:\DotNet\Projects\VSCode\app11\obj\Debug\net6.0\app11.csproj.AssemblyReference.cache
+D:\DotNet\Projects\VSCode\app11\obj\Debug\net6.0\app11.GeneratedMSBuildEditorConfig.editorconfig
+D:\DotNet\Projects\VSCode\app11\obj\Debug\net6.0\app11.AssemblyInfoInputs.cache
+D:\DotNet\Projects\VSCode\app11\obj\Debug\net6.0\app11.AssemblyInfo.cs
+D:\DotNet\Projects\VSCode\app11\obj\Debug\net6.0\app11.csproj.CoreCompileInputs.cache
+D:\DotNet\Projects\VSCode\app11\obj\Debug\net6.0\app11.dll
+D:\DotNet\Projects\VSCode\app11\obj\Debug\net6.0\refint\app11.dll
+D:\DotNet\Projects\VSCode\app11\obj\Debug\net6.0\app11.pdb
+D:\DotNet\Projects\VSCode\app11\obj\Debug\net6.0\app11.genruntimeconfig.cache
+D:\DotNet\Projects\VSCode\app11\obj\Debug\net6.0\ref\app11.dll
