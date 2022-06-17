@@ -13,3 +13,5 @@ D:\DotNet\Projects\VSCode\app11\obj\Debug\net6.0\refint\app11.dll
 D:\DotNet\Projects\VSCode\app11\obj\Debug\net6.0\app11.pdb
 D:\DotNet\Projects\VSCode\app11\obj\Debug\net6.0\app11.genruntimeconfig.cache
 D:\DotNet\Projects\VSCode\app11\obj\Debug\net6.0\ref\app11.dll
+D:\DotNet\Projects\VSCode\app11\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\DotNet\Projects\VSCode\app11\obj\Debug\net6.0\app11.csproj.CopyComplete

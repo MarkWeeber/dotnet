@@ -47,6 +47,10 @@ namespace app11
         {
             if (NewPhone != String.Empty)
             {
+                CustomerChange change = new CustomerChange(); 
+                change.oldPhone = customer.Phone;
+                change.user = this;
+                customer.changelog.Add(change);
                 customer.Phone = NewPhone;
             }
         }

@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Iw+/yec9iWDUIdC9kvjW6+HljlbO9Pk8X6onkfvm+sWuQ3FHssYgNUMduka0ZbM5UfT5+AgLLpYDZuzetVOqLg==",
+  "dgSpecHash": "GT4Sh5onSYQUDFWTD3WQZh5uLKUxcZ/hOpm6JDeVDOCfzOwsCu9uKbD3WOvlqaJUTobKmYa7phd2XjdrDyhPjQ==",
   "success": true,
   "projectFilePath": "D:\\DotNet\\Projects\\VSCode\\app11\\app11.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\asylbekka\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
   "logs": []
 }
