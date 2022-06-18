@@ -2,9 +2,14 @@ using System;
 
 namespace app11
 {
-    enum UserRole
+    public enum UserRole
     {
         Consultant,
         Manager
+    }
+
+    public class Enums
+    {
+
     }
 }

@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
 
 namespace app11
@@ -15,18 +14,67 @@ namespace app11
             userIndex = 0;
         }
         // custom data
-        public string Name;
-        public UserRole userRole;
-        public User(string Name, UserRole userRole = UserRole.Consultant) // consultant is by default
+        public string Name { get; }
+        public UserRole userRole { get; }
+        public string credential { get; }
+        public User(string Name, UserRole userRole) // consultant is by default
         {
             userIndex++;
-            if (Name == String.Empty || this.Names.Contains(Name)) // searching through names database
+            if (Name == String.Empty || Names.Contains(Name)) // searching through names database
             {
-                Name = $"{Guid.NewGuid().ToString().SubString(0, 5)}_{userIndex.ToString()}";
+                Name = $"{Guid.NewGuid().ToString().Substring(0, 5)}_{userIndex.ToString()}";
             }
-            this.Names.Add(Name);
+            Names.Add(Name);
             this.Name = Name;
             this.userRole = userRole;
+            credential = Name + " " + userRole.ToString();
+        }
+
+        public string ReadFirstName(Customer customer)
+        {
+            return customer.FirstName;
+        }
+
+        public string ReadLastName(Customer customer)
+        {
+            return customer.LastName;
+        }
+
+        public string ReadMiddleName(Customer customer)
+        {
+            return customer.MiddleName;
+        }
+
+        public void SetPhone(Customer customer, string NewPhone)
+        {
+            if (NewPhone != String.Empty)
+            {
+                CustomerChange change = new CustomerChange(); 
+                change.oldPhone = customer.Phone;
+                change.user = this;
+                customer.changelog.Add(change);
+                customer.Phone = NewPhone;
+            }
+        }
+
+        public string ReadPassportNumber(Customer customer)
+        {
+            string ans = String.Empty;
+            if (customer.PassportNumber != String.Empty)
+            {
+                ans = "********";
+            }
+            return ans;
+        }
+
+        public string ReadPassportSeries(Customer customer)
+        {
+            string ans = String.Empty;
+            if (customer.PassportSeries != String.Empty)
+            {
+                ans = "********";
+            }
+            return ans;
         }
     }
 }
