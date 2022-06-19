@@ -30,6 +30,11 @@ namespace app11
             credential = Name + " " + userRole.ToString();
         }
 
+        //public User(bool dummy = true)
+        //{
+
+        //}
+
         public string ReadFirstName(Customer customer)
         {
             return customer.FirstName;
@@ -51,6 +56,7 @@ namespace app11
             {
                 CustomerChange change = new CustomerChange(); 
                 change.oldPhone = customer.Phone;
+                change.time = DateTime.Now;
                 change.user = this;
                 customer.changelog.Add(change);
                 customer.Phone = NewPhone;

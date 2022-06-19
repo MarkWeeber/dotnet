@@ -17,6 +17,8 @@ namespace app11
 
     public class Customer
     {
+        public static int incrementor;
+        public int Id { get; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string MiddleName { get; set; }
@@ -24,8 +26,13 @@ namespace app11
         public string PassportSeries { get; set; }
         public string PassportNumber { get; set; }
         public List<CustomerChange> changelog;
+        static Customer()
+        {
+            incrementor = 0;
+        }
         public Customer(string FirstName, string LastName, string MiddleName, string Phone, string PassportNumber, string PassportSeries)
         {
+            this.Id = ++incrementor;
             this.changelog = new List<CustomerChange>();
             this.FirstName = FirstName;
             this.LastName = LastName;
