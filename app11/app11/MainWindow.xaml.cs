@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
+using System.ComponentModel;
 
 namespace app11
 {
@@ -25,7 +26,7 @@ namespace app11
     {
         Resource userResource, customerResource;
         List<User> userDatabase;
-        public ObservableCollection<Customer> customerDatabase;
+        ObservableCollection<Customer> customerDatabase;
         User selectedUser;
         Customer selectedCustomer;
         public MainWindow()
@@ -165,6 +166,8 @@ namespace app11
                     selectedUser.SetPhone(customerDatabase[customerIndexToBeChanged], EditCustomerPhone.Text);
                 }
                 customerResource.SaveToJson(customerDatabase);
+                ICollectionView _view = CollectionViewSource.GetDefaultView(customerDatabase);
+                _view.Refresh();
             }
         }
 
