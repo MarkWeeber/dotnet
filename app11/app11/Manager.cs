@@ -13,7 +13,7 @@ namespace app11
         public void SetFirstName(Customer customer, string NewFirstName)
         {
             CustomerChange change = new CustomerChange(); 
-            change.oldFirstName = customer.FirstName;
+            change.OldFirstName = customer.FirstName;
             change.user = this;
             change.time = DateTime.Now;
             customer.changelog.Add(change);
@@ -23,7 +23,7 @@ namespace app11
         public void SetLastName(Customer customer, string NewLastName)
         {
             CustomerChange change = new CustomerChange(); 
-            change.oldLastName = customer.LastName;
+            change.OldLastName = customer.LastName;
             change.user = this;
             change.time = DateTime.Now;
             customer.changelog.Add(change);
@@ -33,7 +33,7 @@ namespace app11
         public void SetMiddleName(Customer customer, string NewMiddleName)
         {
             CustomerChange change = new CustomerChange();
-            change.oldMiddleName = customer.MiddleName;
+            change.OldMiddleName = customer.MiddleName;
             change.user = this as User;
             change.time = DateTime.Now;
             customer.changelog.Add(change);
@@ -48,7 +48,7 @@ namespace app11
         public void SetPassportNumber(Customer customer, string NewPassportNumber)
         {
             CustomerChange change = new CustomerChange(); 
-            change.oldPassportNumber = customer.PassportNumber;
+            change.OldPassportNumber = customer.PassportNumber;
             change.user = this;
             change.time = DateTime.Now;
             customer.changelog.Add(change);
@@ -58,7 +58,7 @@ namespace app11
         public void SetPassportSeries(Customer customer, string NewPassportSeries)
         {
             CustomerChange change = new CustomerChange(); 
-            change.oldPassportSeries = customer.PassportSeries;
+            change.OldPassportSeries = customer.PassportSeries;
             change.user = this;
             change.time = DateTime.Now;
             customer.changelog.Add(change);

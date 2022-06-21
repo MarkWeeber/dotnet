@@ -166,8 +166,8 @@ namespace app11
                     selectedUser.SetPhone(customerDatabase[customerIndexToBeChanged], EditCustomerPhone.Text);
                 }
                 customerResource.SaveToJson(customerDatabase);
-                ICollectionView _view = CollectionViewSource.GetDefaultView(customerDatabase);
-                _view.Refresh();
+                //ICollectionView _view = CollectionViewSource.GetDefaultView(customerDatabase);
+                //_view.Refresh();
             }
         }
 

@@ -51,7 +51,8 @@
             VerticalAlignment="Stretch"
             Margin="10"
             BorderThickness="2"
-            BorderBrush="Gray" SelectionChanged="CustomerListView_SelectionChanged"
+            BorderBrush="Gray"
+            SelectionChanged="CustomerListView_SelectionChanged"
             >
             <ListView.View>
                 <GridView>

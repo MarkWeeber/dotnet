@@ -55,7 +55,7 @@ namespace app11
             if (NewPhone != String.Empty)
             {
                 CustomerChange change = new CustomerChange(); 
-                change.oldPhone = customer.Phone;
+                change.OldPhone = customer.Phone;
                 change.time = DateTime.Now;
                 change.user = this;
                 customer.changelog.Add(change);
