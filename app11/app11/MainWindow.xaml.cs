@@ -1,27 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Diagnostics;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
-using System.ComponentModel;
 
 namespace app11
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         Resource userResource, customerResource;
@@ -98,7 +84,7 @@ namespace app11
             EditCustomerLastName.Text = selectedCustomer.LastName;
             EditCustomerMiddleName.Text = selectedCustomer.MiddleName;
             EditCustomerPhone.Text = selectedCustomer.Phone;
-            if (selectedUser.userRole == UserRole.Manager)
+            if (selectedUser.UserRole == UserRole.Manager)
             {
                 EditCustomerFisrtName.IsReadOnly = false;
                 EditCustomerFisrtName.Background = Brushes.White;
@@ -135,7 +121,7 @@ namespace app11
             if (selectedUser != null && selectedCustomer != null)
             {
                 int customerIndexToBeChanged = customerDatabase.IndexOf(selectedCustomer);
-                if (selectedUser.userRole == UserRole.Manager)
+                if (selectedUser.UserRole == UserRole.Manager)
                 {
                     User currentUser = userDatabase.Find(item => item.Equals(selectedUser));
                     var _parent = JsonConvert.SerializeObject(selectedUser);
@@ -166,8 +152,6 @@ namespace app11
                     selectedUser.SetPhone(customerDatabase[customerIndexToBeChanged], EditCustomerPhone.Text);
                 }
                 customerResource.SaveToJson(customerDatabase);
-                //ICollectionView _view = CollectionViewSource.GetDefaultView(customerDatabase);
-                //_view.Refresh();
             }
         }
 

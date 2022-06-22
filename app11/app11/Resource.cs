@@ -1,34 +1,31 @@
-using System;
 using System.IO;
-using System.Linq;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace app11
 {
     struct Resource
     {
-        public string fileName;
-        private string pathToFile;
-        public Resource(string fileName)
+        public string FileName;
+        private string PathToFile;
+        public Resource(string FileName)
         {
-            this.fileName = fileName;
-            pathToFile =  Directory.GetCurrentDirectory() + @"\resources\";
+            this.FileName = FileName;
+            PathToFile =  Directory.GetCurrentDirectory() + @"\resources\";
             UpdateDirectory();
         }
         public void SaveToJson(object data)
         {
             UpdateDirectory();
-            File.WriteAllText(pathToFile + fileName, JsonConvert.SerializeObject(data));
+            File.WriteAllText(PathToFile + FileName, JsonConvert.SerializeObject(data));
         }
 
         public T RetrieveFromJson<T>()
         {
-            string fileContents;
+            string _fileContents;
             try
             {
-                fileContents = File.ReadAllText(pathToFile + fileName);
-                return JsonConvert.DeserializeObject<T>(fileContents);
+                _fileContents = File.ReadAllText(PathToFile + FileName);
+                return JsonConvert.DeserializeObject<T>(_fileContents);
             }
             catch (System.Exception)
             {
@@ -38,9 +35,9 @@ namespace app11
 
         private void UpdateDirectory()
         {
-            if(!Directory.Exists(pathToFile))
+            if(!Directory.Exists(PathToFile))
             {
-                Directory.CreateDirectory(pathToFile);
+                Directory.CreateDirectory(PathToFile);
             }
         }
 

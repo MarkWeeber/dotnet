@@ -1,5 +1,3 @@
-using System;
-
 namespace app11
 {
     public class Consultant : User

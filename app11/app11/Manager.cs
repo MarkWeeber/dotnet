@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 
 namespace app11
 {
@@ -14,8 +13,8 @@ namespace app11
         {
             CustomerChange change = new CustomerChange(); 
             change.OldFirstName = customer.FirstName;
-            change.user = this;
-            change.time = DateTime.Now;
+            change.LastChangeUser = this;
+            change.LastChangeTime = DateTime.Now;
             customer.changelog.Add(change);
             customer.FirstName = NewFirstName;
         }
@@ -24,8 +23,8 @@ namespace app11
         {
             CustomerChange change = new CustomerChange(); 
             change.OldLastName = customer.LastName;
-            change.user = this;
-            change.time = DateTime.Now;
+            change.LastChangeUser = this;
+            change.LastChangeTime = DateTime.Now;
             customer.changelog.Add(change);
             customer.LastName = NewLastName;
         }
@@ -34,23 +33,18 @@ namespace app11
         {
             CustomerChange change = new CustomerChange();
             change.OldMiddleName = customer.MiddleName;
-            change.user = this as User;
-            change.time = DateTime.Now;
+            change.LastChangeUser = this as User;
+            change.LastChangeTime = DateTime.Now;
             customer.changelog.Add(change);
             customer.MiddleName = NewMiddleName;
-        }
-
-        public void test()
-        {
-            Debug.WriteLine("TEST_" + Name);
         }
 
         public void SetPassportNumber(Customer customer, string NewPassportNumber)
         {
             CustomerChange change = new CustomerChange(); 
             change.OldPassportNumber = customer.PassportNumber;
-            change.user = this;
-            change.time = DateTime.Now;
+            change.LastChangeUser = this;
+            change.LastChangeTime = DateTime.Now;
             customer.changelog.Add(change);
             customer.PassportNumber = NewPassportNumber;
         }
@@ -59,8 +53,8 @@ namespace app11
         {
             CustomerChange change = new CustomerChange(); 
             change.OldPassportSeries = customer.PassportSeries;
-            change.user = this;
-            change.time = DateTime.Now;
+            change.LastChangeUser = this;
+            change.LastChangeTime = DateTime.Now;
             customer.changelog.Add(change);
             customer.PassportSeries = NewPassportSeries;
         }

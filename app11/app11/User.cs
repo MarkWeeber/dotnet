@@ -15,8 +15,8 @@ namespace app11
         }
         // custom data
         public string Name { get; }
-        public UserRole userRole { get; }
-        public string credential { get; }
+        public UserRole UserRole { get; }
+        public string Credential { get; }
         public User(string Name, UserRole userRole) // consultant is by default
         {
             userIndex++;
@@ -26,14 +26,9 @@ namespace app11
             }
             Names.Add(Name);
             this.Name = Name;
-            this.userRole = userRole;
-            credential = Name + " " + userRole.ToString();
+            this.UserRole = userRole;
+            Credential = Name + " " + userRole.ToString();
         }
-
-        //public User(bool dummy = true)
-        //{
-
-        //}
 
         public string ReadFirstName(Customer customer)
         {
@@ -56,8 +51,8 @@ namespace app11
             {
                 CustomerChange change = new CustomerChange(); 
                 change.OldPhone = customer.Phone;
-                change.time = DateTime.Now;
-                change.user = this;
+                change.LastChangeTime = DateTime.Now;
+                change.LastChangeUser = this;
                 customer.changelog.Add(change);
                 customer.Phone = NewPhone;
             }

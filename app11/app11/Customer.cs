@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace app11
 {
     public struct CustomerChange
     {
-        public User user;
-        public DateTime time;
+        public User LastChangeUser;
+        public DateTime LastChangeTime;
         public string OldFirstName { get; set; }
         public string OldLastName { get; set; }
         public string OldMiddleName { get; set; }

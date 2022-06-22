@@ -11,39 +11,6 @@
             <ColumnDefinition MinWidth="150" Width="6*"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
-        <!--<ListBox
-            Grid.Row="0"
-            x:Name="CustomerListBox"
-            Margin="15"
-            Background="LightGray"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Border
-                        BorderBrush="Black"
-                        Margin="5"
-                        BorderThickness="1"
-                        CornerRadius="12">
-                        <StackPanel Margin="5">
-                            <TextBlock>
-                                <TextBlock.Text>
-                                    <MultiBinding StringFormat="{}{0} {1} {2}">
-                                        <Binding Path="FirstName"/>
-                                        <Binding Path="LastName"/>
-                                        <Binding Path="MiddleName"/>
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
-                            <TextBlock
-                                Text="{Binding Phone}"
-                                Margin="0"
-                                FontSize="12"/>
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>-->
         <ListView
             Grid.Column="0"
             x:Name="CustomerListView"
@@ -72,8 +39,8 @@
             <ComboBox
             Grid.Row="0"
             x:Name="UserSelectComboBox"
-            DisplayMemberPath="credential"
-            SelectedValuePath="credential"
+            DisplayMemberPath="Credential"
+            SelectedValuePath="Credential"
             SelectedValue="{Binding Path=Name}"
             Height="20"
             Margin="20,30,20,20"
@@ -158,19 +125,6 @@
                     Text="Passport Series:"
                     FontWeight="Bold"
                     />
-                <!--<TextBox
-                    Grid.Column="1"
-                    x:Name="EditCustomerFisrtName"
-                    Text="{Binding ElementName=CustomerListView, Path=SelectedItem.FirstName}"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Top"
-                    Padding="2"
-                    Margin="5"
-                    Height="25"
-                    IsReadOnly="True"
-                    BorderThickness="2"
-                    Background="LightGray"
-                    />-->
                 <TextBox
                     Grid.Column="1"
                     x:Name="EditCustomerFisrtName"
