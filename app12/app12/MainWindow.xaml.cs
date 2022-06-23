@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Windows;
 using System.Diagnostics;
-using System.Linq;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Collections;
 
 namespace app12
 {
