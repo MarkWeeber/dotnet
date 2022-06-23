@@ -19,10 +19,17 @@ namespace app12
         {
             InitializeComponent();
             selectedUser = Buffer.SelectedUser;
+            if(selectedUser.UserRole == UserRole.Manager)
+            {
+                AddNewCustomerButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                AddNewCustomerButton.Visibility = Visibility.Hidden;
+            }
             customerResource = new Resource("customers.json");
             customerDatabase = new ObservableCollection<Customer>();
             Customer.Refresh();
-            //customers.Sort(Customer.SortBy(SortingCriteria.Phone));
             SelectedUserUI.Text = selectedUser.Credential;
             customerDatabase = customerResource.RetrieveFromJson<ObservableCollection<Customer>>(); // try reading customer database
             if (customerDatabase == null)   // if file not found then create default values for customers
@@ -152,8 +159,11 @@ namespace app12
 
         private void AddNewCustomerButton_Click(object sender, RoutedEventArgs e)
         {
-            AddCustomerWindow addCustomerWindow = new AddCustomerWindow();
-            addCustomerWindow.ShowDialog();
+            if(selectedUser.UserRole == UserRole.Manager)
+            {
+                AddCustomerWindow addCustomerWindow = new AddCustomerWindow(selectedUser, customerDatabase, customerResource);
+                addCustomerWindow.ShowDialog();
+            }
         }
     }
     public static class ListExtension

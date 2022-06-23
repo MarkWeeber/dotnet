@@ -65,11 +65,6 @@ namespace app12
 
     }
 
-    public static class Utility
-    {
-        
-    }
-
     public class Customer : INotifyPropertyChanged
     {
         public static int incrementor;
@@ -87,6 +82,9 @@ namespace app12
         private string passportNumber;
         public string PassportNumber { get { return passportNumber; } set { SetField(ref passportNumber, value, "PassportNumber"); } }
         public List<CustomerChange> changelog;
+        private DateTime createdTime;
+        public DateTime CreatedTime { get { return createdTime; } }
+        private User createdBy;
         static Customer()
         {
             incrementor = 0;
@@ -95,7 +93,17 @@ namespace app12
         {
             incrementor = 0;
         }
+        public Customer()
+        {
+            Id = ++incrementor;
+        }
         public Customer(string FirstName, string LastName, string MiddleName, string Phone, string PassportNumber, string PassportSeries)
+            : this (FirstName, LastName, MiddleName, Phone, PassportNumber, PassportSeries, null )
+        {
+
+        }
+
+        public Customer(string FirstName, string LastName, string MiddleName, string Phone, string PassportNumber, string PassportSeries, User user)
         {
             Id = ++incrementor;
             changelog = new List<CustomerChange>();
@@ -105,6 +113,8 @@ namespace app12
             phone = Phone;
             passportNumber = PassportNumber;
             passportSeries = PassportSeries;
+            createdTime = DateTime.Now;
+            createdBy = user;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

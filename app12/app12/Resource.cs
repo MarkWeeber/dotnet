@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace app12
 {
-    struct Resource
+    public struct Resource
     {
         public string FileName;
         private string PathToFile;

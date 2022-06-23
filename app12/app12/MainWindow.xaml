@@ -90,7 +90,8 @@
                     Margin="0 0 15 0"
                     Height="25"
                     Content="Add new Customer"
-                    Style="{StaticResource EditButtonStyle}" Click="AddNewCustomerButton_Click"
+                    Style="{StaticResource EditButtonStyle}"
+                    Click="AddNewCustomerButton_Click"
                     />
                 <ListView
                     Grid.Row="1"
