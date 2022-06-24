@@ -12,7 +12,7 @@
         MinWidth="300"
         Style="{StaticResource NormaWindowStyle}"
         >
-    <Grid ShowGridLines="True">
+    <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
@@ -44,7 +44,7 @@
             VerticalAlignment="Center"
             Style="{StaticResource NormalButtonStyle}" Click="ChangeUserButton_Click"
             />
-        <Grid Grid.Row="1" ShowGridLines="True">
+        <Grid Grid.Row="1" ShowGridLines="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="60*"/>
                 <ColumnDefinition Width="40*"/>
@@ -111,7 +111,7 @@
                         </ListView.View>
                 </ListView>
             </Grid>
-            <Grid Grid.Column="1" ShowGridLines="True">
+            <Grid Grid.Column="1" ShowGridLines="False">
                 <Grid.RowDefinitions>
                     <RowDefinition MinHeight="200"/>
                     <RowDefinition Height="*"/>
