@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace app12
 {
@@ -143,7 +144,32 @@ namespace app12
 
         private void SortByComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e = null)
         {
-            customerDatabase.SortCustomExtension(((SortingStruct)SortByComboBox.SelectedItem).Criteria);
+            //customerDatabase.SortCustomExtension(((SortingStruct)SortByComboBox.SelectedItem).Criteria);
+            SortingCriteria selectedSortingCriteia = ((SortingStruct)SortByComboBox.SelectedItem).Criteria;
+            switch (selectedSortingCriteia)
+            {
+                case SortingCriteria.FirstName:
+                    CustomerListView.ItemsSource = customerDatabase.OrderBy(item => item.FirstName);
+                    break;
+                case SortingCriteria.LastName:
+                    CustomerListView.ItemsSource = customerDatabase.OrderBy(item => item.LastName);
+                    break;
+                case SortingCriteria.MiddleName:
+                    CustomerListView.ItemsSource = customerDatabase.OrderBy(item => item.MiddleName);
+                    break;
+                case SortingCriteria.Phone:
+                    CustomerListView.ItemsSource = customerDatabase.OrderBy(item => item.Phone);
+                    break;
+                case SortingCriteria.PassportSeries:
+                    CustomerListView.ItemsSource = customerDatabase.OrderBy(item => item.PassportSeries);
+                    break;
+                case SortingCriteria.PassportNumber:
+                    CustomerListView.ItemsSource = customerDatabase.OrderBy(item => item.PassportNumber);
+                    break;
+                default:
+                    break;
+            }
+            //CustomerListView.ItemsSource = customerDatabase;
             CustomerListView.UnselectAll();
         }
 

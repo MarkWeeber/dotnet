@@ -48,19 +48,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\asylbekka\\.nuget\\packages\\": {}
+    "C:\\Users\\Arcanus\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DotNet\\Projects\\app12\\app12\\app12.csproj",
+      "projectUniqueName": "D:\\Dotnet\\Projects\\app12\\app12\\app12.csproj",
       "projectName": "app12",
-      "projectPath": "D:\\DotNet\\Projects\\app12\\app12\\app12.csproj",
-      "packagesPath": "C:\\Users\\asylbekka\\.nuget\\packages\\",
-      "outputPath": "D:\\DotNet\\Projects\\app12\\app12\\obj\\",
+      "projectPath": "D:\\Dotnet\\Projects\\app12\\app12\\app12.csproj",
+      "packagesPath": "C:\\Users\\Arcanus\\.nuget\\packages\\",
+      "outputPath": "D:\\Dotnet\\Projects\\app12\\app12\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\asylbekka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Arcanus\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -101,12 +101,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[3.1.22, 3.1.22]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
@@ -115,7 +109,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.407\\RuntimeIdentifierGraph.json"
       }
     }
   }
