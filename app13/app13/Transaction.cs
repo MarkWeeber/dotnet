@@ -5,51 +5,60 @@ using System.Text;
 
 namespace app13
 {
-    public class Transaction<Type>
+    interface ITransaction<out Type>
     {
-        public uint Id { get; }
+        Type Source { get; }
+    }
+
+    public abstract class Transaction<Type> : ITransaction<Type>
+    {
+        public Type Source { get; set; }
+
+        public uint Id { get { return id; } }
+        protected uint id;
         static uint incrementor;
-        public DateTime TransactionTime { get; set; }
-        public float TransactionAmount { get; set; }
-        public uint UserId { get; }
-        public Account MainAccount { get; set; }
-        public uint AccountId { get; set; }
-        public Type source { get; set; }
+        public DateTime TransactionTime { get { return transactionTime; } }
+        protected DateTime transactionTime;
+        public float TransactionAmount { get { return transactionAmount; } }
+        protected float transactionAmount;
+        public uint UserId { get { return userId; } }
+        protected uint userId;
+        public uint AccountId { get { return accountId; }  }
+        protected uint accountId;
+        public static List<Transaction<Type>> Transactions { get; set; }
         static Transaction()
         {
-            items = new List<Transaction<Type>>();
             incrementor = 0;
+            Transactions = new List<Transaction<Type>>();
         }
         public static void Refresh()
         {
             incrementor = 0;
+            Transactions.Clear();
         }
         public Transaction()
         {
-            TransactionTime = DateTime.Now;
-            UserId = Buffer.SelectedUser.Id;
-            Id = ++incrementor;
+            transactionTime = DateTime.Now;
+            userId = Buffer.SelectedUser.Id;
+            id = ++incrementor;
         }
-        public static List<Transaction<Type>> items;
-        public Transaction<Type> this [int index]
+        public Transaction<Type> this[int index]
         {
-            get { return items[index]; }
-            set { items[index] = value; }
+            get { return Transactions[index]; }
+            set { Transactions[index] = value; }
         }
-
     }
+
     public class TransactionBetweenAccounts : Transaction<Account>
     {
         public TransactionBetweenAccounts(Account debitAccount, Account creditAccount, float amount)
         {
-            TransactionAmount = amount;
-            MainAccount = debitAccount;
-            AccountId = debitAccount.Id;
-            source = debitAccount;
+            transactionAmount = amount;
+            accountId = debitAccount.Id;
+            Source = debitAccount;
             debitAccount.Amount += amount;
             creditAccount.Amount -= amount;
-            items.Add(this);
-            //Buffer.Transactions.Add(this);
+            Transactions.Add(this);
         }
     }
 
@@ -57,11 +66,10 @@ namespace app13
     {
         public TransactionReplenishment(Account MainAccount, float amount, Customer customer)
         {
-            TransactionAmount = amount;
-            this.MainAccount = MainAccount;
-            source = customer;
+            transactionAmount = amount;
+            Source = customer;
             MainAccount.Amount += amount;
-            items.Add(this);
+            Transactions.Add(this);
         }
     }
 
@@ -69,11 +77,10 @@ namespace app13
     {
         public TransactionWithDrawal(Account MainAccount, float amount, Customer customer)
         {
-            TransactionAmount = amount;
-            this.MainAccount = MainAccount;
-            source = customer;
+            transactionAmount = amount;
+            Source = customer;
             MainAccount.Amount -= amount;
-            items.Add(this);
+            Transactions.Add(this);
         }
     }
 }

@@ -80,10 +80,9 @@ namespace app13
         public string PassportSeries { get { return passportSeries; } set { SetField(ref passportSeries, value, "PassportSeries"); } }
         private string passportNumber;
         public string PassportNumber { get { return passportNumber; } set { SetField(ref passportNumber, value, "PassportNumber"); } }
-        public List<CustomerChange> changelog;
         private DateTime createdTime;
         public DateTime CreatedTime { get { return createdTime; } }
-        private User createdBy;
+        public uint createdByUserId { get; set; }
         static Customer()
         {
             incrementor = 0;
@@ -106,7 +105,6 @@ namespace app13
         public Customer(string FirstName, string LastName, string MiddleName, string Phone, string PassportNumber, string PassportSeries, User user)
         {
             Id = ++incrementor;
-            changelog = new List<CustomerChange>();
             firstName = FirstName;
             lastName = LastName;
             middleName = MiddleName;
@@ -114,7 +112,7 @@ namespace app13
             passportNumber = PassportNumber;
             passportSeries = PassportSeries;
             createdTime = DateTime.Now;
-            createdBy = user;
+            createdByUserId = Buffer.SelectedUser.Id;
             Buffer.Customers.Add(this);
         }
 
@@ -137,87 +135,6 @@ namespace app13
             field = value;
             OnPropertyChanged(propertyName);
             return true;
-        }
-
-        public static IComparer<Customer> SortBy(SortingCriteria criteria)
-        {
-            switch (criteria)
-            {
-                case SortingCriteria.FirstName:
-                    return new SortByFirstName();
-                case SortingCriteria.LastName:
-                    return new SortByLastName();
-                case SortingCriteria.MiddleName:
-                    return new SortByMiddleName();
-                case SortingCriteria.Phone:
-                    return new SortByPhone();
-                case SortingCriteria.PassportSeries:
-                    return new SortByPassportSeries();
-                case SortingCriteria.PassportNumber:
-                    return new SortByPassportNumber();
-                default:
-                    return new SortByFirstName();
-            }
-        }
-
-        public class SortByFirstName : IComparer<Customer>
-        {
-            public int Compare(Customer a, Customer b)
-            {
-                Customer _a = (Customer)a;
-                Customer _b = (Customer)b;
-                return string.Compare(_a.FirstName, _b.FirstName);
-            }
-        }
-
-        public class SortByLastName : IComparer<Customer>
-        {
-            public int Compare(Customer a, Customer b)
-            {
-                Customer _a = (Customer)a;
-                Customer _b = (Customer)b;
-                return string.Compare(_a.LastName, _b.LastName);
-            }
-        }
-
-        public class SortByMiddleName : IComparer<Customer>
-        {
-            public int Compare(Customer a, Customer b)
-            {
-                Customer _a = (Customer)a;
-                Customer _b = (Customer)b;
-                return string.Compare(_a.MiddleName, _b.MiddleName);
-            }
-        }
-
-        public class SortByPhone : IComparer<Customer>
-        {
-            public int Compare(Customer a, Customer b)
-            {
-                Customer _a = (Customer)a;
-                Customer _b = (Customer)b;
-                return string.Compare(_a.Phone, _b.Phone);
-            }
-        }
-
-        public class SortByPassportSeries : IComparer<Customer>
-        {
-            public int Compare(Customer a, Customer b)
-            {
-                Customer _a = (Customer)a;
-                Customer _b = (Customer)b;
-                return string.Compare(_a.PassportSeries, _b.PassportSeries);
-            }
-        }
-
-        public class SortByPassportNumber : IComparer<Customer>
-        {
-            public int Compare(Customer a, Customer b)
-            {
-                Customer _a = (Customer)a;
-                Customer _b = (Customer)b;
-                return string.Compare(_a.PassportNumber, _b.PassportNumber);
-            }
         }
     }
 }

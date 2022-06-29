@@ -10,14 +10,12 @@ namespace app13
         public static User SelectedUser { get; set; }
         public static List<Account> Accounts { get; set; }
         public static List<User> Users { get; set; }
-        //public static List<Transaction<Type>> Transactions { get; set; }
         public static ObservableCollection<Customer> Customers { get; set; }
         static Buffer()
         {
             SelectedUser = null;
             Accounts = new List<Account>();
             Users = new List<User>();
-            //Transactions = new List<Transaction<Type>>();
             Customers = new ObservableCollection<Customer>();
         }
         public static void Refresh()
@@ -29,6 +27,7 @@ namespace app13
             User.Refresh();
             Customers.Clear();
             Customer.Refresh();
+            Transaction<Type>.Refresh();
         }
     }
 }

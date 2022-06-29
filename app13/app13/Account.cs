@@ -4,18 +4,27 @@ using System.Text;
 
 namespace app13
 {
-    public abstract class Account
+    public class Account
     {
         public static uint incrementor;
-        public uint Id { get; }
-        public uint Number { get; }
-        public float Amount { get; set; }
-        public Currency Currency { get; }
-        public Customer Customer { get; }
-        public uint CustomerId { get; }
-        public AccountType AccountType { get; }
-        public uint UserId { get; }
-        public DateTime CreatedTime { get; }
+        public uint Id { get{ return id; } }
+        private uint id;
+        public uint Number { get {return number; } }
+        private uint number;
+        public float Amount { get { return amount; } set { amount = value; } }
+        private float amount;
+        public Currency Currency { get { return currency; } }
+        private Currency currency;
+        public uint CustomerId { get { return customerId; } }
+        private uint customerId;
+        public AccountType AccountType { get { return accountType; } }
+        private AccountType accountType;
+        public uint UserId { get { return userId; } }
+        private uint userId;
+        public DateTime CreatedTime { get { return createdTime; } }
+        private DateTime createdTime;
+        public bool Open { get { return open; } }
+        private bool open;
         static Account()
         {
             incrementor = 0;
@@ -27,40 +36,45 @@ namespace app13
         }
         public Account(Customer customer, AccountType accountType, Currency currency)
         {
-            Id = ++incrementor;
-            Number = 118000 + Id;
-            Customer = customer;
-            CustomerId = customer.Id;
-            UserId = Buffer.SelectedUser.Id;
-            AccountType = accountType;
-            Currency = currency;
-            CreatedTime = DateTime.Now;
+            id = ++incrementor;
+            number = 118000 + id;
+            customerId = customer.Id;
+            userId = Buffer.SelectedUser.Id;
+            this.accountType = accountType;
+            this.currency = currency;
+            open = true;
+            createdTime = DateTime.Now;
+            Buffer.Accounts.Add(this);
+        }
+        public void Close()
+        {
+            open = false;
         }
     }
 
-    public abstract class AccountAction<Type>
+    public class DepositAccount : Account
     {
-        
+        public DepositAccount(Customer customer, Currency currency) : base (customer, AccountType.Deposit, currency)
+        {
+
+        }
+    }
+    public class NonDepositAccount : Account
+    {
+        public NonDepositAccount(Customer customer, Currency currency) : base(customer, AccountType.NonDeposit, currency)
+        {
+
+        }
     }
 
-    public class OpenDeposit : AccountAction<Customer>
+    interface IAccountReplenishment<out T> where T : Account
     {
-        // TO DO Buffer.Accounts.Add(this);
+        T ReplenishAccount();
     }
 
-    public class CloseDeposit : AccountAction<Customer>
+    interface IAccountTransfer<in T> where T : Account
     {
-
-    }
-
-    public class OpenNonDeposit : AccountAction<Customer>
-    {
-
-    }
-
-    public class CloseNonDeposit : AccountAction<Customer>
-    {
-
+        T Account { set; }
     }
 }
 

@@ -23,10 +23,7 @@ namespace app13
         public MainWindow()
         {
             InitializeComponent();
-            //Account t = new Account(1, AccountType.Deposit, Currency.EUR);
-            //t.Amount = 30;
-            //TransactionBetweenAccounts transaction = new TransactionBetweenAccounts(t, t, 300);
-            Buffer.Refresh();
+            Account t = new DepositAccount(new Customer(), Currency.EUR);
         }
     }
 }
