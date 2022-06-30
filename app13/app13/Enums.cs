@@ -1,11 +1,5 @@
 ﻿namespace app13
 {
-    public enum UserRole
-    {
-        Consultant,
-        Manager
-    }
-
     public enum AccountType
     {
         Deposit,

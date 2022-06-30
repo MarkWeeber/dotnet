@@ -14,15 +14,12 @@ namespace app13
         }
         public uint Id { get; }
         public string Name { get; }
-        public UserRole UserRole { get; }
-        public string Credential { get; }
         public static void Refresh()
         {
             userIndex = 0;
             Names.Clear();
-            Buffer.Users.Clear();
         }
-        public User(string Name, UserRole userRole)
+        public User(string Name)
         {
             Id = ++userIndex;
             if (Name == string.Empty || Names.Contains(Name))
@@ -31,9 +28,6 @@ namespace app13
             }
             Names.Add(Name);
             this.Name = Name;
-            this.UserRole = userRole;
-            Credential = Name + " " + userRole.ToString();
-            Buffer.Users.Add(this);
         }
     }
 }

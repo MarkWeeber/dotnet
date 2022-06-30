@@ -4,7 +4,7 @@ using System.Text;
 
 namespace app13
 {
-    public class Account
+    public abstract class Account
     {
         public static uint incrementor;
         public uint Id { get{ return id; } }
@@ -50,6 +50,11 @@ namespace app13
         {
             open = false;
         }
+
+        public void Reopen()
+        {
+            open = true;
+        }
     }
 
     public class DepositAccount : Account
@@ -65,16 +70,6 @@ namespace app13
         {
 
         }
-    }
-
-    interface IAccountReplenishment<out T> where T : Account
-    {
-        T ReplenishAccount();
-    }
-
-    interface IAccountTransfer<in T> where T : Account
-    {
-        T Account { set; }
     }
 }
 

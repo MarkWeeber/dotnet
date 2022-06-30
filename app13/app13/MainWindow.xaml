@@ -5,8 +5,57 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:app13"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Morgan Suisse Bank CSJC" Height="450" Width="800" MinHeight="300" MinWidth="450">
     <Grid>
+        <TextBlock
+            x:Name="UserNameTextBlock"
+            VerticalAlignment="Top"
+            Margin="0 5 25 5"
+            Style="{StaticResource RightListedLabelStyle}"
+            Text="USERNAME"
+            />
+        <TabControl Margin="10 5 10 5">
+            <TabItem Header="Customers">
+                <Grid ShowGridLines="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*" MinWidth="300"/>
+                        <ColumnDefinition Width="2*" MinWidth="150"/>
+                    </Grid.ColumnDefinitions>
+                    <ListView
+                        Grid.Column="0"
+                        x:Name="ListViewCustomers"
+                        Margin="5"
+                        BorderThickness="2"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ID" Width="40"
+                                                DisplayMemberBinding="{Binding Id}"/>
+                                <GridViewColumn Header="First Name" Width="120"
+                                                DisplayMemberBinding="{Binding FirstName}"/>
+                                <GridViewColumn Header="Last Name" Width="120"
+                                                DisplayMemberBinding="{Binding LastName}"/>
+                                <GridViewColumn Header="Middle Name" Width="120"
+                                                DisplayMemberBinding="{Binding MiddleName}"/>
+                                <GridViewColumn Header="Phone" Width="120"
+                                                DisplayMemberBinding="{Binding Phone}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Grid ShowGridLines="True" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Transaction History">
 
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

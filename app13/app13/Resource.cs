@@ -19,7 +19,7 @@ namespace app13
             File.WriteAllText(PathToFile + FileName, JsonConvert.SerializeObject(data));
         }
 
-        public T RetrieveFromJson<T>()
+        public T RetrieveFromJson<T>(T type)
         {
             string _fileContents;
             try

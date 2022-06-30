@@ -83,6 +83,8 @@ namespace app13
         private DateTime createdTime;
         public DateTime CreatedTime { get { return createdTime; } }
         public uint createdByUserId { get; set; }
+        public DepositAccount MainDepositAccount { get; set; }
+        public NonDepositAccount MainNonDepositAccount { get; set; }
         static Customer()
         {
             incrementor = 0;
