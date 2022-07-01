@@ -20,14 +20,14 @@ namespace app13
             customers = new ObservableCollection<Customer>();
             Debug.WriteLine("BUFFER INITIALIZED");
         }
-        public static void Refresh()
-        {
-            SelectedUser = null;
-            Accounts.Clear();
-            Account.Refresh();
-            Customers.Clear();
-            Customer.Refresh();
-            Transaction<Type>.Refresh();
-        }
+        //public static void Refresh()
+        //{
+        //    SelectedUser = null;
+        //    Accounts.Clear();
+        //    Account.Refresh();
+        //    Customers.Clear();
+        //    Customer.Refresh();
+        //    Transaction<Type>.Refresh();
+        //}
     }
 }

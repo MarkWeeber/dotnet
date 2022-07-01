@@ -9,6 +9,7 @@ namespace app13
     public abstract class Transaction<Type>
     {
         public Type Source { get { return source; } }
+        public string SourceDetails { get { return source.ToString(); } }
         protected Type source;
 
         public uint Id { get { return id; } }
@@ -22,16 +23,33 @@ namespace app13
         protected uint userId;
         public uint AccountId { get { return accountId; }  }
         protected uint accountId;
-        public static ObservableCollection<Transaction<Type>> Transactions { get; set; }
+        public uint AccountNumber { get { return accountNumber; } }
+        protected uint accountNumber;
+        public string TransactionTypeName
+        { get
+            {
+                return transactionType switch
+                {
+                    TransactionType.BetweenAccounts => "Between accounts",
+                    TransactionType.Replenishment => "Replenishment",
+                    TransactionType.WithDrawal => "Withdrawal",
+                    _ => "",
+                };
+            }
+        }
+        public TransactionType TransactionType { get { return transactionType; } }
+        protected TransactionType transactionType;
+        public static ObservableCollection<Transaction<Type>> Transactions { get {return transactions; } set { if (value == null) { transactions = new ObservableCollection<Transaction<Type>>(); } else { transactions = value; } } }
+        protected static ObservableCollection<Transaction<Type>> transactions;
         static Transaction()
         {
             incrementor = 0;
-            Transactions = new ObservableCollection<Transaction<Type>>();
+            transactions = new ObservableCollection<Transaction<Type>>();
         }
         public static void Refresh()
         {
             incrementor = 0;
-            Transactions.Clear();
+            transactions.Clear();
         }
         public Transaction()
         {
@@ -41,8 +59,8 @@ namespace app13
         }
         public Transaction<Type> this[int index]
         {
-            get { return Transactions[index]; }
-            set { Transactions[index] = value; }
+            get { return transactions[index]; }
+            set { transactions[index] = value; }
         }
     }
     // parametrized classes
@@ -52,10 +70,12 @@ namespace app13
         {
             transactionAmount = amount;
             accountId = debitAccount.Id;
+            accountNumber = debitAccount.Number;
             source = creditAccount;
             debitAccount.Amount += amount;
             creditAccount.Amount -= amount;
-            Transactions.Add(this);
+            transactionType = TransactionType.BetweenAccounts;
+            transactions.Add(this);
         }
     }
 
@@ -64,9 +84,11 @@ namespace app13
         public TransactionReplenishment(Account MainAccount, float amount, Customer customer)
         {
             transactionAmount = amount;
+            accountNumber = MainAccount.Number;
             source = customer;
             MainAccount.Amount += amount;
-            Transactions.Add(this);
+            transactionType = TransactionType.Replenishment;
+            transactions.Add(this);
         }
     }
 
@@ -75,9 +97,11 @@ namespace app13
         public TransactionWithDrawal(Account MainAccount, float amount, Customer customer)
         {
             transactionAmount = amount;
+            accountNumber = MainAccount.Number;
             source = customer;
             MainAccount.Amount -= amount;
-            Transactions.Add(this);
+            transactionType = TransactionType.WithDrawal;
+            transactions.Add(this);
         }
     }
     // covariant intefrace

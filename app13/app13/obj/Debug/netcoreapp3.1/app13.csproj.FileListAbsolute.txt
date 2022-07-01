@@ -21,3 +21,5 @@ D:\DotNet\Projects\app13\app13\obj\Debug\netcoreapp3.1\app13.dll
 D:\DotNet\Projects\app13\app13\obj\Debug\netcoreapp3.1\app13.pdb
 D:\DotNet\Projects\app13\app13\obj\Debug\netcoreapp3.1\app13.genruntimeconfig.cache
 D:\DotNet\Projects\app13\app13\obj\Debug\netcoreapp3.1\App.baml
+D:\DotNet\Projects\app13\app13\obj\Debug\netcoreapp3.1\AddNewCustomer.g.cs
+D:\DotNet\Projects\app13\app13\obj\Debug\netcoreapp3.1\AddNewCustomer.baml

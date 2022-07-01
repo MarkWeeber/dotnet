@@ -10,4 +10,9 @@
     {
         EUR, USD, RUB, GBP
     }
+
+    public enum TransactionType
+    {
+        BetweenAccounts, Replenishment, WithDrawal
+    }
 }

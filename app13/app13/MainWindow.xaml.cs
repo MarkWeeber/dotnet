@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 namespace app13
 {
@@ -24,7 +25,11 @@ namespace app13
     {
         private User user;
         private Resource customerResource;
+        private Resource accountsResource;
+        private Resource transactionResource;
         private Customer selectedCustomer;
+        private GridViewColumnHeader listViewSortCol = null;
+        private SortAdorner listViewSortAdorner = null;
         public MainWindow()
         {
             InitializeComponent();
@@ -50,6 +55,70 @@ namespace app13
                 customerResource.SaveToJson(Buffer.Customers);
             }
             ListViewCustomers.ItemsSource = Buffer.Customers;
+            // Accounts database - retreive from json
+            accountsResource = new Resource("accounts.json");
+            Buffer.Accounts = accountsResource.RetrieveFromJson(Buffer.Accounts);
+            if(!Buffer.Accounts.Any())
+            {
+                Debug.WriteLine("Accounts data not found");
+            }
+            // Transactions database - retreive from json
+            transactionResource = new Resource("transactions.json");
+            Transaction<Type>.Refresh();
+            Transaction<Type>.Transactions = transactionResource.RetrieveFromJson(Transaction<Type>.Transactions);
+            if(!Transaction<Type>.Transactions.Any())
+            {
+                Debug.WriteLine("Transactions data not found");
+            }
+
+        }
+
+        private void CustomersListViewColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            ManageColumnsSorting(sender);
+        }
+
+        private void TransactiontsListViewColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            ManageColumnsSorting(sender);
+        }
+
+        private void ManageColumnsSorting(object sender)
+        {
+            GridViewColumnHeader column = sender as GridViewColumnHeader;
+            string sortBy = column.Tag.ToString();
+            if (listViewSortCol != null)
+            {
+                AdornerLayer.GetAdornerLayer(listViewSortCol).Remove(listViewSortAdorner);
+                ListViewCustomers.Items.SortDescriptions.Clear();
+            }
+
+            ListSortDirection newDir = ListSortDirection.Ascending;
+            if (listViewSortCol == column && listViewSortAdorner.Direction == newDir)
+                newDir = ListSortDirection.Descending;
+
+            listViewSortCol = column;
+            listViewSortAdorner = new SortAdorner(listViewSortCol, newDir);
+            AdornerLayer.GetAdornerLayer(listViewSortCol).Add(listViewSortAdorner);
+            ListViewCustomers.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
+        }
+
+        private void AddNewCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewCustomer addNewCustomer = new AddNewCustomer(customerResource);
+            addNewCustomer.ShowDialog();
+        }
+
+        private void ListViewCustomers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedCustomer = ListViewCustomers.SelectedItem as Customer;
+            ShowCustomerAccounts.Style = Application.Current.FindResource("NormalButtonStyle") as Style;
+        }
+
+        private void ListViewCustomers_Unselect()
+        {
+            ShowCustomerAccounts.Style = Application.Current.FindResource("DisabledButtonStyle") as Style;
+            ListViewCustomers.UnselectAll();
         }
     }
 }

@@ -15,7 +15,7 @@
             Text="USERNAME"
             />
         <TabControl Margin="10 5 10 5">
-            <TabItem Header="Customers">
+            <TabItem Header="All Customers">
                 <Grid ShowGridLines="True">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5*" MinWidth="300"/>
@@ -27,34 +27,174 @@
                         Margin="5"
                         BorderThickness="2"
                         HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch">
+                        VerticalAlignment="Stretch"
+                        SelectionChanged="ListViewCustomers_SelectionChanged">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="ID" Width="40"
-                                                DisplayMemberBinding="{Binding Id}"/>
-                                <GridViewColumn Header="First Name" Width="120"
-                                                DisplayMemberBinding="{Binding FirstName}"/>
-                                <GridViewColumn Header="Last Name" Width="120"
-                                                DisplayMemberBinding="{Binding LastName}"/>
-                                <GridViewColumn Header="Middle Name" Width="120"
-                                                DisplayMemberBinding="{Binding MiddleName}"/>
-                                <GridViewColumn Header="Phone" Width="120"
-                                                DisplayMemberBinding="{Binding Phone}"/>
+                                <GridViewColumn
+                                    Width="45"
+                                    DisplayMemberBinding="{Binding Id}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="Id"
+                                            Click="CustomersListViewColumnHeader_Click">
+                                            ID
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="120"
+                                    DisplayMemberBinding="{Binding FirstName}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="FirstName"
+                                            Click="CustomersListViewColumnHeader_Click">
+                                            First Name
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="120"
+                                    DisplayMemberBinding="{Binding LastName}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="LastName"
+                                            Click="CustomersListViewColumnHeader_Click">
+                                            Last Name
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="120"
+                                    DisplayMemberBinding="{Binding MiddleName}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="MiddleName"
+                                            Click="CustomersListViewColumnHeader_Click">
+                                            Middle Name
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="110"
+                                    DisplayMemberBinding="{Binding Phone}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="Phone"
+                                            Click="CustomersListViewColumnHeader_Click">
+                                            Phone
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
                     <Grid ShowGridLines="True" Grid.Column="1">
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
+                        <Button
+                            Grid.Row="0"
+                            x:Name="AddNewCustomer"
+                            Style="{StaticResource NormalButtonStyle}"
+                            Margin="3"
+                            Content="Add New Customer"
+                            Click="AddNewCustomer_Click"
+                            />
+                        <Button
+                            Grid.Row="1"
+                            x:Name="ShowCustomerAccounts"
+                            Style="{StaticResource DisabledButtonStyle}"
+                            Margin="3"
+                            Content="Show Customer Accounts"
+                            />
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Transaction History">
-
+            <TabItem Header="All Transaction History">
+                <Grid ShowGridLines="True">
+                    <ListView
+                        x:Name="ListViewTransactionHistory"
+                        Margin="5"
+                        BorderThickness="2"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn
+                                    Width="45"
+                                    DisplayMemberBinding="{Binding Id}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="Id"
+                                            Click="TransactiontsListViewColumnHeader_Click">
+                                            ID
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="120"
+                                    DisplayMemberBinding="{Binding TransactionTime}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="TransactionTime"
+                                            Click="TransactiontsListViewColumnHeader_Click">
+                                            Date
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="120"
+                                    DisplayMemberBinding="{Binding AccountNumber}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="AccountNumber"
+                                            Click="TransactiontsListViewColumnHeader_Click">
+                                            Account Number
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="120"
+                                    DisplayMemberBinding="{Binding TransactionTypeName}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="TransactionTypeName"
+                                            Click="TransactiontsListViewColumnHeader_Click">
+                                            Transaction Type
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="110"
+                                    DisplayMemberBinding="{Binding SourceDetails}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="SourceDetails"
+                                            Click="TransactiontsListViewColumnHeader_Click">
+                                            Source
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="110"
+                                    DisplayMemberBinding="{Binding TransactionAmount}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="TransactionAmount"
+                                            Click="TransactiontsListViewColumnHeader_Click">
+                                            Transaction Amount
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

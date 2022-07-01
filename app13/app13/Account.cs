@@ -55,6 +55,11 @@ namespace app13
         {
             open = true;
         }
+
+        public override string ToString()
+        {
+            return this.accountType.ToString() + " Account " + this.currency.ToString() + " " + this.number.ToString();
+        }
     }
 
     public class DepositAccount : Account

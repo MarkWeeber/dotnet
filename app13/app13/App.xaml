@@ -9,18 +9,28 @@
             <Setter Property="Height" Value="30"/>
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
         </Style>
         <Style TargetType="Button" x:Key="CancelButtonStyle">
             <Setter Property="Background" Value="OrangeRed"/>
             <Setter Property="Height" Value="30"/>
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
         </Style>
         <Style TargetType="Button" x:Key="EditButtonStyle">
             <Setter Property="Background" Value="Wheat"/>
             <Setter Property="Height" Value="30"/>
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+        <Style TargetType="Button" x:Key="DisabledButtonStyle">
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#FFA8A8A8"/>
         </Style>
         <Style TargetType="TextBlock" x:Key="NormalLabelStyle">
             <Setter Property="FontWeight" Value="Bold"/>

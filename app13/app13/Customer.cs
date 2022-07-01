@@ -138,5 +138,9 @@ namespace app13
             OnPropertyChanged(propertyName);
             return true;
         }
+        public override string ToString()
+        {
+            return "Customer: " + this.firstName.ToString() + " " + this.lastName.ToString();
+        }
     }
 }
