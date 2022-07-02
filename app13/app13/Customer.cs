@@ -115,6 +115,8 @@ namespace app13
             passportSeries = PassportSeries;
             createdTime = DateTime.Now;
             createdByUserId = Buffer.SelectedUser.Id;
+            MainNonDepositAccount = new NonDepositAccount(Id, Currency.RUB);
+            MainDepositAccount = new DepositAccount(Id, Currency.RUB);
             Buffer.Customers.Add(this);
         }
 

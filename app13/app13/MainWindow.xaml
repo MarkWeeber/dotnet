@@ -110,7 +110,7 @@
                             x:Name="ShowCustomerAccounts"
                             Style="{StaticResource DisabledButtonStyle}"
                             Margin="3"
-                            Content="Show Customer Accounts"
+                            Content="Show Customer Accounts" Click="ShowCustomerAccounts_Click"
                             />
                     </Grid>
                 </Grid>

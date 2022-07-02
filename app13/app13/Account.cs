@@ -11,8 +11,8 @@ namespace app13
         private uint id;
         public uint Number { get {return number; } }
         private uint number;
-        public float Amount { get { return amount; } set { amount = value; } }
-        private float amount;
+        public float Balance { get { return balance; } set { balance = value; } }
+        private float balance;
         public Currency Currency { get { return currency; } }
         private Currency currency;
         public uint CustomerId { get { return customerId; } }
@@ -34,14 +34,15 @@ namespace app13
             incrementor = 0;
             Buffer.Accounts.Clear();
         }
-        public Account(Customer customer, AccountType accountType, Currency currency)
+        public Account(uint customerId, AccountType accountType, Currency currency)
         {
             id = ++incrementor;
             number = 118000 + id;
-            customerId = customer.Id;
+            this.customerId = customerId;
             userId = Buffer.SelectedUser.Id;
             this.accountType = accountType;
             this.currency = currency;
+            balance = 0;
             open = true;
             createdTime = DateTime.Now;
             Buffer.Accounts.Add(this);
@@ -64,14 +65,14 @@ namespace app13
 
     public class DepositAccount : Account
     {
-        public DepositAccount(Customer customer, Currency currency) : base (customer, AccountType.Deposit, currency)
+        public DepositAccount(uint customerId, Currency currency) : base (customerId, AccountType.Deposit, currency)
         {
 
         }
     }
     public class NonDepositAccount : Account
     {
-        public NonDepositAccount(Customer customer, Currency currency) : base(customer, AccountType.NonDeposit, currency)
+        public NonDepositAccount(uint customerId, Currency currency) : base(customerId, AccountType.NonDeposit, currency)
         {
 
         }

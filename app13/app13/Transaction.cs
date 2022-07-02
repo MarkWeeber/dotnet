@@ -72,8 +72,8 @@ namespace app13
             accountId = debitAccount.Id;
             accountNumber = debitAccount.Number;
             source = creditAccount;
-            debitAccount.Amount += amount;
-            creditAccount.Amount -= amount;
+            debitAccount.Balance += amount;
+            creditAccount.Balance -= amount;
             transactionType = TransactionType.BetweenAccounts;
             transactions.Add(this);
         }
@@ -86,7 +86,7 @@ namespace app13
             transactionAmount = amount;
             accountNumber = MainAccount.Number;
             source = customer;
-            MainAccount.Amount += amount;
+            MainAccount.Balance += amount;
             transactionType = TransactionType.Replenishment;
             transactions.Add(this);
         }
@@ -99,7 +99,7 @@ namespace app13
             transactionAmount = amount;
             accountNumber = MainAccount.Number;
             source = customer;
-            MainAccount.Amount -= amount;
+            MainAccount.Balance -= amount;
             transactionType = TransactionType.WithDrawal;
             transactions.Add(this);
         }

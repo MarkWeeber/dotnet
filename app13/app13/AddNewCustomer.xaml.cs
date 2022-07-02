@@ -84,7 +84,6 @@ namespace app13
                     InputNewPassportNumber.Text,
                     InputNewPassportSeries.Text,
                     Buffer.SelectedUser);
-                Buffer.Customers.Add(newCustomer);
                 customerResource.SaveToJson(Buffer.Customers);
                 foreach (var item in InputFields)
                 {

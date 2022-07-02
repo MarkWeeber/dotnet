@@ -70,37 +70,41 @@ namespace app13
             {
                 Debug.WriteLine("Transactions data not found");
             }
+            ListViewTransactionHistory.ItemsSource = Transaction<Type>.Transactions;
 
         }
 
         private void CustomersListViewColumnHeader_Click(object sender, RoutedEventArgs e)
         {
-            ManageColumnsSorting(sender);
+            ManageColumnsSorting(sender, ListViewCustomers);
         }
 
         private void TransactiontsListViewColumnHeader_Click(object sender, RoutedEventArgs e)
         {
-            ManageColumnsSorting(sender);
+            ManageColumnsSorting(sender, ListViewTransactionHistory);
         }
 
-        private void ManageColumnsSorting(object sender)
+        private void ManageColumnsSorting(object sender, ListView listView)
         {
-            GridViewColumnHeader column = sender as GridViewColumnHeader;
-            string sortBy = column.Tag.ToString();
-            if (listViewSortCol != null)
+            if(listView != null)
             {
-                AdornerLayer.GetAdornerLayer(listViewSortCol).Remove(listViewSortAdorner);
-                ListViewCustomers.Items.SortDescriptions.Clear();
+                GridViewColumnHeader column = sender as GridViewColumnHeader;
+                string sortBy = column.Tag.ToString();
+                if (listViewSortCol != null)
+                {
+                    AdornerLayer.GetAdornerLayer(listViewSortCol).Remove(listViewSortAdorner);
+                    listView.Items.SortDescriptions.Clear();
+                }
+
+                ListSortDirection newDir = ListSortDirection.Ascending;
+                if (listViewSortCol == column && listViewSortAdorner.Direction == newDir)
+                    newDir = ListSortDirection.Descending;
+
+                listViewSortCol = column;
+                listViewSortAdorner = new SortAdorner(listViewSortCol, newDir);
+                AdornerLayer.GetAdornerLayer(listViewSortCol).Add(listViewSortAdorner);
+                listView.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
             }
-
-            ListSortDirection newDir = ListSortDirection.Ascending;
-            if (listViewSortCol == column && listViewSortAdorner.Direction == newDir)
-                newDir = ListSortDirection.Descending;
-
-            listViewSortCol = column;
-            listViewSortAdorner = new SortAdorner(listViewSortCol, newDir);
-            AdornerLayer.GetAdornerLayer(listViewSortCol).Add(listViewSortAdorner);
-            ListViewCustomers.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
         }
 
         private void AddNewCustomer_Click(object sender, RoutedEventArgs e)
@@ -119,6 +123,15 @@ namespace app13
         {
             ShowCustomerAccounts.Style = Application.Current.FindResource("DisabledButtonStyle") as Style;
             ListViewCustomers.UnselectAll();
+        }
+
+        private void ShowCustomerAccounts_Click(object sender, RoutedEventArgs e)
+        {
+            if(selectedCustomer != null)
+            {
+                CustomerManageWindow customerManageWindow = new CustomerManageWindow(selectedCustomer);
+                customerManageWindow.ShowDialog();
+            }
         }
     }
 }
