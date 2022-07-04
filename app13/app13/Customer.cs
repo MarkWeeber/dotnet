@@ -80,11 +80,11 @@ namespace app13
         public string PassportSeries { get { return passportSeries; } set { SetField(ref passportSeries, value, "PassportSeries"); } }
         private string passportNumber;
         public string PassportNumber { get { return passportNumber; } set { SetField(ref passportNumber, value, "PassportNumber"); } }
-        private DateTime createdTime;
-        public DateTime CreatedTime { get { return createdTime; } }
+        private string createdTime;
+        public string CreatedTime { get { return createdTime; } set { createdTime = value; } }
         public uint createdByUserId { get; set; }
-        public DepositAccount MainDepositAccount { get; set; }
-        public NonDepositAccount MainNonDepositAccount { get; set; }
+        public uint MainDepositAccountId { get; set; }
+        public uint MainNonDepositAccountId { get; set; }
         static Customer()
         {
             incrementor = 0;
@@ -113,10 +113,8 @@ namespace app13
             phone = Phone;
             passportNumber = PassportNumber;
             passportSeries = PassportSeries;
-            createdTime = DateTime.Now;
+            createdTime = DateTime.Now.ToString("dd.MM.yyyy HH:mm t");
             createdByUserId = Buffer.SelectedUser.Id;
-            MainNonDepositAccount = new NonDepositAccount(Id, Currency.RUB);
-            MainDepositAccount = new DepositAccount(Id, Currency.RUB);
             Buffer.Customers.Add(this);
         }
 

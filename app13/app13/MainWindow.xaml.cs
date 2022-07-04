@@ -40,7 +40,7 @@ namespace app13
             // Customers database - retreive from json, or create default values
             customerResource = new Resource("customers.json");
             Customer.Refresh();
-            Buffer.Customers = customerResource.RetrieveFromJson(Buffer.Customers);
+            Buffer.Customers = customerResource.RetrieveFromJson<ObservableCollection<Customer>>();
             if (!Buffer.Customers.Any())
             {
                 Debug.WriteLine("Customers data not found or corrupted, making default values");
@@ -55,17 +55,29 @@ namespace app13
                 customerResource.SaveToJson(Buffer.Customers);
             }
             ListViewCustomers.ItemsSource = Buffer.Customers;
-            // Accounts database - retreive from json
+            // Accounts database - retreive from json, or create new accounts
             accountsResource = new Resource("accounts.json");
-            Buffer.Accounts = accountsResource.RetrieveFromJson(Buffer.Accounts);
+            Account.Refresh();
+            Buffer.Accounts = accountsResource.RetrieveFromJson<ObservableCollection<Account>>();
             if(!Buffer.Accounts.Any())
             {
                 Debug.WriteLine("Accounts data not found");
+                for (int i = 0; i < Buffer.Customers.Count; i++)
+                {
+                    Buffer.Customers[i].MainDepositAccountId = new DepositAccount(Buffer.Customers[i].Id, Currency.RUB).Id;
+                    Buffer.Customers[i].MainNonDepositAccountId = new NonDepositAccount(Buffer.Customers[i].Id, Currency.RUB).Id;
+                    new DepositAccount(Buffer.Customers[i].Id, Currency.EUR);
+                    new DepositAccount(Buffer.Customers[i].Id, Currency.USD);
+                    new NonDepositAccount(Buffer.Customers[i].Id, Currency.EUR);
+                    new NonDepositAccount(Buffer.Customers[i].Id, Currency.USD);
+                }
+                accountsResource.SaveToJson(Buffer.Accounts);
+                customerResource.SaveToJson(Buffer.Customers);
             }
             // Transactions database - retreive from json
             transactionResource = new Resource("transactions.json");
             Transaction<Type>.Refresh();
-            Transaction<Type>.Transactions = transactionResource.RetrieveFromJson(Transaction<Type>.Transactions);
+            Transaction<Type>.Transactions = transactionResource.RetrieveFromJson<ObservableCollection<Transaction<Type>>>();
             if(!Transaction<Type>.Transactions.Any())
             {
                 Debug.WriteLine("Transactions data not found");
@@ -109,7 +121,7 @@ namespace app13
 
         private void AddNewCustomer_Click(object sender, RoutedEventArgs e)
         {
-            AddNewCustomer addNewCustomer = new AddNewCustomer(customerResource);
+            AddNewCustomer addNewCustomer = new AddNewCustomer(customerResource, accountsResource);
             addNewCustomer.ShowDialog();
         }
 
@@ -129,7 +141,7 @@ namespace app13
         {
             if(selectedCustomer != null)
             {
-                CustomerManageWindow customerManageWindow = new CustomerManageWindow(selectedCustomer);
+                CustomerManageWindow customerManageWindow = new CustomerManageWindow(selectedCustomer, accountsResource);
                 customerManageWindow.ShowDialog();
             }
         }

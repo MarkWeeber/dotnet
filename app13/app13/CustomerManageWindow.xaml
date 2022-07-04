@@ -8,10 +8,12 @@
         Title="CustomerManageWindow" Height="450" MinHeight="400" Width="850" MinWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="280"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="218.411"/>
+            <ColumnDefinition Width="61.589"/>
+            <ColumnDefinition Width="188*"/>
+            <ColumnDefinition Width="97*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
+        <Grid Grid.Column="0" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -142,12 +144,11 @@
                 VerticalAlignment="Center"
                 />
         </Grid>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="2" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Background="#FFA0EAEA" Margin="10">
                 <Grid.ColumnDefinitions>
@@ -156,8 +157,8 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock
                     Grid.Column="0"
@@ -171,7 +172,7 @@
                 <TextBlock
                     Grid.Column="1"
                     Style="{StaticResource NormalLabelStyle}"
-                    Text="Number:"
+                    Text="ID:"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     Margin="0 15 0 0"
@@ -179,13 +180,21 @@
                 <TextBlock
                     Grid.Column="2"
                     Style="{StaticResource NormalLabelStyle}"
-                    Text="Balance:"
+                    Text="Number:"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     Margin="0 15 0 0"
                     />
                 <TextBlock
                     Grid.Column="3"
+                    Style="{StaticResource NormalLabelStyle}"
+                    Text="Balance:"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0 15 0 0"
+                    />
+                <TextBlock
+                    Grid.Column="4"
                     Style="{StaticResource NormalLabelStyle}"
                     Text="Currency:"
                     HorizontalAlignment="Center"
@@ -194,7 +203,7 @@
                     />
                 <TextBlock
                     Grid.Column="1"
-                    x:Name="CV_MainDepositAccountNumber"
+                    x:Name="CV_MainDepositAccountId"
                     Text="XXXXX"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
@@ -202,7 +211,7 @@
                     />
                 <TextBlock
                     Grid.Column="2"
-                    x:Name="CV_MainDepositAccountBalance"
+                    x:Name="CV_MainDepositAccountNumber"
                     Text="XXXXX"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
@@ -210,11 +219,33 @@
                     />
                 <TextBlock
                     Grid.Column="3"
+                    x:Name="CV_MainDepositAccountBalance"
+                    Text="XXXXX"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Margin="0 0 0 15"
+                    />
+                <TextBlock
+                    Grid.Column="4"
                     x:Name="CV_MainDepositAccountCurrency"
                     Text="XXXXX"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
                     Margin="0 0 0 15"
+                    />
+                <Button
+                    Grid.Column="5"
+                    x:Name="CV_ButtonReplenishMainDepositAccount"
+                    Style="{StaticResource NormalButtonStyle}"
+                    Content="REPLENISH"
+                    Margin="5"
+                    />
+                <Button
+                    Grid.Column="6"
+                    x:Name="CV_ButtonTransferFromMainDepositAccount"
+                    Style="{StaticResource NormalButtonStyle}"
+                    Content="TRANSFER"
+                    Margin="5"
                     />
             </Grid>
             <Grid Grid.Row="1" Background="#FFE8E6D0" Margin="10">
@@ -224,8 +255,8 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock
                     Grid.Column="0"
@@ -239,7 +270,7 @@
                 <TextBlock
                     Grid.Column="1"
                     Style="{StaticResource NormalLabelStyle}"
-                    Text="Number:"
+                    Text="ID:"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     Margin="0 15 0 0"
@@ -247,13 +278,21 @@
                 <TextBlock
                     Grid.Column="2"
                     Style="{StaticResource NormalLabelStyle}"
-                    Text="Balance:"
+                    Text="Number:"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     Margin="0 15 0 0"
                     />
                 <TextBlock
                     Grid.Column="3"
+                    Style="{StaticResource NormalLabelStyle}"
+                    Text="Balance:"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0 15 0 0"
+                    />
+                <TextBlock
+                    Grid.Column="4"
                     Style="{StaticResource NormalLabelStyle}"
                     Text="Currency:"
                     HorizontalAlignment="Center"
@@ -262,7 +301,7 @@
                     />
                 <TextBlock
                     Grid.Column="1"
-                    x:Name="CV_MainNonDepositAccountNumber"
+                    x:Name="CV_MainNonDepositAccountId"
                     Text="XXXXX"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
@@ -270,7 +309,7 @@
                     />
                 <TextBlock
                     Grid.Column="2"
-                    x:Name="CV_MainNonDepositAccountBalance"
+                    x:Name="CV_MainNonDepositAccountNumber"
                     Text="XXXXX"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
@@ -278,13 +317,151 @@
                     />
                 <TextBlock
                     Grid.Column="3"
+                    x:Name="CV_MainNonDepositAccountBalance"
+                    Text="XXXXX"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Margin="0 0 0 15"
+                    />
+                <TextBlock
+                    Grid.Column="4"
                     x:Name="CV_MainNonDepositAccountCurrency"
                     Text="XXXXX"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
                     Margin="0 0 0 15"
                     />
+                <Button
+                    Grid.Column="5"
+                    x:Name="CV_ButtonReplenishMainNonDepositAccount"
+                    Style="{StaticResource NormalButtonStyle}"
+                    Content="REPLENISH"
+                    Margin="5"
+                    />
+                <Button
+                    Grid.Column="6"
+                    x:Name="CV_ButtonTransferFromMainNonDepositAccount"
+                    Style="{StaticResource NormalButtonStyle}"
+                    Content="TRANSFER"
+                    Margin="5"
+                    />
             </Grid>
+            <TabControl Grid.Row="2">
+                <TabItem Header="Active Other Accounts">
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="420"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <ListView
+                            Grid.Column="0"
+                            x:Name="CV_ListViewOtherAccounts"
+                            Margin="5 5 5 15"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            SelectionChanged="CV_ListViewOtherAccounts_SelectionChanged"
+                            >
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn
+                                Width="45"
+                                DisplayMemberBinding="{Binding Id}"
+                                >
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader
+                                        Tag="Id"
+                                        Click="CV_ListViewOtherAccountsColumnHeader_Click"
+                                        >
+                                                ID
+                                            </GridViewColumnHeader>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn
+                                Width="100"
+                                DisplayMemberBinding="{Binding Number}"
+                                >
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader
+                                        Tag="Number"
+                                        Click="CV_ListViewOtherAccountsColumnHeader_Click"
+                                        >
+                                                Number
+                                            </GridViewColumnHeader>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn
+                                Width="100"
+                                DisplayMemberBinding="{Binding Balance}"
+                                >
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader
+                                        Tag="Balance"
+                                        Click="CV_ListViewOtherAccountsColumnHeader_Click"
+                                        >
+                                                Balance
+                                            </GridViewColumnHeader>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn
+                                Width="100"
+                                DisplayMemberBinding="{Binding Currency}"
+                                >
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader
+                                        Tag="Currency"
+                                        Click="CV_ListViewOtherAccountsColumnHeader_Click"
+                                        >
+                                                Currency
+                                            </GridViewColumnHeader>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Row="0"
+                                x:Name="CV_ButtonAddNewAccount"
+                                Style="{StaticResource EditButtonStyle}"
+                                Margin="7"
+                                Content="ADD NEW ACCOUNT" Click="CV_ButtonAddNewAccount_Click"
+                                />
+                            <Button
+                                Grid.Row="1"
+                                x:Name="CV_ButtonReplenishAccount"
+                                Style="{StaticResource DisabledButtonStyle}"
+                                Margin="7"
+                                Content="REPLENISH ACCOUNT"
+                                />
+                            <Button
+                                Grid.Row="2"
+                                x:Name="CV_ButtonTransferFromAccount"
+                                Style="{StaticResource DisabledButtonStyle}"
+                                Margin="7"
+                                Content="TRANSFER"
+                                />
+                            <Button
+                                Grid.Row="3"
+                                x:Name="CV_ButtonCloseAccount"
+                                Style="{StaticResource DisabledButtonStyle}"
+                                Margin="7"
+                                Content="CLOSE ACCOUNT"
+                                />
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Inactive Other Accounts">
+
+                </TabItem>
+
+            </TabControl>
+
         </Grid>
     </Grid>
 </Window>

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace app13
 {
-    public abstract class Account
+    public class Account : INotifyPropertyChanged
     {
         public static uint incrementor;
         public uint Id { get{ return id; } }
@@ -21,10 +22,10 @@ namespace app13
         private AccountType accountType;
         public uint UserId { get { return userId; } }
         private uint userId;
-        public DateTime CreatedTime { get { return createdTime; } }
-        private DateTime createdTime;
-        public bool Open { get { return open; } }
-        private bool open;
+        public string CreatedTime { get { return createdTime; } set { createdTime = value; } }
+        private string createdTime;
+        public bool Active { get { return active; } }
+        private bool active;
         static Account()
         {
             incrementor = 0;
@@ -43,23 +44,44 @@ namespace app13
             this.accountType = accountType;
             this.currency = currency;
             balance = 0;
-            open = true;
-            createdTime = DateTime.Now;
+            active = true;
+            createdTime = DateTime.Now.ToString("dd.MM.yyyy HH:mm");
             Buffer.Accounts.Add(this);
         }
         public void Close()
         {
-            open = false;
+            active = false;
         }
 
         public void Reopen()
         {
-            open = true;
+            active = true;
         }
 
         public override string ToString()
         {
             return this.accountType.ToString() + " Account " + this.currency.ToString() + " " + this.number.ToString();
+        }
+        
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        protected bool SetField<T>(ref T field, T value, string propertyName)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+            {
+                return false;
+            }
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
         }
     }
 

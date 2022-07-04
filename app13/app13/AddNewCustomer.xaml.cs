@@ -17,10 +17,12 @@ namespace app13
     {
         private List<TextBox> InputFields;
         private Resource customerResource;
-        public AddNewCustomer(Resource customerResource)
+        private Resource accountsResource;
+        public AddNewCustomer(Resource customerResource, Resource accountsResource)
         {
             InitializeComponent();
             this.customerResource = customerResource;
+            this.accountsResource = accountsResource;
             InputFields = new List<TextBox>() { InputNewFirstName, InputNewLastName, InputNewMiddleName, InputNewPhone, InputNewPassportNumber, InputNewPassportSeries };
         }
 
@@ -46,7 +48,7 @@ namespace app13
             }
             if (!emptyFieldChecker)
             {
-                new Customer(
+                Customer newCustomer = new Customer(
                     InputNewFirstName.Text,
                     InputNewLastName.Text,
                     InputNewMiddleName.Text,
@@ -54,7 +56,10 @@ namespace app13
                     InputNewPassportNumber.Text,
                     InputNewPassportSeries.Text,
                     Buffer.SelectedUser);
+                newCustomer.MainDepositAccountId = new DepositAccount(newCustomer.Id, Currency.RUB).Id;
+                newCustomer.MainNonDepositAccountId = new NonDepositAccount(newCustomer.Id, Currency.RUB).Id;
                 customerResource.SaveToJson(Buffer.Customers);
+                accountsResource.SaveToJson(Buffer.Accounts);
                 this.Close();
             }
         }
@@ -84,7 +89,10 @@ namespace app13
                     InputNewPassportNumber.Text,
                     InputNewPassportSeries.Text,
                     Buffer.SelectedUser);
+                newCustomer.MainDepositAccountId = new DepositAccount(newCustomer.Id, Currency.RUB).Id;
+                newCustomer.MainNonDepositAccountId = new NonDepositAccount(newCustomer.Id, Currency.RUB).Id;
                 customerResource.SaveToJson(Buffer.Customers);
+                accountsResource.SaveToJson(Buffer.Accounts);
                 foreach (var item in InputFields)
                 {
                     item.Text = "";

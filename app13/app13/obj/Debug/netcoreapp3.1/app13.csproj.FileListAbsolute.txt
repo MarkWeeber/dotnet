@@ -25,3 +25,5 @@ D:\DotNet\Projects\app13\app13\obj\Debug\netcoreapp3.1\AddNewCustomer.g.cs
 D:\DotNet\Projects\app13\app13\obj\Debug\netcoreapp3.1\AddNewCustomer.baml
 D:\DotNet\Projects\app13\app13\obj\Debug\netcoreapp3.1\CustomerManageWindow.g.cs
 D:\DotNet\Projects\app13\app13\obj\Debug\netcoreapp3.1\CustomerManageWindow.baml
+D:\DotNet\Projects\app13\app13\obj\Debug\netcoreapp3.1\AddNewAccount.g.cs
+D:\DotNet\Projects\app13\app13\obj\Debug\netcoreapp3.1\AddNewAccount.baml

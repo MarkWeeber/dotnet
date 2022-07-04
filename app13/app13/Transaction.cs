@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Text;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace app13
 {
@@ -15,8 +16,8 @@ namespace app13
         public uint Id { get { return id; } }
         protected uint id;
         static uint incrementor;
-        public DateTime TransactionTime { get { return transactionTime; } }
-        protected DateTime transactionTime;
+        public string TransactionTime { get { return transactionTime; } set { transactionTime = value; } }
+        protected string transactionTime;
         public float TransactionAmount { get { return transactionAmount; } }
         protected float transactionAmount;
         public uint UserId { get { return userId; } }
@@ -53,7 +54,7 @@ namespace app13
         }
         public Transaction()
         {
-            transactionTime = DateTime.Now;
+            transactionTime = DateTime.Now.ToString("dd.MM.yyyy HH:mm");
             userId = Buffer.SelectedUser.Id;
             id = ++incrementor;
         }
@@ -116,7 +117,8 @@ namespace app13
         public ReplenishDepositAccount(Customer customer, float amount)
         {
             AccountCustomer = customer;
-            new TransactionReplenishment(AccountCustomer.MainDepositAccount, amount, customer);
+            DepositAccount depositAccount = new ObservableCollection<Account>( Buffer.Accounts.Where(item => item.Id == customer.MainDepositAccountId))[0] as DepositAccount;
+            new TransactionReplenishment(depositAccount, amount, customer);
         }
     }
     public class ReplenishNonDepositAccount : IAccountReplenishment<Customer>
@@ -125,7 +127,8 @@ namespace app13
         public ReplenishNonDepositAccount(Customer customer, float amount)
         {
             AccountCustomer = customer;
-            new TransactionReplenishment(AccountCustomer.MainNonDepositAccount, amount, customer);
+            NonDepositAccount nonDepositAccount = new ObservableCollection<Account>(Buffer.Accounts.Where(item => item.Id == customer.MainNonDepositAccountId))[0] as NonDepositAccount;
+            new TransactionReplenishment(nonDepositAccount, amount, customer);
         }
     }
     // contravariant interface
@@ -143,7 +146,9 @@ namespace app13
         {
             BeneficiaryCustomer = beneficiary;
             PayingCustomer = payingCustomer;
-            new TransactionBetweenAccounts(BeneficiaryCustomer.MainNonDepositAccount, PayingCustomer.MainNonDepositAccount, amount);
+            NonDepositAccount beneficiaryNonDepositAccount = new ObservableCollection<Account>(Buffer.Accounts.Where(item => item.Id == beneficiary.MainNonDepositAccountId))[0] as NonDepositAccount;
+            NonDepositAccount payingNonDepositAccount = new ObservableCollection<Account>(Buffer.Accounts.Where(item => item.Id == payingCustomer.MainNonDepositAccountId))[0] as NonDepositAccount;
+            new TransactionBetweenAccounts(beneficiaryNonDepositAccount, payingNonDepositAccount, amount);
         }
     }
 }
