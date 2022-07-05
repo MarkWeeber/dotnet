@@ -24,9 +24,6 @@ namespace app13
     public partial class MainWindow : Window
     {
         private User user;
-        private Resource customerResource;
-        private Resource accountsResource;
-        private Resource transactionResource;
         private Customer selectedCustomer;
         private GridViewColumnHeader listViewSortCol = null;
         private SortAdorner listViewSortAdorner = null;
@@ -37,53 +34,12 @@ namespace app13
             user = new User("MAIN MANAGER");
             Buffer.SelectedUser = user;
             UserNameTextBlock.Text = user.Name;
-            // Customers database - retreive from json, or create default values
-            customerResource = new Resource("customers.json");
-            Customer.Refresh();
-            Buffer.Customers = customerResource.RetrieveFromJson<ObservableCollection<Customer>>();
-            if (!Buffer.Customers.Any())
-            {
-                Debug.WriteLine("Customers data not found or corrupted, making default values");
-                new Customer("Adamson", "Adam", "Adam Jr", "55-445321", "1160000", "XP");
-                new Customer("Brian", "Palma", "De", "55-55123", "1161111", "XP");
-                new Customer("Rupert", "Murdoc", "Senior", "55-0101010", "1167701", "DM");
-                new Customer("Nixon", "Flow", "Scott", "554-551234", "1160051", "SS");
-                new Customer("Jannson", "Greg", "Val", "9-9944-5", "1160016", "DM");
-                new Customer("Ruyeen", "Sam", "Gross", "0055855123", "1160051", "SS");
-                new Customer("Karvee", "William", "Rum", "00773123", "1160021", "SS");
-                new Customer("Samoa", "Josh", "Sent", "55123345", "1160001", "XP");
-                customerResource.SaveToJson(Buffer.Customers);
-            }
+            Buffer.LoadData();
             ListViewCustomers.ItemsSource = Buffer.Customers;
-            // Accounts database - retreive from json, or create new accounts
-            accountsResource = new Resource("accounts.json");
-            Account.Refresh();
-            Buffer.Accounts = accountsResource.RetrieveFromJson<ObservableCollection<Account>>();
-            if(!Buffer.Accounts.Any())
+            if(Buffer.Transactions.Any())
             {
-                Debug.WriteLine("Accounts data not found");
-                for (int i = 0; i < Buffer.Customers.Count; i++)
-                {
-                    Buffer.Customers[i].MainDepositAccountId = new DepositAccount(Buffer.Customers[i].Id, Currency.RUB).Id;
-                    Buffer.Customers[i].MainNonDepositAccountId = new NonDepositAccount(Buffer.Customers[i].Id, Currency.RUB).Id;
-                    new DepositAccount(Buffer.Customers[i].Id, Currency.EUR);
-                    new DepositAccount(Buffer.Customers[i].Id, Currency.USD);
-                    new NonDepositAccount(Buffer.Customers[i].Id, Currency.EUR);
-                    new NonDepositAccount(Buffer.Customers[i].Id, Currency.USD);
-                }
-                accountsResource.SaveToJson(Buffer.Accounts);
-                customerResource.SaveToJson(Buffer.Customers);
+                ListViewTransactionHistory.ItemsSource = Buffer.Transactions;
             }
-            // Transactions database - retreive from json
-            transactionResource = new Resource("transactions.json");
-            Transaction<Type>.Refresh();
-            Transaction<Type>.Transactions = transactionResource.RetrieveFromJson<ObservableCollection<Transaction<Type>>>();
-            if(!Transaction<Type>.Transactions.Any())
-            {
-                Debug.WriteLine("Transactions data not found");
-            }
-            ListViewTransactionHistory.ItemsSource = Transaction<Type>.Transactions;
-
         }
 
         private void CustomersListViewColumnHeader_Click(object sender, RoutedEventArgs e)
@@ -121,7 +77,7 @@ namespace app13
 
         private void AddNewCustomer_Click(object sender, RoutedEventArgs e)
         {
-            AddNewCustomer addNewCustomer = new AddNewCustomer(customerResource, accountsResource);
+            AddNewCustomer addNewCustomer = new AddNewCustomer();
             addNewCustomer.ShowDialog();
         }
 
@@ -141,7 +97,7 @@ namespace app13
         {
             if(selectedCustomer != null)
             {
-                CustomerManageWindow customerManageWindow = new CustomerManageWindow(selectedCustomer, accountsResource);
+                CustomerManageWindow customerManageWindow = new CustomerManageWindow(selectedCustomer);
                 customerManageWindow.ShowDialog();
             }
         }

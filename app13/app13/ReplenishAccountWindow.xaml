@@ -1,0 +1,126 @@
+﻿<Window x:Class="app13.ReplenishAccountWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:app13"
+        mc:Ignorable="d"
+        Title="Replenish Account" Height="240" MinHeight="220" Width="400" MinWidth="350">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="ID:"
+            Style="{StaticResource NormalLabelStyle}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Margin="0 5 0 0"
+            />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            x:Name="RA_AccountId"
+            Text="XXXXX"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Margin="0 0 0 5"
+            />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="1"
+            Text="NUMBER:"
+            Style="{StaticResource NormalLabelStyle}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Margin="0 5 0 0"
+            />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="1"
+            x:Name="RA_AccountNumber"
+            Text="XXXXX"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Margin="0 0 0 5"
+            />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="2"
+            Text="CURRENCY:"
+            Style="{StaticResource NormalLabelStyle}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Margin="0 5 0 0"
+            />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="2"
+            x:Name="RA_AccountCurrency"
+            Text="XXXXX"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Margin="0 0 0 5"
+            />
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="CURRENT BALANCE:"
+            TextWrapping="Wrap"
+            Style="{StaticResource NormalLabelStyle}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            />
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="1"
+            x:Name="RA_AccountBalance"
+            Text="XXXXX"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            />
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="0"
+            Text="REPLENISH AMOUNT:"
+            TextWrapping="Wrap"
+            Style="{StaticResource NormalLabelStyle}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            />
+        <TextBox
+            Grid.Row="2"
+            Grid.Column="1"
+            x:Name="RA_TextBoxReplenishAmount"
+            Margin="5"
+            Height="25" PreviewTextInput="RA_TextBoxReplenishAmount_PreviewTextInput"
+            />
+        
+        <Button
+            Grid.Row="3"
+            Grid.Column="1"
+            x:Name="RA_ButtonReplenish"
+            Style="{StaticResource NormalButtonStyle}"
+            Margin="5"
+            Content="REPLENISH" Click="RA_ButtonReplenish_Click"
+            />
+        <Button
+            Grid.Row="3"
+            Grid.Column="2"
+            x:Name="RA_ButtonCancel"
+            Style="{StaticResource CancelButtonStyle}"
+            Margin="5"
+            Content="CANCEL" Click="RA_ButtonCancel_Click"
+            />
+    </Grid>
+</Window>

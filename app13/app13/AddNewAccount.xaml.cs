@@ -15,16 +15,13 @@ namespace app13
 {
     public partial class AddNewAccount : Window
     {
-        private Resource accountsResource;
         private Customer customer;
-        private Account newAccount;
         private bool currencyPicked = false;
         private Currency pickedCurrency;
         private CustomerManageWindow customerManageWindow;
-        public AddNewAccount(Resource accountsResource, Customer customer, CustomerManageWindow customerManageWindow)
+        public AddNewAccount(Customer customer, CustomerManageWindow customerManageWindow)
         {
             InitializeComponent();
-            this.accountsResource = accountsResource;
             this.customer = customer;
             this.customerManageWindow = customerManageWindow;
             ANC_ComboBoxCurrencyPicker.ItemsSource = Enum.GetValues((typeof(Currency)));
@@ -41,13 +38,13 @@ namespace app13
             {
                 if (ANC_RadioDepositTypeChecker.IsChecked == true)
                 {
-                    newAccount = new DepositAccount(customer.Id, pickedCurrency);
+                    new DepositAccount(customer.Id, pickedCurrency);
                 }
                 else if (ANC_RadioNonDepositTypeChecker.IsChecked == true)
                 {
-                    newAccount = new NonDepositAccount(customer.Id, pickedCurrency);
+                    new NonDepositAccount(customer.Id, pickedCurrency);
                 }
-                accountsResource.SaveToJson(Buffer.Accounts);
+                Buffer.SaveAccounts();
                 customerManageWindow.RefreshListViews();
                 this.Close();
             }

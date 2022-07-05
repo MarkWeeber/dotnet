@@ -7,24 +7,21 @@ using System.Linq;
 
 namespace app13
 {
-    public abstract class Transaction<Type>
+    public class Transaction
     {
-        public Type Source { get { return source; } }
-        public string SourceDetails { get { return source.ToString(); } }
-        protected Type source;
-
-        public uint Id { get { return id; } }
+        public uint Id { get { return id; } set { id = value; } }
         protected uint id;
-        static uint incrementor;
+        public string SourceDetails { get; set; }
+        private static uint incrementor;
         public string TransactionTime { get { return transactionTime; } set { transactionTime = value; } }
         protected string transactionTime;
-        public float TransactionAmount { get { return transactionAmount; } }
+        public float TransactionAmount { get { return transactionAmount; } set { transactionAmount = value; } }
         protected float transactionAmount;
-        public uint UserId { get { return userId; } }
+        public uint UserId { get { return userId; } set { userId = value; } }
         protected uint userId;
-        public uint AccountId { get { return accountId; }  }
+        public uint AccountId { get { return accountId; } set { accountId = value; } }
         protected uint accountId;
-        public uint AccountNumber { get { return accountNumber; } }
+        public uint AccountNumber { get { return accountNumber; } set { accountNumber = value; } }
         protected uint accountNumber;
         public string TransactionTypeName
         { get
@@ -36,21 +33,21 @@ namespace app13
                     TransactionType.WithDrawal => "Withdrawal",
                     _ => "",
                 };
+            } set
+            {
+                ;
             }
         }
-        public TransactionType TransactionType { get { return transactionType; } }
+        public TransactionType TransactionType { get { return transactionType; } set { transactionType = value; } }
         protected TransactionType transactionType;
-        public static ObservableCollection<Transaction<Type>> Transactions { get {return transactions; } set { if (value == null) { transactions = new ObservableCollection<Transaction<Type>>(); } else { transactions = value; } } }
-        protected static ObservableCollection<Transaction<Type>> transactions;
         static Transaction()
         {
             incrementor = 0;
-            transactions = new ObservableCollection<Transaction<Type>>();
         }
         public static void Refresh()
         {
             incrementor = 0;
-            transactions.Clear();
+            Buffer.Transactions.Clear();
         }
         public Transaction()
         {
@@ -58,14 +55,15 @@ namespace app13
             userId = Buffer.SelectedUser.Id;
             id = ++incrementor;
         }
-        public Transaction<Type> this[int index]
-        {
-            get { return transactions[index]; }
-            set { transactions[index] = value; }
-        }
+    }
+
+    public class TransactionType<T> : Transaction
+    {
+        protected T source;
+        
     }
     // parametrized classes
-    public class TransactionBetweenAccounts : Transaction<Account>
+    public class TransactionBetweenAccounts : TransactionType<Account>
     {
         public TransactionBetweenAccounts(Account debitAccount, Account creditAccount, float amount)
         {
@@ -73,36 +71,39 @@ namespace app13
             accountId = debitAccount.Id;
             accountNumber = debitAccount.Number;
             source = creditAccount;
+            SourceDetails = source.ToString();
             debitAccount.Balance += amount;
             creditAccount.Balance -= amount;
             transactionType = TransactionType.BetweenAccounts;
-            transactions.Add(this);
+            Buffer.Transactions.Add((Transaction)this);
         }
     }
 
-    class TransactionReplenishment : Transaction<Customer>
+    class TransactionReplenishment : TransactionType<Customer>
     {
         public TransactionReplenishment(Account MainAccount, float amount, Customer customer)
         {
             transactionAmount = amount;
             accountNumber = MainAccount.Number;
             source = customer;
+            SourceDetails = source.ToString();
             MainAccount.Balance += amount;
             transactionType = TransactionType.Replenishment;
-            transactions.Add(this);
+            Buffer.Transactions.Add((Transaction)this);
         }
     }
 
-    class TransactionWithDrawal : Transaction<Customer>
+    class TransactionWithDrawal : TransactionType<Customer>
     {
         public TransactionWithDrawal(Account MainAccount, float amount, Customer customer)
         {
             transactionAmount = amount;
             accountNumber = MainAccount.Number;
             source = customer;
+            SourceDetails = source.ToString();
             MainAccount.Balance -= amount;
             transactionType = TransactionType.WithDrawal;
-            transactions.Add(this);
+            Buffer.Transactions.Add((Transaction)this);
         }
     }
     // covariant intefrace
@@ -117,7 +118,7 @@ namespace app13
         public ReplenishDepositAccount(Customer customer, float amount)
         {
             AccountCustomer = customer;
-            DepositAccount depositAccount = new ObservableCollection<Account>( Buffer.Accounts.Where(item => item.Id == customer.MainDepositAccountId))[0] as DepositAccount;
+            Account depositAccount = new ObservableCollection<Account>(Buffer.Accounts.Where(item => item.Id == customer.MainDepositAccountId))[0];
             new TransactionReplenishment(depositAccount, amount, customer);
         }
     }
@@ -127,7 +128,7 @@ namespace app13
         public ReplenishNonDepositAccount(Customer customer, float amount)
         {
             AccountCustomer = customer;
-            NonDepositAccount nonDepositAccount = new ObservableCollection<Account>(Buffer.Accounts.Where(item => item.Id == customer.MainNonDepositAccountId))[0] as NonDepositAccount;
+            Account nonDepositAccount = new ObservableCollection<Account>(Buffer.Accounts.Where(item => item.Id == customer.MainNonDepositAccountId))[0];
             new TransactionReplenishment(nonDepositAccount, amount, customer);
         }
     }

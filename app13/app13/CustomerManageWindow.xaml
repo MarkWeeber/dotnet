@@ -238,7 +238,7 @@
                     x:Name="CV_ButtonReplenishMainDepositAccount"
                     Style="{StaticResource NormalButtonStyle}"
                     Content="REPLENISH"
-                    Margin="5"
+                    Margin="5" Click="CV_ButtonReplenishMainDepositAccount_Click"
                     />
                 <Button
                     Grid.Column="6"
@@ -337,6 +337,7 @@
                     Style="{StaticResource NormalButtonStyle}"
                     Content="REPLENISH"
                     Margin="5"
+                    Click="CV_ButtonReplenishMainNonDepositAccount_Click"
                     />
                 <Button
                     Grid.Column="6"
@@ -348,7 +349,7 @@
             </Grid>
             <TabControl Grid.Row="2">
                 <TabItem Header="Active Other Accounts">
-                    <Grid Grid.Row="2">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="420"/>
                             <ColumnDefinition/>
@@ -437,7 +438,7 @@
                                 x:Name="CV_ButtonReplenishAccount"
                                 Style="{StaticResource DisabledButtonStyle}"
                                 Margin="7"
-                                Content="REPLENISH ACCOUNT"
+                                Content="REPLENISH ACCOUNT" Click="CV_ButtonReplenishAccount_Click"
                                 />
                             <Button
                                 Grid.Row="2"
@@ -448,18 +449,100 @@
                                 />
                             <Button
                                 Grid.Row="3"
-                                x:Name="CV_ButtonCloseAccount"
+                                x:Name="CV_ButtonDeactivateAccount"
                                 Style="{StaticResource DisabledButtonStyle}"
                                 Margin="7"
-                                Content="CLOSE ACCOUNT"
+                                Content="DEACTIVATE ACCOUNT" Click="CV_ButtonDeactivateAccount_Click"
                                 />
                         </Grid>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Inactive Other Accounts">
-
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="420"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <ListView
+                            Grid.Column="0"
+                            x:Name="CV_ListViewOtherInactiveAccounts"
+                            Margin="5 5 5 15"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch" SelectionChanged="CV_ListViewOtherInactiveAccounts_SelectionChanged"
+                            >
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn
+                                            Width="45"
+                                            DisplayMemberBinding="{Binding Id}"
+                                            >
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader
+                                                Tag="Id"
+                                                Click="CV_ListViewOtherInactiveAccountsColumnHeader_Click"
+                                                >
+                                                ID
+                                            </GridViewColumnHeader>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn
+                                        Width="100"
+                                        DisplayMemberBinding="{Binding Number}"
+                                        >
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader
+                                                Tag="Number" Click="CV_ListViewOtherInactiveAccountsColumnHeader_Click"
+                                                >
+                                                Number
+                                            </GridViewColumnHeader>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn
+                                        Width="100"
+                                        DisplayMemberBinding="{Binding Balance}"
+                                        >
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader
+                                                Tag="Balance"
+                                                Click="CV_ListViewOtherInactiveAccountsColumnHeader_Click"
+                                                >
+                                                Balance
+                                            </GridViewColumnHeader>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn
+                                        Width="100"
+                                        DisplayMemberBinding="{Binding Currency}"
+                                        >
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader
+                                                Tag="Currency"
+                                                Click="CV_ListViewOtherInactiveAccountsColumnHeader_Click"
+                                                >
+                                                Currency
+                                            </GridViewColumnHeader>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Row="0"
+                                x:Name="CV_ButtonActivateAccount"
+                                Style="{StaticResource DisabledButtonStyle}"
+                                Margin="7"
+                                Content="ACTIVATE  ACCOUNT" Click="CV_ButtonActivateAccount_Click"
+                                />
+                        </Grid>
+                    </Grid>
                 </TabItem>
-
             </TabControl>
 
         </Grid>

@@ -16,6 +16,9 @@
     <Compile Update="CustomerManageWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="ReplenishAccountWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="AddNewAccount.xaml">
@@ -28,6 +31,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ReplenishAccountWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

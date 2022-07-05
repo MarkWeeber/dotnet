@@ -12,7 +12,7 @@ namespace app13
         private uint id;
         public uint Number { get {return number; } }
         private uint number;
-        public float Balance { get { return balance; } set { balance = value; } }
+        public float Balance { get { return balance; } set { SetField(ref balance, value, "Balance"); } }
         private float balance;
         public Currency Currency { get { return currency; } }
         private Currency currency;
@@ -24,7 +24,7 @@ namespace app13
         private uint userId;
         public string CreatedTime { get { return createdTime; } set { createdTime = value; } }
         private string createdTime;
-        public bool Active { get { return active; } }
+        public bool Active { get { return active; } set { SetField(ref active, value, "Active"); } }
         private bool active;
         static Account()
         {
@@ -47,15 +47,6 @@ namespace app13
             active = true;
             createdTime = DateTime.Now.ToString("dd.MM.yyyy HH:mm");
             Buffer.Accounts.Add(this);
-        }
-        public void Close()
-        {
-            active = false;
-        }
-
-        public void Reopen()
-        {
-            active = true;
         }
 
         public override string ToString()

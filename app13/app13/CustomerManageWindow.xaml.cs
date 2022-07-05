@@ -22,21 +22,17 @@ namespace app13
     public partial class CustomerManageWindow : Window
     {
         public Customer selectedCustomer;
-        private Account selectedOtherAccount;
+        private Account selectedOtherActiveAccount;
+        private Account selectedOtherInactiveAccount;
         private GridViewColumnHeader listViewSortCol = null;
         private SortAdorner listViewSortAdorner = null;
-        private ObservableCollection<Account> otherAccountsOnSelectedCustomer;
-        private Resource accountsResource;
         private Account mainDepositAccount;
         private Account mainNonDepositAccount;
-        public CustomerManageWindow(Customer customer, Resource accountsResource)
+        public CustomerManageWindow(Customer customer)
         {
             InitializeComponent();
             selectedCustomer = customer;
-            this.accountsResource = accountsResource;
             // map data
-            mainDepositAccount = new ObservableCollection<Account>(Buffer.Accounts.Where(item => (item.Id == selectedCustomer.MainDepositAccountId)))[0];
-            mainNonDepositAccount = new ObservableCollection<Account>(Buffer.Accounts.Where(item => (item.Id == selectedCustomer.MainNonDepositAccountId)))[0];
             CustomerViewTextBlockFirstName.Text = selectedCustomer.FirstName;
             CustomerViewTextBlockLastName.Text = selectedCustomer.LastName;
             CustomerViewTextBlockMiddleName.Text = selectedCustomer.MiddleName;
@@ -44,23 +40,16 @@ namespace app13
             CustomerViewTextBlockPassportNumber.Text = selectedCustomer.PassportNumber;
             CustomerViewTextBlockPassportSeries.Text = selectedCustomer.PassportSeries;
             CustomerViewTextBlockRegistrationDate.Text = selectedCustomer.CreatedTime;
-            CV_MainDepositAccountId.Text = mainDepositAccount.Id.ToString();
-            CV_MainDepositAccountNumber.Text = mainDepositAccount.Number.ToString();
-            CV_MainDepositAccountBalance.Text = mainDepositAccount.Balance.ToString();
-            CV_MainDepositAccountCurrency.Text = mainDepositAccount.Currency.ToString();
-            CV_MainNonDepositAccountId.Text = mainNonDepositAccount.Id.ToString();
-            CV_MainNonDepositAccountNumber.Text = mainNonDepositAccount.Number.ToString();
-            CV_MainNonDepositAccountBalance.Text = mainNonDepositAccount.Balance.ToString();
-            CV_MainNonDepositAccountCurrency.Text = mainNonDepositAccount.Currency.ToString();
+            RefreshMainAccounts();
             RefreshListViews();
         }
 
         private void CV_ListViewOtherAccounts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedOtherAccount = CV_ListViewOtherAccounts.SelectedItem as Account;
+            selectedOtherActiveAccount = CV_ListViewOtherAccounts.SelectedItem as Account;
             CV_ButtonReplenishAccount.Style = Application.Current.FindResource("NormalButtonStyle") as Style;
             CV_ButtonTransferFromAccount.Style = Application.Current.FindResource("NormalButtonStyle") as Style;
-            CV_ButtonCloseAccount.Style = Application.Current.FindResource("NormalButtonStyle") as Style;
+            CV_ButtonDeactivateAccount.Style = Application.Current.FindResource("NormalButtonStyle") as Style;
         }
 
         private void CV_ListViewOtherAccountsColumnHeader_Click(object sender, RoutedEventArgs e)
@@ -93,13 +82,27 @@ namespace app13
 
         private void CV_ButtonAddNewAccount_Click(object sender, RoutedEventArgs e)
         {
-            AddNewAccount addNewAccount = new AddNewAccount(accountsResource, selectedCustomer, this);
+            AddNewAccount addNewAccount = new AddNewAccount(selectedCustomer, this);
             addNewAccount.ShowDialog();
+        }
+
+        public void RefreshMainAccounts()
+        {
+            mainDepositAccount = new ObservableCollection<Account>(Buffer.Accounts.Where(item => (item.Id == selectedCustomer.MainDepositAccountId)))[0];
+            mainNonDepositAccount = new ObservableCollection<Account>(Buffer.Accounts.Where(item => (item.Id == selectedCustomer.MainNonDepositAccountId)))[0];
+            CV_MainDepositAccountId.Text = mainDepositAccount.Id.ToString();
+            CV_MainDepositAccountNumber.Text = mainDepositAccount.Number.ToString();
+            CV_MainDepositAccountBalance.Text = mainDepositAccount.Balance.ToString();
+            CV_MainDepositAccountCurrency.Text = mainDepositAccount.Currency.ToString();
+            CV_MainNonDepositAccountId.Text = mainNonDepositAccount.Id.ToString();
+            CV_MainNonDepositAccountNumber.Text = mainNonDepositAccount.Number.ToString();
+            CV_MainNonDepositAccountBalance.Text = mainNonDepositAccount.Balance.ToString();
+            CV_MainNonDepositAccountCurrency.Text = mainNonDepositAccount.Currency.ToString();
         }
 
         public void RefreshListViews()
         {
-            otherAccountsOnSelectedCustomer = new ObservableCollection<Account>(Buffer.Accounts.Where
+            CV_ListViewOtherAccounts.ItemsSource = new ObservableCollection<Account>(Buffer.Accounts.Where
                 (
                         item =>
                         (item.Active == true) &&
@@ -108,7 +111,76 @@ namespace app13
                         (item.Id != selectedCustomer.MainNonDepositAccountId)
                 )
                 );
-            CV_ListViewOtherAccounts.ItemsSource = otherAccountsOnSelectedCustomer;
+            CV_ListViewOtherAccounts.UnselectAll();
+            CV_ListViewOtherInactiveAccounts.ItemsSource = new ObservableCollection<Account>(Buffer.Accounts.Where
+                (
+                        item =>
+                        (item.Active == false) &&
+                        (item.CustomerId == selectedCustomer.Id) &&
+                        (item.Id != selectedCustomer.MainDepositAccountId) &&
+                        (item.Id != selectedCustomer.MainNonDepositAccountId)
+                )
+                );
+            CV_ListViewOtherInactiveAccounts.UnselectAll();
+            CV_ButtonReplenishAccount.Style = Application.Current.FindResource("DisabledButtonStyle") as Style;
+            CV_ButtonTransferFromAccount.Style = Application.Current.FindResource("DisabledButtonStyle") as Style;
+            CV_ButtonDeactivateAccount.Style = Application.Current.FindResource("DisabledButtonStyle") as Style;
+            CV_ButtonActivateAccount.Style = Application.Current.FindResource("DisabledButtonStyle") as Style;
+        }
+
+        private void CV_ListViewOtherInactiveAccounts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedOtherInactiveAccount = CV_ListViewOtherInactiveAccounts.SelectedItem as Account;
+            CV_ButtonActivateAccount.Style = Application.Current.FindResource("NormalButtonStyle") as Style;
+        }
+
+        private void CV_ListViewOtherInactiveAccountsColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            ManageColumnsSorting(sender, CV_ListViewOtherInactiveAccounts);
+        }
+
+        private void CV_ButtonDeactivateAccount_Click(object sender, RoutedEventArgs e)
+        {
+            if(selectedOtherActiveAccount != null && MessageBox.Show("Deactivate this account?", "Confirm Deactivate", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                selectedOtherActiveAccount.Active = false;
+                Buffer.SaveAccounts();
+                RefreshListViews();
+            }
+        }
+
+        private void CV_ButtonActivateAccount_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedOtherInactiveAccount != null && MessageBox.Show("Activate this account?", "Confirm Activate", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                selectedOtherInactiveAccount.Active = true;
+                Buffer.SaveAccounts();
+                RefreshListViews();
+            }
+        }
+
+        private void CV_ButtonReplenishMainDepositAccount_Click(object sender, RoutedEventArgs e)
+        {
+            CallReplenishWindow(mainDepositAccount);
+        }
+
+        private void CallReplenishWindow(Account account)
+        {
+            ReplenishAccountWindow replenishAccountWindow = new ReplenishAccountWindow(selectedCustomer, account, this);
+            replenishAccountWindow.ShowDialog();
+        }
+
+        private void CV_ButtonReplenishMainNonDepositAccount_Click(object sender, RoutedEventArgs e)
+        {
+            CallReplenishWindow(mainNonDepositAccount);
+        }
+
+        private void CV_ButtonReplenishAccount_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedOtherActiveAccount != null)
+            {
+                CallReplenishWindow(selectedOtherActiveAccount);
+            }
         }
     }
 }
