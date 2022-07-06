@@ -182,5 +182,26 @@ namespace app13
                 CallReplenishWindow(selectedOtherActiveAccount);
             }
         }
+
+        private void CV_ButtonTransferFromMainDepositAccount_Click(object sender, RoutedEventArgs e)
+        {
+            CallTransferWindos(mainDepositAccount);
+        }
+
+        private void CV_ButtonTransferFromMainNonDepositAccount_Click(object sender, RoutedEventArgs e)
+        {
+            CallTransferWindos(mainNonDepositAccount);
+        }
+
+        private void CV_ButtonTransferFromAccount_Click(object sender, RoutedEventArgs e)
+        {
+            CallTransferWindos(selectedOtherActiveAccount);
+        }
+
+        private void CallTransferWindos(Account account)
+        {
+            TransferBetweenAccountsWindow transferBetweenAccountsWindow = new TransferBetweenAccountsWindow(account, this);
+            transferBetweenAccountsWindow.ShowDialog();
+        }
     }
 }

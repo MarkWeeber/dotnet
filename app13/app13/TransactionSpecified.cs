@@ -57,13 +57,13 @@ namespace app13
         }
     }
 
-    public class TransactionType<T> : Transaction
+    public class TransactionSpecified<T> : Transaction
     {
         protected T source;
         
     }
     // parametrized classes
-    public class TransactionBetweenAccounts : TransactionType<Account>
+    public class TransactionBetweenAccounts : TransactionSpecified<Account>
     {
         public TransactionBetweenAccounts(Account debitAccount, Account creditAccount, float amount)
         {
@@ -79,7 +79,7 @@ namespace app13
         }
     }
 
-    class TransactionReplenishment : TransactionType<Customer>
+    class TransactionReplenishment : TransactionSpecified<Customer>
     {
         public TransactionReplenishment(Account MainAccount, float amount, Customer customer)
         {
@@ -93,7 +93,7 @@ namespace app13
         }
     }
 
-    class TransactionWithDrawal : TransactionType<Customer>
+    class TransactionWithDrawal : TransactionSpecified<Customer>
     {
         public TransactionWithDrawal(Account MainAccount, float amount, Customer customer)
         {

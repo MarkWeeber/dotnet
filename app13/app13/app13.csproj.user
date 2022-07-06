@@ -19,6 +19,9 @@
     <Compile Update="ReplenishAccountWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="TransferBetweenAccountsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="AddNewAccount.xaml">
@@ -34,6 +37,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="ReplenishAccountWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TransferBetweenAccountsWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

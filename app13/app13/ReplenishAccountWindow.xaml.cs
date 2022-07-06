@@ -35,6 +35,12 @@ namespace app13
             this.account = account;
             this.customerManageWindow = customerManageWindow;
             CheckForMainAccount();
+            // map data
+            RA_AccountId.Text = account.Id.ToString();
+            RA_AccountNumber.Text = account.Number.ToString();
+            RA_AccountCurrency.Text = account.Currency.ToString();
+            RA_AccountBalance.Text = account.Balance.ToString();
+
         }
 
         private void CheckForMainAccount()
@@ -59,7 +65,7 @@ namespace app13
         {
             if(float.TryParse(RA_TextBoxReplenishAmount.Text, out replenishAmount))
             {
-                if(replenishAmount > 0)
+                if(replenishAmount > 0f)
                 {
                     if(isMainAccount)
                     {
@@ -79,6 +85,7 @@ namespace app13
                     Buffer.SaveTransactions();
                     Buffer.SaveAccounts();
                     customerManageWindow.RefreshMainAccounts();
+                    customerManageWindow.RefreshListViews();
                     this.Close();
                 }
             }

@@ -16,7 +16,7 @@
             />
         <TabControl Margin="10 5 10 5">
             <TabItem Header="All Customers">
-                <Grid ShowGridLines="True">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5*" MinWidth="300"/>
                         <ColumnDefinition Width="2*" MinWidth="150"/>
@@ -89,7 +89,7 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Grid ShowGridLines="True" Grid.Column="1">
+                    <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="40"/>
                             <RowDefinition Height="40"/>

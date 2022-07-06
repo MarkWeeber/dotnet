@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:app13"
         mc:Ignorable="d"
-        Title="CustomerManageWindow" Height="450" MinHeight="400" Width="850" MinWidth="800">
+        Title="CustomerManageWindow" Height="450" MinHeight="400" Width="900" MinWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="218.411"/>
@@ -245,7 +245,7 @@
                     x:Name="CV_ButtonTransferFromMainDepositAccount"
                     Style="{StaticResource NormalButtonStyle}"
                     Content="TRANSFER"
-                    Margin="5"
+                    Margin="5" Click="CV_ButtonTransferFromMainDepositAccount_Click"
                     />
             </Grid>
             <Grid Grid.Row="1" Background="#FFE8E6D0" Margin="10">
@@ -344,7 +344,7 @@
                     x:Name="CV_ButtonTransferFromMainNonDepositAccount"
                     Style="{StaticResource NormalButtonStyle}"
                     Content="TRANSFER"
-                    Margin="5"
+                    Margin="5" Click="CV_ButtonTransferFromMainNonDepositAccount_Click"
                     />
             </Grid>
             <TabControl Grid.Row="2">
@@ -445,7 +445,7 @@
                                 x:Name="CV_ButtonTransferFromAccount"
                                 Style="{StaticResource DisabledButtonStyle}"
                                 Margin="7"
-                                Content="TRANSFER"
+                                Content="TRANSFER" Click="CV_ButtonTransferFromAccount_Click"
                                 />
                             <Button
                                 Grid.Row="3"
