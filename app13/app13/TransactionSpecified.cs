@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.Text;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 
 namespace app13
 {
-    public class Transaction
+    public class Transaction : INotifyPropertyChanged
     {
         public uint Id { get { return id; } set { id = value; } }
         protected uint id;
@@ -54,6 +53,27 @@ namespace app13
             transactionTime = DateTime.Now.ToString("dd.MM.yyyy HH:mm");
             userId = Buffer.SelectedUser.Id;
             id = ++incrementor;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        protected bool SetField<T>(ref T field, T value, string propertyName)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+            {
+                return false;
+            }
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
         }
     }
 
@@ -147,8 +167,8 @@ namespace app13
         {
             BeneficiaryCustomer = beneficiary;
             PayingCustomer = payingCustomer;
-            NonDepositAccount beneficiaryNonDepositAccount = new ObservableCollection<Account>(Buffer.Accounts.Where(item => item.Id == beneficiary.MainNonDepositAccountId))[0] as NonDepositAccount;
-            NonDepositAccount payingNonDepositAccount = new ObservableCollection<Account>(Buffer.Accounts.Where(item => item.Id == payingCustomer.MainNonDepositAccountId))[0] as NonDepositAccount;
+            Account beneficiaryNonDepositAccount = new ObservableCollection<Account>(Buffer.Accounts.Where(item => item.Id == beneficiary.MainNonDepositAccountId))[0];
+            Account payingNonDepositAccount = new ObservableCollection<Account>(Buffer.Accounts.Where(item => item.Id == payingCustomer.MainNonDepositAccountId))[0];
             new TransactionBetweenAccounts(beneficiaryNonDepositAccount, payingNonDepositAccount, amount);
         }
     }

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
 D:\DotNet\Projects\app13\app13\App.xaml
-6883282311
+7-2123828381
 
-161470554204
+17-1467287971
 1931216087040
-AddNewAccount.xaml;AddNewCustomer.xaml;CustomerManageWindow.xaml;MainWindow.xaml;ReplenishAccountWindow.xaml;TransferBetweenAccountsWindow.xaml;
+AddNewAccount.xaml;AddNewCustomer.xaml;CustomerManageWindow.xaml;MainWindow.xaml;ReplenishAccountWindow.xaml;TransferBetweenAccountsWindow.xaml;TransferBetweenCustomersWindow.xaml;
 
 False
 

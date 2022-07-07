@@ -31,3 +31,5 @@ D:\DotNet\Projects\app13\app13\obj\Debug\netcoreapp3.1\ReplenishAccountWindow.g.
 D:\DotNet\Projects\app13\app13\obj\Debug\netcoreapp3.1\ReplenishAccountWindow.baml
 D:\DotNet\Projects\app13\app13\obj\Debug\netcoreapp3.1\TransferBetweenAccountsWindow.g.cs
 D:\DotNet\Projects\app13\app13\obj\Debug\netcoreapp3.1\TransferBetweenAccountsWindow.baml
+D:\DotNet\Projects\app13\app13\obj\Debug\netcoreapp3.1\TransferBetweenCustomersWindow.g.cs
+D:\DotNet\Projects\app13\app13\obj\Debug\netcoreapp3.1\TransferBetweenCustomersWindow.baml

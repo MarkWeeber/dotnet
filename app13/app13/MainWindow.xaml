@@ -112,6 +112,13 @@
                             Margin="3"
                             Content="Show Customer Accounts" Click="ShowCustomerAccounts_Click"
                             />
+                        <Button
+                            Grid.Row="2"
+                            x:Name="TransferBetweenTwoCustomers"
+                            Style="{StaticResource NormalButtonStyle}"
+                            Margin="3"
+                            Content="Transfer Between Customers" Click="TransferBetweenTwoCustomers_Click"
+                            />
                     </Grid>
                 </Grid>
             </TabItem>
@@ -170,7 +177,7 @@
                                     </GridViewColumn.Header>
                                 </GridViewColumn>
                                 <GridViewColumn
-                                    Width="110"
+                                    Width="180"
                                     DisplayMemberBinding="{Binding SourceDetails}">
                                     <GridViewColumn.Header>
                                         <GridViewColumnHeader

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 
 namespace app13
 {
@@ -73,6 +70,7 @@ namespace app13
             if (!Transactions.Any())
             {
                 Debug.WriteLine("Transactions data not found");
+                new TransactionReplenishment(Buffer.Accounts[0], 100, Buffer.Customers[0]);
             }
         }
 
