@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "8lJgJaDwwhCBzhK/Wlf9mFADsq6FqSX8EgcCaksovRpK3LvVYaEZWGSzVuD04lc1ViPcDZ7tnrosIQEfcBwbBw==",
+  "success": true,
+  "projectFilePath": "D:\\DotNet\\Projects\\app14\\app14\\app14.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\asylbekka\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\asylbekka\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512"
+  ],
+  "logs": []
+}

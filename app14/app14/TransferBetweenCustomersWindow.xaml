@@ -1,0 +1,274 @@
+﻿<Window x:Class="app14.TransferBetweenCustomersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:app14"
+        mc:Ignorable="d"
+        Title="Transfer Between Customers" Height="420" Width="680">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Style="{StaticResource NormalLabelStyle}"
+                Text="SOURCE CUSTOMER:"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Margin="20 0 0 0"
+                TextWrapping="Wrap"
+                />
+            <ComboBox
+                Grid.Row="0"
+                Grid.Column="0"
+                x:Name="TBC_ComboBoxSourceCustomer"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="0 0 20 0"
+                Height="25"
+                Width="160" SelectionChanged="TBC_ComboBoxSourceCustomer_SelectionChanged"
+                />
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="1"
+                Style="{StaticResource NormalLabelStyle}"
+                Text="BENEFICIARY CUSTOMER:"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Margin="20 0 0 0"
+                TextWrapping="Wrap"
+                />
+            <ComboBox
+                Grid.Row="0"
+                Grid.Column="1"
+                x:Name="TBC_ComboBoxBeneficiaryCustomer"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="0 0 20 0"
+                Height="25"
+                Width="140" SelectionChanged="TBC_ComboBoxBeneficiaryCustomer_SelectionChanged"
+                />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Style="{StaticResource NormalLabelStyle}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Text="Main Non-Deposit Account"
+                />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource NormalLabelStyle}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Text="Main Non-Deposit Account"
+                />
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                Style="{StaticResource NormalLabelStyle}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="ID:"
+                Margin="40 0 0 0"
+                />
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                x:Name="TBC_TextBlockSourceAccoundId"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Text="XXXXXXXXX"
+                Margin="0 0 40 0"
+                />
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="1"
+                Style="{StaticResource NormalLabelStyle}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="ID:"
+                Margin="40 0 0 0"
+                />
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="1"
+                x:Name="TBC_TextBlockBeneficiaryAccoundId"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Text="XXXXXXXXX"
+                Margin="0 0 40 0"
+                />
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="0"
+                Style="{StaticResource NormalLabelStyle}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="NUMBER:"
+                Margin="40 0 0 0"
+                />
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="0"
+                x:Name="TBC_TextBlockSourceAccoundNumber"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Text="XXXXXXXXX"
+                Margin="0 0 40 0"
+                />
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="1"
+                Style="{StaticResource NormalLabelStyle}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="NUMBER:"
+                Margin="40 0 0 0"
+                />
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="1"
+                x:Name="TBC_TextBlockBeneficiaryAccoundNumber"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Text="XXXXXXXXX"
+                Margin="0 0 40 0"
+                />
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="0"
+                Style="{StaticResource NormalLabelStyle}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="CURRENCY:"
+                Margin="40 0 0 0"
+                />
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="0"
+                x:Name="TBC_TextBlockSourceAccoundCurrency"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Text="XXXXXXXXX"
+                Margin="0 0 40 0"
+                />
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="1"
+                Style="{StaticResource NormalLabelStyle}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="CURRENCY:"
+                Margin="40 0 0 0"
+                />
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="1"
+                x:Name="TBC_TextBlockBeneficiaryAccoundCurrency"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Text="XXXXXXXXX"
+                Margin="0 0 40 0"
+                />
+            <TextBlock
+                Grid.Row="5"
+                Grid.Column="0"
+                Style="{StaticResource NormalLabelStyle}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="BALANCE:"
+                Margin="40 0 0 0"
+                />
+            <TextBlock
+                Grid.Row="5"
+                Grid.Column="0"
+                x:Name="TBC_TextBlockSourceAccoundBalance"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Text="XXXXXXXXX"
+                Margin="0 0 40 0"
+                />
+            <TextBlock
+                Grid.Row="5"
+                Grid.Column="1"
+                Style="{StaticResource NormalLabelStyle}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="BALANCE:"
+                Margin="40 0 0 0"
+                />
+            <TextBlock
+                Grid.Row="5"
+                Grid.Column="1"
+                x:Name="TBC_TextBlockBeneficiaryAccoundBalance"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Text="XXXXXXXXX"
+                Margin="0 0 40 0"
+                />
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock
+                Grid.Column="0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Style="{StaticResource NormalLabelStyle}"
+                Text="SPECIFY TRANSFER AMOUNT:"
+                TextWrapping="Wrap"
+                />
+            <TextBlock
+                Grid.Column="1"
+                x:Name="TBC_TextBlockMaxAllowedAmount"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Margin="0 7 0 0"
+                Text="Max Allowed: "
+                />
+            <TextBox
+                Grid.Column="1"
+                x:Name="TBC_TextBoxInputAmount"
+                Height="30"
+                Margin="10"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                PreviewTextInput="TBC_TextBoxInputAmount_PreviewTextInput"
+                />
+            <Button
+                Grid.Column="2"
+                x:Name="TBC_ButtonSendTransfer"
+                Style="{StaticResource NormalButtonStyle}"
+                Margin="5"
+                Content="TRANSFER" Click="TBC_ButtonSendTransfer_Click"/>
+            <Button
+                Grid.Column="3"
+                x:Name="TBC_ButtonCancel"
+                Style="{StaticResource CancelButtonStyle}"
+                Margin="5"
+                Content="CANCEL" Click="TBC_ButtonCancel_Click"/>
+        </Grid>
+    </Grid>
+</Window>
