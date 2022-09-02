@@ -53,3 +53,5 @@ D:\DotNet\Projects\app14\app14\obj\Debug\netcoreapp3.1\app14.csproj.CopyComplete
 D:\DotNet\Projects\app14\app14\obj\Debug\netcoreapp3.1\app14.dll
 D:\DotNet\Projects\app14\app14\obj\Debug\netcoreapp3.1\app14.pdb
 D:\DotNet\Projects\app14\app14\obj\Debug\netcoreapp3.1\app14.genruntimeconfig.cache
+D:\DotNet\Projects\app14\app14\obj\Debug\netcoreapp3.1\testing.g.cs
+D:\DotNet\Projects\app14\app14\obj\Debug\netcoreapp3.1\testing.baml

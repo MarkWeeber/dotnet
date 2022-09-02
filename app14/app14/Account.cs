@@ -6,6 +6,18 @@ namespace app14
 {
     public class Account : INotifyPropertyChanged
     {
+        public event Action<string> ActionEvent
+        {
+            add
+            {
+
+            }
+            remove
+            {
+
+            }
+        }
+        
         public static uint incrementor;
         public uint Id { get{ return id; } }
         private uint id;
