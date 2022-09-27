@@ -107,17 +107,24 @@
                             />
                         <Button
                             Grid.Row="1"
+                            x:Name="TransferBetweenTwoCustomers"
+                            Style="{StaticResource NormalButtonStyle}"
+                            Margin="3"
+                            Content="Transfer Between Customers" Click="TransferBetweenTwoCustomers_Click"
+                            />
+                        <Button
+                            Grid.Row="2"
                             x:Name="ShowCustomerAccounts"
                             Style="{StaticResource DisabledButtonStyle}"
                             Margin="3"
                             Content="Show Customer Accounts" Click="ShowCustomerAccounts_Click"
                             />
                         <Button
-                            Grid.Row="2"
-                            x:Name="TransferBetweenTwoCustomers"
-                            Style="{StaticResource NormalButtonStyle}"
+                            Grid.Row="3"
+                            x:Name="EditCustomerDetails"
+                            Style="{StaticResource DisabledButtonStyle}"
                             Margin="3"
-                            Content="Transfer Between Customers" Click="TransferBetweenTwoCustomers_Click"
+                            Content="Edit Customer Details" Click="EditCustomerDetails_Click"
                             />
                     </Grid>
                 </Grid>
@@ -201,6 +208,16 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Account History">
+                <Grid>
+                    
+                </Grid>
+            </TabItem>
+            <TabItem Header="User Edit History">
+                <Grid>
+
                 </Grid>
             </TabItem>
         </TabControl>

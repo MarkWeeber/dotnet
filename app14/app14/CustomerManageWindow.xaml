@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:app14"
         mc:Ignorable="d"
-        Title="CustomerManageWindow" Height="450" MinHeight="400" Width="900" MinWidth="800">
+        Title="Manage Customer Accounts" Height="450" MinHeight="400" Width="900" MinWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="218.411"/>
@@ -26,7 +26,7 @@
             </Grid.RowDefinitions>
             <TextBlock
                 Grid.Row="0"
-                Text="USER DETAILS:"
+                Text="CUSTOMER DETAILS:"
                 Style="{StaticResource NormalLabelStyle}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"

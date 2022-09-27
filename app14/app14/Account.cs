@@ -5,19 +5,7 @@ using System.ComponentModel;
 namespace app14
 {
     public class Account : INotifyPropertyChanged
-    {
-        public event Action<string> ActionEvent
-        {
-            add
-            {
-
-            }
-            remove
-            {
-
-            }
-        }
-        
+    {   
         public static uint incrementor;
         public uint Id { get{ return id; } }
         private uint id;
@@ -85,6 +73,12 @@ namespace app14
             OnPropertyChanged(propertyName);
             return true;
         }
+
+        // don't use simple removal, the program just deactivates account but never should delete account
+        //public void CloseAccount()
+        //{
+        //    Buffer.Accounts.Remove(this);
+        //}
     }
 
     public class DepositAccount : Account

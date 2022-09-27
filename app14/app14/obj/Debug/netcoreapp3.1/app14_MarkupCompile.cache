@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
 D:\DotNet\Projects\app14\app14\App.xaml
-8-800095450
+92098097098
 
-18714333181
+19-1905607702
 1931216087040
-AddNewAccount.xaml;AddNewCustomer.xaml;CustomerManageWindow.xaml;MainWindow.xaml;ReplenishAccountWindow.xaml;testing.xaml;TransferBetweenAccountsWindow.xaml;TransferBetweenCustomersWindow.xaml;
+AddNewAccount.xaml;AddNewCustomer.xaml;CustomerManageWindow.xaml;EditCustomerDetails.xaml;MainWindow.xaml;ReplenishAccountWindow.xaml;testing.xaml;TransferBetweenAccountsWindow.xaml;TransferBetweenCustomersWindow.xaml;
 
 False
 

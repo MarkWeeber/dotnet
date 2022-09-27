@@ -18,7 +18,7 @@ namespace app14
             // Create current User and initialize buffer
             user = new User("MAIN MANAGER");
             Buffer.SelectedUser = user;
-            UserNameTextBlock.Text = user.Name;
+            UserNameTextBlock.Text = $"LOGGED AS: {user.Name}";
             Buffer.LoadData();
             ListViewCustomers.ItemsSource = Buffer.Customers;
             if(Buffer.Transactions.Any())
@@ -70,6 +70,7 @@ namespace app14
         {
             selectedCustomer = ListViewCustomers.SelectedItem as Customer;
             ShowCustomerAccounts.Style = Application.Current.FindResource("NormalButtonStyle") as Style;
+            EditCustomerDetails.Style = Application.Current.FindResource("NormalButtonStyle") as Style;
         }
 
         private void ListViewCustomers_Unselect()
@@ -91,6 +92,16 @@ namespace app14
         {
             TransferBetweenCustomersWindow transferBetweenCustomersWindow = new TransferBetweenCustomersWindow();
             transferBetweenCustomersWindow.ShowDialog();
+        }
+
+        private void EditCustomerDetails_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedCustomer != null)
+            {
+                // TO DO
+                EditCustomerDetails editCustomerDetails = new EditCustomerDetails(selectedCustomer);
+                editCustomerDetails.ShowDialog();
+            }
         }
     }
 }
