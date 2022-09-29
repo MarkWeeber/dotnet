@@ -12,9 +12,9 @@ TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
 D:\DotNet\Projects\app14\app14\App.xaml
 92098097098
 
-211892591120
+22642669307
 1931216087040
 AddNewAccount.xaml;AddNewCustomer.xaml;CustomerManageWindow.xaml;EditCustomerDetails.xaml;MainWindow.xaml;ReplenishAccountWindow.xaml;testing.xaml;TransferBetweenAccountsWindow.xaml;TransferBetweenCustomersWindow.xaml;
 
-True
+False
 

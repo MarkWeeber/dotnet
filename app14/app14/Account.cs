@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Windows;
 
 namespace app14
 {
@@ -18,7 +20,7 @@ namespace app14
         public uint AccountId { get; set; }
         public Currency Currency { get; set; }
         public AccountState AccountState { get; set; }
-        
+
         static AccountStateLog()
         {
             incrementor = 0;
@@ -32,6 +34,14 @@ namespace app14
             AccountState = accountState;
             LastChangeTime = DateTime.Now.ToString("dd.MM.yyyy HH:mm t");
             LastChangeUserName = Buffer.SelectedUser.Name;
+            //PopUpNotification.Notify += NotifyOnStateChange;
+            //var x = new PopUpNotification();
+            MessageBox.Show("Account changed", "Caption", MessageBoxButton.OK, MessageBoxImage.Information);
+
+        }
+        private void NotifyOnStateChange(string messageTitle, string messageDetails)
+        {
+            Debug.WriteLine($"Account creation {messageTitle} {messageDetails} the account {AccountId} has set it's state to {AccountState}");
         }
     }
 
