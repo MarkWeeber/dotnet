@@ -132,6 +132,8 @@ namespace app14
             if(selectedOtherActiveAccount != null && MessageBox.Show("Deactivate this account?", "Confirm Deactivate", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 selectedOtherActiveAccount.Active = false;
+                Buffer.AccountsStatesLog.Add(new AccountStateLog(selectedOtherActiveAccount, AccountState.Deactivated));
+                Buffer.SaveAccountsStatesLog();
                 Buffer.SaveAccounts();
                 RefreshListViews();
             }
@@ -142,6 +144,8 @@ namespace app14
             if (selectedOtherInactiveAccount != null && MessageBox.Show("Activate this account?", "Confirm Activate", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 selectedOtherInactiveAccount.Active = true;
+                Buffer.AccountsStatesLog.Add(new AccountStateLog(selectedOtherInactiveAccount, AccountState.Activated));
+                Buffer.SaveAccountsStatesLog();
                 Buffer.SaveAccounts();
                 RefreshListViews();
             }

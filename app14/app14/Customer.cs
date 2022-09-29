@@ -7,14 +7,34 @@ namespace app14
 {
     public struct CustomerChange
     {
-        public User LastChangeUser;
-        public DateTime LastChangeTime;
+        public static uint incrementor;
+        public uint Id { get; }
+        public string LastChangeUserName { get; set; }
+        public string LastChangeTime { get; set; }
+        public uint CustomerId { get; set; }
         public string OldFirstName { get; set; }
         public string OldLastName { get; set; }
         public string OldMiddleName { get; set; }
         public string OldPhone { get; set; }
         public string OldPassportSeries { get; set; }
         public string OldPassportNumber { get; set; }
+        static CustomerChange()
+        {
+            incrementor = 0;
+        }
+        public CustomerChange(Customer customer, string oldFirstName, string oldLastName, string oldMiddleName, string oldPhone, string oldPassportSeries, string oldPassportNumber)
+        {
+            Id = ++incrementor;
+            CustomerId = customer.Id;
+            OldFirstName = oldFirstName;
+            OldLastName = oldLastName;
+            OldMiddleName = oldMiddleName;
+            OldPhone = oldPhone;
+            OldPassportSeries = oldPassportSeries;
+            OldPassportNumber = oldPassportNumber;
+            LastChangeTime = DateTime.Now.ToString("dd.MM.yyyy HH:mm t");
+            LastChangeUserName = Buffer.SelectedUser.Name;
+        }
     }
 
     public enum SortingCriteria

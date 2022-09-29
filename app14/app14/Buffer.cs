@@ -13,9 +13,15 @@ namespace app14
         private static ObservableCollection<Customer> customers;
         public static ObservableCollection<Transaction> Transactions { get => transactions; set => transactions = value ?? new ObservableCollection<Transaction>(); }
         private static ObservableCollection<Transaction> transactions;
+        public static ObservableCollection<CustomerChange> CustomersChangeLog { get => customersChangeLog; set => customersChangeLog = value ?? new ObservableCollection<CustomerChange>(); }
+        private static ObservableCollection<CustomerChange> customersChangeLog;
+        public static ObservableCollection<AccountStateLog> AccountsStatesLog { get => accountsStatesLog; set => accountsStatesLog = value ?? new ObservableCollection<AccountStateLog>(); }
+        private static ObservableCollection<AccountStateLog> accountsStatesLog;
         private static Resource customersResource;
         private static Resource accountsResource;
         private static Resource transactionsResource;
+        private static Resource customersChangeLogResource;
+        private static Resource accountsStatesLogResource;
         static Buffer()
         {
             Debug.WriteLine("BUFFER INITIALYZE START");
@@ -23,9 +29,13 @@ namespace app14
             accounts = new ObservableCollection<Account>();
             customers = new ObservableCollection<Customer>();
             transactions = new ObservableCollection<Transaction>();
+            customersChangeLog = new ObservableCollection<CustomerChange>();
+            accountsStatesLog = new ObservableCollection<AccountStateLog>();
             customersResource = new Resource("customers.json");
             accountsResource = new Resource("accounts.json");
             transactionsResource = new Resource("transactions.json");
+            customersChangeLogResource = new Resource("customersChangeLog.json");
+            accountsStatesLogResource = new Resource("accountsStatesLog.json");
         }
 
         static public void LoadData()
@@ -65,13 +75,24 @@ namespace app14
                 customersResource.SaveToJson(customers);
             }
             // Transactions database - retreive from json
-            //Transaction.Refresh();
             Transactions = transactionsResource.RetrieveFromJson<ObservableCollection<Transaction>>();
             if (!Transactions.Any())
             {
                 Debug.WriteLine("Transactions data not found");
-                new TransactionReplenishment(Buffer.Accounts[0], 100, Buffer.Customers[0]);
             }
+            // Customer change log - retreive from json
+            CustomersChangeLog = customersChangeLogResource.RetrieveFromJson<ObservableCollection<CustomerChange>>();
+            if (!CustomersChangeLog.Any())
+            {
+                Debug.WriteLine("Customers change data not found");
+            }
+            // Accounts states log - retreive from json
+            AccountsStatesLog = accountsStatesLogResource.RetrieveFromJson<ObservableCollection<AccountStateLog>>();
+            if (!AccountsStatesLog.Any())
+            {
+                Debug.WriteLine("Accounts states data not found");
+            }
+
         }
 
         public static void SaveCustomers()
@@ -87,6 +108,16 @@ namespace app14
         public static void SaveTransactions()
         {
             transactionsResource.SaveToJson(transactions);
+        }
+
+        public static void SaveCustomersChangeLog()
+        {
+            customersChangeLogResource.SaveToJson(customersChangeLog);
+        }
+
+        public static void SaveAccountsStatesLog()
+        {
+            accountsStatesLogResource.SaveToJson(accountsStatesLog);
         }
     }
 }

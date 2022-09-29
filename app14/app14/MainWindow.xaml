@@ -129,8 +129,8 @@
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem Header="All Transaction History">
-                <Grid ShowGridLines="True">
+            <TabItem Header="Transactions History">
+                <Grid>
                     <ListView
                         x:Name="ListViewTransactionHistory"
                         Margin="5"
@@ -210,14 +210,199 @@
                     </ListView>
                 </Grid>
             </TabItem>
-            <TabItem Header="Account History">
+            <TabItem Header="Account Open and Close History">
                 <Grid>
-                    
+                    <ListView
+                        x:Name="ListViewAccountsSatesLog"
+                        Margin="5"
+                        BorderThickness="2"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn
+                                    Width="100"
+                                    DisplayMemberBinding="{Binding LastChangeTime}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="LastChangeTime"
+                                            Click="ListViewAccountsStatesLogColumnHeader_Click">
+                                            Date
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="100"
+                                    DisplayMemberBinding="{Binding LastChangeUserName}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="LastChangeUserName"
+                                            Click="ListViewAccountsStatesLogColumnHeader_Click">
+                                            Changed By
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="100"
+                                    DisplayMemberBinding="{Binding CustomerId}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="CustomerId"
+                                            Click="ListViewAccountsStatesLogColumnHeader_Click">
+                                            Customer Id
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="100"
+                                    DisplayMemberBinding="{Binding AccountId}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="AccountId"
+                                            Click="ListViewAccountsStatesLogColumnHeader_Click">
+                                            Account Id
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="100"
+                                    DisplayMemberBinding="{Binding Currency}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="Currency"
+                                            Click="ListViewAccountsStatesLogColumnHeader_Click">
+                                            Currency
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="100"
+                                    DisplayMemberBinding="{Binding AccountState}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="AccountState"
+                                            Click="ListViewCustomersChangeLogColumnHeader_Click">
+                                            Account State
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
                 </Grid>
             </TabItem>
-            <TabItem Header="User Edit History">
+            <TabItem Header="Customers Change History">
                 <Grid>
-
+                    <ListView
+                        x:Name="ListViewCustomersChangeLog"
+                        Margin="5"
+                        BorderThickness="2"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn
+                                    Width="70"
+                                    DisplayMemberBinding="{Binding LastChangeTime}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="LastChangeTime"
+                                            Click="ListViewCustomersChangeLogColumnHeader_Click">
+                                            Date
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="70"
+                                    DisplayMemberBinding="{Binding LastChangeUserName}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="LastChangeUserName"
+                                            Click="ListViewCustomersChangeLogColumnHeader_Click">
+                                            Changed By
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="70"
+                                    DisplayMemberBinding="{Binding CustomerId}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="CustomerId"
+                                            Click="ListViewCustomersChangeLogColumnHeader_Click">
+                                            Customer Id
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="90"
+                                    DisplayMemberBinding="{Binding OldFirstName}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="OldFirstName"
+                                            Click="ListViewCustomersChangeLogColumnHeader_Click">
+                                            Old First Name
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="90"
+                                    DisplayMemberBinding="{Binding OldLastName}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="OldLastName"
+                                            Click="ListViewCustomersChangeLogColumnHeader_Click">
+                                            Old Last Name
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="100"
+                                    DisplayMemberBinding="{Binding OldMiddleName}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="OldMiddleName"
+                                            Click="ListViewCustomersChangeLogColumnHeader_Click">
+                                            Old Middle Name
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="80"
+                                    DisplayMemberBinding="{Binding OldPhone}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="OldPhone"
+                                            Click="ListViewCustomersChangeLogColumnHeader_Click">
+                                            Old Phone
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="110"
+                                    DisplayMemberBinding="{Binding OldPassportSeries}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="OldPassportSeries"
+                                            Click="ListViewCustomersChangeLogColumnHeader_Click">
+                                            Old Passport Series
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                    Width="110"
+                                    DisplayMemberBinding="{Binding OldPassportNumber}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader
+                                            Tag="OldPassportNumber"
+                                            Click="ListViewCustomersChangeLogColumnHeader_Click">
+                                            Old Passport Number
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
                 </Grid>
             </TabItem>
         </TabControl>

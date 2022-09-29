@@ -10,6 +10,7 @@ namespace app14
         private bool currencyPicked = false;
         private Currency pickedCurrency;
         private CustomerManageWindow customerManageWindow;
+        private Account newAccout;
         public AddNewAccount(Customer customer, CustomerManageWindow customerManageWindow)
         {
             InitializeComponent();
@@ -29,12 +30,14 @@ namespace app14
             {
                 if (ANC_RadioDepositTypeChecker.IsChecked == true)
                 {
-                    new DepositAccount(customer.Id, pickedCurrency);
+                    newAccout = new DepositAccount(customer.Id, pickedCurrency);
                 }
                 else if (ANC_RadioNonDepositTypeChecker.IsChecked == true)
                 {
-                    new NonDepositAccount(customer.Id, pickedCurrency);
+                    newAccout = new NonDepositAccount(customer.Id, pickedCurrency);
                 }
+                Buffer.AccountsStatesLog.Add(new AccountStateLog(newAccout, AccountState.Opened));
+                Buffer.SaveAccountsStatesLog();
                 Buffer.SaveAccounts();
                 customerManageWindow.RefreshListViews();
                 this.Close();

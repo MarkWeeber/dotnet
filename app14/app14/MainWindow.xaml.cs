@@ -20,11 +20,15 @@ namespace app14
             Buffer.SelectedUser = user;
             UserNameTextBlock.Text = $"LOGGED AS: {user.Name}";
             Buffer.LoadData();
+            BindListData();
+        }
+
+        private void BindListData()
+        {
             ListViewCustomers.ItemsSource = Buffer.Customers;
-            if(Buffer.Transactions.Any())
-            {
-                ListViewTransactionHistory.ItemsSource = Buffer.Transactions;
-            }
+            ListViewTransactionHistory.ItemsSource = Buffer.Transactions;
+            ListViewCustomersChangeLog.ItemsSource = Buffer.CustomersChangeLog;
+            ListViewAccountsSatesLog.ItemsSource = Buffer.AccountsStatesLog;
         }
 
         private void CustomersListViewColumnHeader_Click(object sender, RoutedEventArgs e)
@@ -35,6 +39,16 @@ namespace app14
         private void TransactiontsListViewColumnHeader_Click(object sender, RoutedEventArgs e)
         {
             ManageColumnsSorting(sender, ListViewTransactionHistory);
+        }
+
+        private void ListViewCustomersChangeLogColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            ManageColumnsSorting(sender, ListViewCustomersChangeLog);
+        }
+
+        private void ListViewAccountsStatesLogColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            ManageColumnsSorting(sender, ListViewAccountsSatesLog);
         }
 
         private void ManageColumnsSorting(object sender, ListView listView)

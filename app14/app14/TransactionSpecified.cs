@@ -27,6 +27,7 @@ namespace app14
             {
                 return transactionType switch
                 {
+                    TransactionType.Default => "Default Empty",
                     TransactionType.BetweenAccounts => "Between accounts",
                     TransactionType.Replenishment => "Replenishment",
                     TransactionType.WithDrawal => "Withdrawal",

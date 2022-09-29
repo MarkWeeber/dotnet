@@ -44,6 +44,17 @@ namespace app14
         {
             if (selectedCustomer != null)
             {
+                Buffer.CustomersChangeLog.Add(
+                    new CustomerChange(
+                        selectedCustomer,
+                        (selectedCustomer.FirstName != CED_FirstName.Text)? selectedCustomer.FirstName : "",
+                        (selectedCustomer.LastName != CED_LastName.Text) ? selectedCustomer.LastName : "",
+                        (selectedCustomer.MiddleName != CED_MiddleName.Text) ? selectedCustomer.MiddleName : "",
+                        (selectedCustomer.Phone != CED_Phone.Text) ? selectedCustomer.Phone : "",
+                        (selectedCustomer.PassportNumber != CED_PassportNumber.Text) ? selectedCustomer.PassportNumber : "",
+                        (selectedCustomer.PassportSeries != CED_PassportSeries.Text) ? selectedCustomer.PassportSeries : ""
+                    ));
+                Buffer.SaveCustomersChangeLog();
                 selectedCustomer.FirstName = CED_FirstName.Text;
                 selectedCustomer.LastName = CED_LastName.Text;
                 selectedCustomer.MiddleName = CED_MiddleName.Text;

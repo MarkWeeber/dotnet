@@ -13,6 +13,6 @@
 
     public enum TransactionType
     {
-        BetweenAccounts, Replenishment, WithDrawal
+        Default, BetweenAccounts, Replenishment, WithDrawal
     }
 }

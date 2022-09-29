@@ -4,6 +4,37 @@ using System.ComponentModel;
 
 namespace app14
 {
+    public enum AccountState
+    {
+        Opened, Activated, Deactivated
+    }
+    public struct AccountStateLog
+    {
+        public static uint incrementor;
+        public uint Id { get; }
+        public string LastChangeUserName { get; set; }
+        public string LastChangeTime { get; set; }
+        public uint CustomerId { get; set; }
+        public uint AccountId { get; set; }
+        public Currency Currency { get; set; }
+        public AccountState AccountState { get; set; }
+        
+        static AccountStateLog()
+        {
+            incrementor = 0;
+        }
+        public AccountStateLog(Account account, AccountState accountState)
+        {
+            Id = ++incrementor;
+            AccountId = account.Id;
+            Currency = account.Currency;
+            CustomerId = account.CustomerId;
+            AccountState = accountState;
+            LastChangeTime = DateTime.Now.ToString("dd.MM.yyyy HH:mm t");
+            LastChangeUserName = Buffer.SelectedUser.Name;
+        }
+    }
+
     public class Account : INotifyPropertyChanged
     {   
         public static uint incrementor;
@@ -73,12 +104,6 @@ namespace app14
             OnPropertyChanged(propertyName);
             return true;
         }
-
-        // don't use simple removal, the program just deactivates account but never should delete account
-        //public void CloseAccount()
-        //{
-        //    Buffer.Accounts.Remove(this);
-        //}
     }
 
     public class DepositAccount : Account
