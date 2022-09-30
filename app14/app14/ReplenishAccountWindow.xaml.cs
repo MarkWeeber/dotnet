@@ -69,6 +69,12 @@ namespace app14
                     }
                     Buffer.SaveTransactions();
                     Buffer.SaveAccounts();
+                    // Calling delegate example
+                    PopUpNotification replenishNotification = new PopUpNotification();
+                    replenishNotification.FeedData("Replenishment", $"Account #{account.Number} was replenished by amount of {replenishAmount} {account.Currency} \nby user: {Buffer.SelectedUser.Name}");
+                    replenishNotification.Notificate += Buffer.MessagePopUp;
+                    replenishNotification.Launch();
+                    // Calling delegate example end
                     customerManageWindow.RefreshMainAccounts();
                     customerManageWindow.RefreshListViews();
                     this.Close();

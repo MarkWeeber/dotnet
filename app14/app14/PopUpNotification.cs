@@ -2,17 +2,20 @@
 
 namespace app14
 {
+    public delegate void NotificationDelegate(string Title, string Message);
     public class PopUpNotification
     {
-        public static event Action<string, string> Notify
+        public event NotificationDelegate Notificate;
+        private string title;
+        private string message;
+        public void Launch()
         {
-            add { }
-            remove { }
+            Notificate?.Invoke(title, message);
         }
-        private static event Action<string, string> notify;
-        public PopUpNotification()
+        public void FeedData(string Title, string Message)
         {
-            notify?.Invoke("Notifies", "On");
+            title = Title;
+            message = Message;
         }
     }
 }

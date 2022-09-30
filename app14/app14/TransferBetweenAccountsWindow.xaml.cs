@@ -76,6 +76,12 @@ namespace app14
                         new TransactionBetweenAccounts(beneficiaryAccount, sourceAccount, transferAmount);
                         Buffer.SaveTransactions();
                         Buffer.SaveAccounts();
+                        // Calling delegate example
+                        PopUpNotification transferNotification = new PopUpNotification();
+                        transferNotification.FeedData("Transfer between accounts", $"A {transferAmount} {sourceAccount.Currency} was sent from Account #{sourceAccount.Number} to Account #{beneficiaryAccount.Number} \ntransfer done by user: {Buffer.SelectedUser.Name}");
+                        transferNotification.Notificate += Buffer.MessagePopUp;
+                        transferNotification.Launch();
+                        // Calling delegate example end
                         customerManageWindow.RefreshMainAccounts();
                         customerManageWindow.RefreshListViews();
                         this.Close();

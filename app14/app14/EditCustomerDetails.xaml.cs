@@ -61,6 +61,12 @@ namespace app14
                 selectedCustomer.Phone = CED_Phone.Text;
                 selectedCustomer.PassportNumber = CED_PassportNumber.Text;
                 selectedCustomer.PassportSeries = CED_PassportSeries.Text;
+                // Calling delegate example
+                PopUpNotification customerDetailsUpdateNotification = new PopUpNotification();
+                customerDetailsUpdateNotification.FeedData("Customer details update", $"Customer with Id {selectedCustomer.Id} was updated by user: {Buffer.SelectedUser.Name}");
+                customerDetailsUpdateNotification.Notificate += Buffer.MessagePopUp;
+                customerDetailsUpdateNotification.Launch();
+                // Calling delegate example end
                 Buffer.SaveCustomers();
                 this.Close();
             }

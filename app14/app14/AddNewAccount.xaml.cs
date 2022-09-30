@@ -39,6 +39,12 @@ namespace app14
                 Buffer.AccountsStatesLog.Add(new AccountStateLog(newAccout, AccountState.Opened));
                 Buffer.SaveAccountsStatesLog();
                 Buffer.SaveAccounts();
+                // Calling delegate example
+                PopUpNotification newAccountNotification = new PopUpNotification();
+                newAccountNotification.FeedData("New account", $"A new Account with number #{newAccout.Number} was created by user: {Buffer.SelectedUser.Name}");
+                newAccountNotification.Notificate += Buffer.MessagePopUp;
+                newAccountNotification.Launch();
+                // Calling delegate example end
                 customerManageWindow.RefreshListViews();
                 this.Close();
             }

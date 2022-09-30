@@ -135,6 +135,12 @@ namespace app14
                 Buffer.AccountsStatesLog.Add(new AccountStateLog(selectedOtherActiveAccount, AccountState.Deactivated));
                 Buffer.SaveAccountsStatesLog();
                 Buffer.SaveAccounts();
+                // Calling delegate example
+                PopUpNotification deactivationNotification = new PopUpNotification();
+                deactivationNotification.FeedData("Deactivation", $"Account #{selectedOtherActiveAccount.Number} was deactivated by user: {Buffer.SelectedUser.Name}");
+                deactivationNotification.Notificate += Buffer.MessagePopUp;
+                deactivationNotification.Launch();
+                // Calling delegate example end
                 RefreshListViews();
             }
         }
@@ -147,6 +153,12 @@ namespace app14
                 Buffer.AccountsStatesLog.Add(new AccountStateLog(selectedOtherInactiveAccount, AccountState.Activated));
                 Buffer.SaveAccountsStatesLog();
                 Buffer.SaveAccounts();
+                // Calling delegate example
+                PopUpNotification activationNotification = new PopUpNotification();
+                activationNotification.FeedData("Activation",$"Account #{selectedOtherInactiveAccount.Number} was activated by user: {Buffer.SelectedUser.Name}");
+                activationNotification.Notificate += Buffer.MessagePopUp;
+                activationNotification.Launch();
+                // Calling delegate example end
                 RefreshListViews();
             }
         }
@@ -177,20 +189,20 @@ namespace app14
 
         private void CV_ButtonTransferFromMainDepositAccount_Click(object sender, RoutedEventArgs e)
         {
-            CallTransferWindos(mainDepositAccount);
+            CallTransferWindow(mainDepositAccount);
         }
 
         private void CV_ButtonTransferFromMainNonDepositAccount_Click(object sender, RoutedEventArgs e)
         {
-            CallTransferWindos(mainNonDepositAccount);
+            CallTransferWindow(mainNonDepositAccount);
         }
 
         private void CV_ButtonTransferFromAccount_Click(object sender, RoutedEventArgs e)
         {
-            CallTransferWindos(selectedOtherActiveAccount);
+            CallTransferWindow(selectedOtherActiveAccount);
         }
 
-        private void CallTransferWindos(Account account)
+        private void CallTransferWindow(Account account)
         {
             TransferBetweenAccountsWindow transferBetweenAccountsWindow = new TransferBetweenAccountsWindow(account, this);
             transferBetweenAccountsWindow.ShowDialog();

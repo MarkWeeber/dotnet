@@ -36,7 +36,7 @@ namespace app14
             LastChangeUserName = Buffer.SelectedUser.Name;
             //PopUpNotification.Notify += NotifyOnStateChange;
             //var x = new PopUpNotification();
-            MessageBox.Show("Account changed", "Caption", MessageBoxButton.OK, MessageBoxImage.Information);
+            //MessageBox.Show("Account changed", "Caption", MessageBoxButton.OK, MessageBoxImage.Information);
 
         }
         private void NotifyOnStateChange(string messageTitle, string messageDetails)

@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Windows;
 
 namespace app14
 {
@@ -38,7 +39,7 @@ namespace app14
             accountsStatesLogResource = new Resource("accountsStatesLog.json");
         }
 
-        static public void LoadData()
+        public static void LoadData()
         {
             // Customers database - retreive from json, or create default values
             Customer.Refresh();
@@ -118,6 +119,12 @@ namespace app14
         public static void SaveAccountsStatesLog()
         {
             accountsStatesLogResource.SaveToJson(accountsStatesLog);
+        }
+
+        // special function for delegate
+        public static void MessagePopUp(string title, string message)
+        {
+            MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
