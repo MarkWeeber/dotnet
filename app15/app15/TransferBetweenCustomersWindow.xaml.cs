@@ -35,16 +35,23 @@ namespace app15
             {
                 if (transferAmount > 0f)
                 {
-                    if (transferAmount <= sourceAccount.Balance)
+                    try
                     {
                         new TransferBetweenCustomers(beneficiaryCustomer, sourceCustomer, transferAmount);
                         Buffer.SaveTransactions();
                         Buffer.SaveAccounts();
+                        // Calling delegate example
+                        PopUpNotification transferNotification = new PopUpNotification();
+                        transferNotification.FeedData("Transfer between accounts", $"A {transferAmount} {sourceAccount.Currency} was sent from Account #{sourceAccount.Number} to Account #{beneficiaryAccount.Number} \ntransfer done by user: {Buffer.SelectedUser.Name}");
+                        transferNotification.Notificate += Buffer.MessagePopUp;
+                        transferNotification.Launch();
+                        // Calling delegate example end
                         this.Close();
+
                     }
-                    else
+                    catch (OutOfBalanceException exception)
                     {
-                        MessageBox.Show(this, $"Transfer amount must not exceed {sourceAccount.Balance.ToString()}", "Invalid amount", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show(this, $"Accounnt {exception.SourceAccount.Number} has insufficient funds", "Out of balance", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
             }
@@ -59,7 +66,7 @@ namespace app15
         private void TBC_ComboBoxSourceCustomer_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             sourceCustomer = TBC_ComboBoxSourceCustomer.SelectedItem as Customer;
-            sourceAccount = (Buffer.Accounts.Where(item => item.Id == sourceCustomer.MainNonDepositAccountId).ToList())[0];
+            sourceAccount = Buffer.Accounts.Where(item => item.Id == sourceCustomer.MainNonDepositAccountId).ToList()[0];
             UpdateSourceAccountIndicators();
             TBC_ComboBoxBeneficiaryCustomer.IsEnabled = true;
             TBC_ComboBoxBeneficiaryCustomer.ItemsSource = Buffer.Customers.Where(item => item.Id != sourceCustomer.Id);
@@ -81,7 +88,7 @@ namespace app15
             beneficiaryCustomer = TBC_ComboBoxBeneficiaryCustomer.SelectedItem as Customer;
             if(beneficiaryCustomer != null)
             {
-                beneficiaryAccount = (Buffer.Accounts.Where(item => item.Id == beneficiaryCustomer.MainNonDepositAccountId).ToList())[0];
+                beneficiaryAccount = Buffer.Accounts.Where(item => item.Id == beneficiaryCustomer.MainNonDepositAccountId).ToList()[0];
                 UpdateBeneficiaryAccountIndicators();
             }
             else

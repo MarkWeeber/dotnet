@@ -71,7 +71,7 @@ namespace app15
             {
                 if (transferAmount > 0f)
                 {
-                    if(transferAmount <= sourceAccount.Balance)
+                    try
                     {
                         new TransactionBetweenAccounts(beneficiaryAccount, sourceAccount, transferAmount);
                         Buffer.SaveTransactions();
@@ -86,9 +86,9 @@ namespace app15
                         customerManageWindow.RefreshListViews();
                         this.Close();
                     }
-                    else
+                    catch (OutOfBalanceException exception)
                     {
-                        MessageBox.Show(this, $"Transfer amount must not exceed {sourceAccount.Balance.ToString()}", "Invalid amount", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show(this, $"Accounnt {exception.SourceAccount.Number} has insufficient funds", "Out of balance", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
             }

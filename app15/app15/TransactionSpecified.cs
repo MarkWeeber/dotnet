@@ -93,10 +93,17 @@ namespace app15
             accountNumber = debitAccount.Number;
             source = creditAccount;
             SourceDetails = source.ToString();
-            debitAccount.Balance += amount;
-            creditAccount.Balance -= amount;
             transactionType = TransactionType.BetweenAccounts;
-            Buffer.Transactions.Add((Transaction)this);
+            if (creditAccount.Balance >= amount)
+            {
+                debitAccount.Balance += amount;
+                creditAccount.Balance -= amount;
+                Buffer.Transactions.Add((Transaction)this);
+            }
+            else
+            {
+                throw new OutOfBalanceException(creditAccount);
+            }
         }
     }
 
