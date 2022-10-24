@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.32602.291
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "app15", "app15\app15.csproj", "{71350C29-578D-405F-B1FA-CF895AA04B3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommercialBankLibrary_15", "..\CommercialBankLibrary_15\CommercialBankLibrary_15.csproj", "{4D8B5028-FD6F-481F-9863-48B49C38B814}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommercialBankLibrary_15", "CommercialBankLibrary_15\CommercialBankLibrary_15.csproj", "{4D8B5028-FD6F-481F-9863-48B49C38B814}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

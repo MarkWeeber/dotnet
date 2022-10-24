@@ -52,8 +52,8 @@
     },
     "CommercialBankLibrary_15/1.0.0": {
       "type": "project",
-      "path": "../../CommercialBankLibrary_15/CommercialBankLibrary_15.csproj",
-      "msbuildProject": "../../CommercialBankLibrary_15/CommercialBankLibrary_15.csproj"
+      "path": "../CommercialBankLibrary_15/CommercialBankLibrary_15.csproj",
+      "msbuildProject": "../CommercialBankLibrary_15/CommercialBankLibrary_15.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -89,6 +89,9 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
+            "D:\\DotNet\\Projects\\app15\\CommercialBankLibrary_15\\CommercialBankLibrary_15.csproj": {
+              "projectPath": "D:\\DotNet\\Projects\\app15\\CommercialBankLibrary_15\\CommercialBankLibrary_15.csproj"
+            },
             "D:\\DotNet\\Projects\\CommercialBankLibrary_15\\CommercialBankLibrary_15.csproj": {
               "projectPath": "D:\\DotNet\\Projects\\CommercialBankLibrary_15\\CommercialBankLibrary_15.csproj"
             }

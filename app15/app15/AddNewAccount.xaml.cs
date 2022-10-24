@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using CommercialBankLibrary_15;
+using Buffer = CommercialBankLibrary_15.Buffer;
 
 namespace app15
 {

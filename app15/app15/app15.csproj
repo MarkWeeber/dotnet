@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\CommercialBankLibrary_15\CommercialBankLibrary_15.csproj" />
+    <ProjectReference Include="..\CommercialBankLibrary_15\CommercialBankLibrary_15.csproj" />
   </ItemGroup>
 
 </Project>

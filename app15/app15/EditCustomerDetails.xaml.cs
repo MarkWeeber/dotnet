@@ -9,6 +9,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CommercialBankLibrary_15;
+using Buffer = CommercialBankLibrary_15.Buffer;
 
 namespace app15
 {

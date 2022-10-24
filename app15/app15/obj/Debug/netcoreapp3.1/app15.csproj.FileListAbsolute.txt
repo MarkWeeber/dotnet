@@ -35,3 +35,5 @@ D:\DotNet\Projects\app15\app15\obj\Debug\netcoreapp3.1\app15.csproj.CopyComplete
 D:\DotNet\Projects\app15\app15\obj\Debug\netcoreapp3.1\app15.dll
 D:\DotNet\Projects\app15\app15\obj\Debug\netcoreapp3.1\app15.pdb
 D:\DotNet\Projects\app15\app15\obj\Debug\netcoreapp3.1\app15.genruntimeconfig.cache
+D:\DotNet\Projects\app15\app15\bin\Debug\netcoreapp3.1\CommercialBankLibrary_15.dll
+D:\DotNet\Projects\app15\app15\bin\Debug\netcoreapp3.1\CommercialBankLibrary_15.pdb
