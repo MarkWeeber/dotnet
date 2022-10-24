@@ -42,7 +42,7 @@ namespace app15
                 // Calling delegate example
                 PopUpNotification newAccountNotification = new PopUpNotification();
                 newAccountNotification.FeedData("New account", $"A new Account with number #{newAccout.Number} was created by user: {Buffer.SelectedUser.Name}");
-                newAccountNotification.Notificate += Buffer.MessagePopUp;
+                newAccountNotification.Notificate += PopUp.MessagePopUp;
                 newAccountNotification.Launch();
                 // Calling delegate example end
                 customerManageWindow.RefreshListViews();

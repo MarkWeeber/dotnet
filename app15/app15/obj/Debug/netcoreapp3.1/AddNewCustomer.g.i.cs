@@ -125,7 +125,7 @@ namespace app15 {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/app15;component/addnewcustomer.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/app15;V1.0.0.0;component/addnewcustomer.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\AddNewCustomer.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

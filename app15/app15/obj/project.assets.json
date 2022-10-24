@@ -10,6 +10,15 @@
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
+      },
+      "CommercialBankLibrary_15/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/CommercialBankLibrary_15.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CommercialBankLibrary_15.dll": {}
+        }
       }
     }
   },
@@ -40,10 +49,16 @@
         "newtonsoft.json.nuspec",
         "packageIcon.png"
       ]
+    },
+    "CommercialBankLibrary_15/1.0.0": {
+      "type": "project",
+      "path": "../../CommercialBankLibrary_15/CommercialBankLibrary_15.csproj",
+      "msbuildProject": "../../CommercialBankLibrary_15/CommercialBankLibrary_15.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "CommercialBankLibrary_15 >= 1.0.0",
       "Newtonsoft.Json >= 13.0.1"
     ]
   },
@@ -73,7 +88,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\DotNet\\Projects\\CommercialBankLibrary_15\\CommercialBankLibrary_15.csproj": {
+              "projectPath": "D:\\DotNet\\Projects\\CommercialBankLibrary_15\\CommercialBankLibrary_15.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

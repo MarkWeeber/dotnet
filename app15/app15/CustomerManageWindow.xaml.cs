@@ -138,7 +138,7 @@ namespace app15
                 // Calling delegate example
                 PopUpNotification deactivationNotification = new PopUpNotification();
                 deactivationNotification.FeedData("Deactivation", $"Account #{selectedOtherActiveAccount.Number} was deactivated by user: {Buffer.SelectedUser.Name}");
-                deactivationNotification.Notificate += Buffer.MessagePopUp;
+                deactivationNotification.Notificate += PopUp.MessagePopUp;
                 deactivationNotification.Launch();
                 // Calling delegate example end
                 RefreshListViews();
@@ -156,7 +156,7 @@ namespace app15
                 // Calling delegate example
                 PopUpNotification activationNotification = new PopUpNotification();
                 activationNotification.FeedData("Activation",$"Account #{selectedOtherInactiveAccount.Number} was activated by user: {Buffer.SelectedUser.Name}");
-                activationNotification.Notificate += Buffer.MessagePopUp;
+                activationNotification.Notificate += PopUp.MessagePopUp;
                 activationNotification.Launch();
                 // Calling delegate example end
                 RefreshListViews();

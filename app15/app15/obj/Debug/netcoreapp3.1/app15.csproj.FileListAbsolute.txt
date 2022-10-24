@@ -1,3 +1,10 @@
+D:\DotNet\Projects\app15\app15\bin\Debug\netcoreapp3.1\app15.exe
+D:\DotNet\Projects\app15\app15\bin\Debug\netcoreapp3.1\app15.deps.json
+D:\DotNet\Projects\app15\app15\bin\Debug\netcoreapp3.1\app15.runtimeconfig.json
+D:\DotNet\Projects\app15\app15\bin\Debug\netcoreapp3.1\app15.runtimeconfig.dev.json
+D:\DotNet\Projects\app15\app15\bin\Debug\netcoreapp3.1\app15.dll
+D:\DotNet\Projects\app15\app15\bin\Debug\netcoreapp3.1\app15.pdb
+D:\DotNet\Projects\app15\app15\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 D:\DotNet\Projects\app15\app15\obj\Debug\netcoreapp3.1\app15.csproj.AssemblyReference.cache
 D:\DotNet\Projects\app15\app15\obj\Debug\netcoreapp3.1\AddNewAccount.g.cs
 D:\DotNet\Projects\app15\app15\obj\Debug\netcoreapp3.1\AddNewCustomer.g.cs
@@ -10,13 +17,6 @@ D:\DotNet\Projects\app15\app15\obj\Debug\netcoreapp3.1\TransferBetweenCustomersW
 D:\DotNet\Projects\app15\app15\obj\Debug\netcoreapp3.1\App.g.cs
 D:\DotNet\Projects\app15\app15\obj\Debug\netcoreapp3.1\app15_MarkupCompile.cache
 D:\DotNet\Projects\app15\app15\obj\Debug\netcoreapp3.1\app15_MarkupCompile.lref
-D:\DotNet\Projects\app15\app15\bin\Debug\netcoreapp3.1\app15.exe
-D:\DotNet\Projects\app15\app15\bin\Debug\netcoreapp3.1\app15.deps.json
-D:\DotNet\Projects\app15\app15\bin\Debug\netcoreapp3.1\app15.runtimeconfig.json
-D:\DotNet\Projects\app15\app15\bin\Debug\netcoreapp3.1\app15.runtimeconfig.dev.json
-D:\DotNet\Projects\app15\app15\bin\Debug\netcoreapp3.1\app15.dll
-D:\DotNet\Projects\app15\app15\bin\Debug\netcoreapp3.1\app15.pdb
-D:\DotNet\Projects\app15\app15\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 D:\DotNet\Projects\app15\app15\obj\Debug\netcoreapp3.1\App.baml
 D:\DotNet\Projects\app15\app15\obj\Debug\netcoreapp3.1\AddNewAccount.baml
 D:\DotNet\Projects\app15\app15\obj\Debug\netcoreapp3.1\AddNewCustomer.baml

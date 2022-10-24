@@ -120,11 +120,5 @@ namespace app15
         {
             accountsStatesLogResource.SaveToJson(accountsStatesLog);
         }
-
-        // special function for delegate
-        public static void MessagePopUp(string title, string message)
-        {
-            MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Information);
-        }
     }
 }

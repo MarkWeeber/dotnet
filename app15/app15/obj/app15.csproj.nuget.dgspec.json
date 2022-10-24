@@ -27,7 +27,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\DotNet\\Projects\\CommercialBankLibrary_15\\CommercialBankLibrary_15.csproj": {
+                "projectPath": "D:\\DotNet\\Projects\\CommercialBankLibrary_15\\CommercialBankLibrary_15.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -71,6 +75,21 @@
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
         }
+      }
+    },
+    "D:\\DotNet\\Projects\\CommercialBankLibrary_15\\CommercialBankLibrary_15.csproj": {
+      "restore": {
+        "projectUniqueName": "D:\\DotNet\\Projects\\CommercialBankLibrary_15\\CommercialBankLibrary_15.csproj",
+        "projectName": "CommercialBankLibrary_15",
+        "projectPath": "D:\\DotNet\\Projects\\CommercialBankLibrary_15\\CommercialBankLibrary_15.csproj",
+        "frameworks": {
+          "net472": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {}
       }
     }
   }

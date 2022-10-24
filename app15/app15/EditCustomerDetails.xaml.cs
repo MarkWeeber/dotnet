@@ -64,7 +64,7 @@ namespace app15
                 // Calling delegate example
                 PopUpNotification customerDetailsUpdateNotification = new PopUpNotification();
                 customerDetailsUpdateNotification.FeedData("Customer details update", $"Customer with Id {selectedCustomer.Id} was updated by user: {Buffer.SelectedUser.Name}");
-                customerDetailsUpdateNotification.Notificate += Buffer.MessagePopUp;
+                customerDetailsUpdateNotification.Notificate += PopUp.MessagePopUp;
                 customerDetailsUpdateNotification.Launch();
                 // Calling delegate example end
                 Buffer.SaveCustomers();

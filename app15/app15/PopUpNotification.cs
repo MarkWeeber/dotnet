@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Windows;
 
 namespace app15
 {
@@ -16,6 +16,13 @@ namespace app15
         {
             title = Title;
             message = Message;
+        }
+    }
+    public static class PopUp
+    {
+        public static void MessagePopUp(string title, string message)
+        {
+            MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

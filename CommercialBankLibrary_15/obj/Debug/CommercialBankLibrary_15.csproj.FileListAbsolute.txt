@@ -1,0 +1,8 @@
+D:\DotNet\Projects\CommercialBankLibrary_15\bin\Debug\CommercialBankLibrary_15.dll
+D:\DotNet\Projects\CommercialBankLibrary_15\bin\Debug\CommercialBankLibrary_15.pdb
+D:\DotNet\Projects\CommercialBankLibrary_15\bin\Debug\Newtonsoft.Json.dll
+D:\DotNet\Projects\CommercialBankLibrary_15\obj\Debug\CommercialBankLibrary_15.csproj.AssemblyReference.cache
+D:\DotNet\Projects\CommercialBankLibrary_15\obj\Debug\CommercialBankLibrary_15.csproj.CoreCompileInputs.cache
+D:\DotNet\Projects\CommercialBankLibrary_15\obj\Debug\CommercialBankLibrary_15.csproj.CopyComplete
+D:\DotNet\Projects\CommercialBankLibrary_15\obj\Debug\CommercialBankLibrary_15.dll
+D:\DotNet\Projects\CommercialBankLibrary_15\obj\Debug\CommercialBankLibrary_15.pdb
