@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\DotNet\Projects\app15\app15\obj\Debug\netcoreapp3.1\
+D:\Dotnet\Projects\app15\app15\obj\Debug\netcoreapp3.1\
 app15
 none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
-D:\DotNet\Projects\app15\app15\App.xaml
+D:\Dotnet\Projects\app15\app15\App.xaml
 8774364167
 
 1488997358
-1942142241045
+194155996985
 AddNewAccount.xaml;AddNewCustomer.xaml;CustomerManageWindow.xaml;EditCustomerDetails.xaml;MainWindow.xaml;ReplenishAccountWindow.xaml;TransferBetweenAccountsWindow.xaml;TransferBetweenCustomersWindow.xaml;
 
-False
+True
 

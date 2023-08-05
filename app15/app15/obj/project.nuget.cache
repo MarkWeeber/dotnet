@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "fVij0pGU2BFaHGf9K2pib9XQhabgG40oLVKWVLzXw4e24fdmOqxSoiBSgWmuDsM+mXSF611ovSBQNIj/qQ/K0Q==",
+  "dgSpecHash": "8G8fSGN/UvMCbsWv4xZmO8LxJ24cnduTq3U7apsozUqLnMMcmMkh5hDy47l90XZuvg+kgUpCfkjJn8kauukaEQ==",
   "success": true,
-  "projectFilePath": "D:\\DotNet\\Projects\\app15\\app15\\app15.csproj",
+  "projectFilePath": "D:\\Dotnet\\Projects\\app15\\app15\\app15.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\asylbekka\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
-    "C:\\Users\\asylbekka\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512"
+    "C:\\Users\\Arcanus\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
   ],
   "logs": []
 }
