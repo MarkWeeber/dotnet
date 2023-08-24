@@ -1,0 +1,161 @@
+﻿<Window x:Class="app16.AddNewCustomer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:app16"
+        mc:Ignorable="d"
+        Title="AddNewCustomer" Height="450" Width="800">
+    <Grid>
+        <Grid ShowGridLines="False">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="First Name:"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Margin="10 0 0 0"
+            Style="{StaticResource NormalLabelStyle}"
+            />
+            <TextBox
+            Grid.Row="0"
+            Grid.Column="0"
+            x:Name="InputNewFirstName"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Width="110"
+            Margin="80 0 10 0"
+            Style="{StaticResource StretchedTextBoxStyle}"
+            />
+            <TextBlock
+            Grid.Row="0"
+            Grid.Column="1"
+            Text="Last Name:"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Margin="10 0 0 0"
+            Style="{StaticResource NormalLabelStyle}"
+            />
+            <TextBox
+            Grid.Row="0"
+            Grid.Column="1"
+            x:Name="InputNewLastName"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Width="110"
+            Margin="80 0 10 0"
+            Style="{StaticResource StretchedTextBoxStyle}"
+            />
+            <TextBlock
+            Grid.Row="0"
+            Grid.Column="2"
+            Text="Middle Name:"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Margin="10 0 0 0"
+            Style="{StaticResource NormalLabelStyle}"
+            />
+            <TextBox
+            Grid.Row="0"
+            Grid.Column="2"
+            x:Name="InputNewMiddleName"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Width="110"
+            Margin="90 0 10 0"
+            Style="{StaticResource StretchedTextBoxStyle}"
+            />
+            <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="Phone:"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Margin="10 0 0 0"
+            Style="{StaticResource NormalLabelStyle}"
+            />
+            <TextBox
+            Grid.Row="1"
+            Grid.Column="0"
+            x:Name="InputNewPhone"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Width="130"
+            Margin="60 0 10 0"
+            Style="{StaticResource StretchedTextBoxStyle}"
+            />
+            <TextBlock
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="Passport Number:"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Margin="10 0 0 0"
+            Style="{StaticResource NormalLabelStyle}"
+            />
+            <TextBox
+            Grid.Row="1"
+            Grid.Column="1"
+            x:Name="InputNewPassportNumber"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Width="70"
+            Margin="120 0 10 0"
+            Style="{StaticResource StretchedTextBoxStyle}"
+            />
+            <TextBlock
+            Grid.Row="1"
+            Grid.Column="2"
+            Text="Passport Series:"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Margin="10 0 0 0"
+            Style="{StaticResource NormalLabelStyle}"
+            />
+            <TextBox
+            Grid.Row="1"
+            Grid.Column="2"
+            x:Name="InputNewPassportSeries"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Width="90"
+            Margin="110 0 10 0"
+            Style="{StaticResource StretchedTextBoxStyle}"
+            />
+            <Button
+            Grid.Row="2"
+            Grid.Column="0"
+            x:Name="AddNewCustomerButton"
+            Content="Add and Return"
+            Margin="15 0 15 0"
+            Style="{StaticResource NormalButtonStyle}" Click="AddNewCustomerButton_Click"
+            />
+            <Button
+            Grid.Row="2"
+            Grid.Column="1"
+            x:Name="AddNewCustomerButtonContinue"
+            Content="Add and Add another"
+            Margin="15 0 15 0"
+            Style="{StaticResource NormalButtonStyle}" Click="AddNewCustomerContniueButton_Click"
+            />
+            <Button
+            Grid.Row="2"
+            Grid.Column="2"
+            x:Name="CancelAddingNewCustomer"
+            Content="Cancel"
+            Margin="15 0 15 0"
+            Style="{StaticResource CancelButtonStyle}" Click="CancelAddingNewCustomer_Click"
+            />
+        </Grid>
+    </Grid>
+</Window>
