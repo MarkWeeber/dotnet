@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Async Test Console App": {
+      "commandName": "Project"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "environmentVariables": {},
+      "distributionName": ""
+    }
+  }
+}
