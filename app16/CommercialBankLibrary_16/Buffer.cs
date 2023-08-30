@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace CommercialBankLibrary_16
@@ -37,6 +39,11 @@ namespace CommercialBankLibrary_16
             transactionsResource = new Resource("transactions.json");
             customersChangeLogResource = new Resource("customersChangeLog.json");
             accountsStatesLogResource = new Resource("accountsStatesLog.json");
+        }
+
+        public static async void LoadDataAsync()
+        {
+            await Task.Run(() => LoadData());
         }
 
         public static void LoadData()

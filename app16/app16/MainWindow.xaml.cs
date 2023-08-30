@@ -4,6 +4,8 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.ComponentModel;
 using CommercialBankLibrary_16;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace app16
 {
@@ -16,11 +18,28 @@ namespace app16
         public MainWindow()
         {
             InitializeComponent();
+            // testing tasks
+            //LoadingPopUpShow();
             // Create current User and initialize buffer
             user = new User("MAIN MANAGER");
             Buffer.SelectedUser = user;
             UserNameTextBlock.Text = $"LOGGED AS: {user.Name}";
-            Buffer.LoadData();
+            //Task[] tasks = new Task[]
+            //{
+            //    Task.Factory.StartNew(() => Buffer.LoadData()),
+            //    Task.Factory.StartNew(() => BindListData())
+            //};
+            //Task.WaitAll(tasks);
+            //return;
+            Task task1 = new Task(Buffer.LoadData);
+            task1.Start();
+            task1.Wait();
+            task1.Dispose();
+            //Buffer.LoadData();
+            //Buffer.LoadDataAsync();
+            //Task task2 = new Task(BindListData);
+            //task2.Start();
+            //task2.Wait();
             BindListData();
         }
 
@@ -113,10 +132,17 @@ namespace app16
         {
             if (selectedCustomer != null)
             {
-                // TO DO
                 EditCustomerDetails editCustomerDetails = new EditCustomerDetails(selectedCustomer);
                 editCustomerDetails.ShowDialog();
             }
+        }
+
+        private void LoadingPopUpShow()
+        {
+            LoadingPopUp loadingPopUp = new LoadingPopUp();
+            loadingPopUp.Show();
+            Thread.Sleep(1000);
+            loadingPopUp.Close();
         }
     }
 }
