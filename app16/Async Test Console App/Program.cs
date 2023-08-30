@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Async_Test_Console_App
@@ -7,10 +8,7 @@ namespace Async_Test_Console_App
     {
         static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            //Test();
-            //Test2();
-            //await RunAB();
+            Console.WriteLine("Running async methods");
             await Task.WhenAll(Program.RunAB(), Program.RunBA());
             //Task<int> taskName = Task.Run(() =>
             //{
