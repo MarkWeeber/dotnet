@@ -1,10 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "8G8fSGN/UvMCbsWv4xZmO8LxJ24cnduTq3U7apsozUqLnMMcmMkh5hDy47l90XZuvg+kgUpCfkjJn8kauukaEQ==",
+  "dgSpecHash": "8gloLGBOZwa1yHYe8m8vfziMI9lw7QeRDWbyWRu3SieDSMAdPPnIvigMSxXJCmGq93Xo0St+xiXmbh078mv/mg==",
   "success": true,
   "projectFilePath": "D:\\Dotnet\\Projects\\app15\\app15\\app15.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Arcanus\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+    "C:\\Users\\user\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.32\\microsoft.netcore.app.host.win-x64.3.1.32.nupkg.sha512"
   ],
   "logs": []
 }
