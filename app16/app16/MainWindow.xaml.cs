@@ -15,31 +15,21 @@ namespace app16
         private Customer selectedCustomer;
         private GridViewColumnHeader listViewSortCol = null;
         private SortAdorner listViewSortAdorner = null;
+        private LoadingPopUp loadingPopUp = null;
+
         public MainWindow()
         {
             InitializeComponent();
-            // testing tasks
-            //LoadingPopUpShow();
-            // Create current User and initialize buffer
-            user = new User("MAIN MANAGER");
+            LoadingPopUpShow(); // Show user please wait window
+            user = new User("MAIN MANAGER"); // Create current User
             Buffer.SelectedUser = user;
             UserNameTextBlock.Text = $"LOGGED AS: {user.Name}";
-            //Task[] tasks = new Task[]
-            //{
-            //    Task.Factory.StartNew(() => Buffer.LoadData()),
-            //    Task.Factory.StartNew(() => BindListData())
-            //};
-            //Task.WaitAll(tasks);
-            //return;
-            Task task1 = new Task(Buffer.LoadData);
+            Buffer.DefaultNumberOfClients = 2000;
+            Task task1 = new Task(Buffer.LoadData); // Load buffer simultaneously
             task1.Start();
             task1.Wait();
+            LoadingPopUpClose();
             task1.Dispose();
-            //Buffer.LoadData();
-            //Buffer.LoadDataAsync();
-            //Task task2 = new Task(BindListData);
-            //task2.Start();
-            //task2.Wait();
             BindListData();
         }
 
@@ -139,9 +129,12 @@ namespace app16
 
         private void LoadingPopUpShow()
         {
-            LoadingPopUp loadingPopUp = new LoadingPopUp();
+            loadingPopUp = new LoadingPopUp();
             loadingPopUp.Show();
-            Thread.Sleep(1000);
+        }
+
+        private void LoadingPopUpClose()
+        {
             loadingPopUp.Close();
         }
     }

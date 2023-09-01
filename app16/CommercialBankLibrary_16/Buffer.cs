@@ -10,6 +10,7 @@ namespace CommercialBankLibrary_16
     public static class Buffer
     {
         public static User SelectedUser;
+        public static int DefaultNumberOfClients = 10;
         public static ObservableCollection<Account> Accounts { get => accounts; set => accounts = value ?? new ObservableCollection<Account>(); }
         private static ObservableCollection<Account> accounts;
         public static ObservableCollection<Customer> Customers { get => customers; set => customers = value ?? new ObservableCollection<Customer>(); }
@@ -54,14 +55,18 @@ namespace CommercialBankLibrary_16
             if (!Customers.Any())
             {
                 Debug.WriteLine("Customers data not found or corrupted, making default values");
-                new Customer("Adamson", "Adam", "Adam Jr", "55-445321", "1160000", "XP");
-                new Customer("Brian", "Palma", "De", "55-55123", "1161111", "XP");
-                new Customer("Rupert", "Murdoc", "Senior", "55-0101010", "1167701", "DM");
-                new Customer("Nixon", "Flow", "Scott", "554-551234", "1160051", "SS");
-                new Customer("Jannson", "Greg", "Val", "9-9944-5", "1160016", "DM");
-                new Customer("Ruyeen", "Sam", "Gross", "0055855123", "1160051", "SS");
-                new Customer("Karvee", "William", "Rum", "00773123", "1160021", "SS");
-                new Customer("Samoa", "Josh", "Sent", "55123345", "1160001", "XP");
+                for (int i = 0; i < DefaultNumberOfClients; i++)
+                {
+                    Customer.RandomCustomer();
+                }
+                //new Customer("Adamson", "Adam", "Adam Jr", "55-445321", "1160000", "XP");
+                //new Customer("Brian", "Palma", "De", "55-55123", "1161111", "XP");
+                //new Customer("Rupert", "Murdoc", "Senior", "55-0101010", "1167701", "DM");
+                //new Customer("Nixon", "Flow", "Scott", "554-551234", "1160051", "SS");
+                //new Customer("Jannson", "Greg", "Val", "9-9944-5", "1160016", "DM");
+                //new Customer("Ruyeen", "Sam", "Gross", "0055855123", "1160051", "SS");
+                //new Customer("Karvee", "William", "Rum", "00773123", "1160021", "SS");
+                //new Customer("Samoa", "Josh", "Sent", "55123345", "1160001", "XP");
                 customersResource.SaveToJson(customers);
             }
             // Accounts database - retreive from json, or create new accounts
@@ -100,7 +105,6 @@ namespace CommercialBankLibrary_16
             {
                 Debug.WriteLine("Accounts states data not found");
             }
-
         }
 
         public static void SaveCustomers()
