@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Threading.Tasks;
 using CommercialBankLibrary_16;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace app16
 {
@@ -18,6 +19,8 @@ namespace app16
         private Customer sourceCustomer;
         private Customer beneficiaryCustomer;
         private CustomerManageWindow customerManageWindow;
+        private ObservableCollection<Customer> customerList;
+
         public TransferBetweenAccountsWindow(Account account, CustomerManageWindow customerManageWindow)
         {
             InitializeComponent();
@@ -34,40 +37,40 @@ namespace app16
             TBA_TextBlockSourceAccountBalance.Text = sourceAccount.Balance.ToString();
             TBA_TextBlockMaxAllowedAmount.Text = "Max Allowed: " + sourceAccount.Balance.ToString();
             // maping combobox
+
             //TBA_ComboboxPickDestinationAccountHolderName.ItemsSource = Buffer.Customers.Where(item => item.Id != sourceCustomer.Id).ToList();
-            TBA_ComboboxPickDestinationAccountHolderName.ItemsSource = GetCustomersListAsync(Buffer.Customers, sourceCustomer.Id).Result;
-        }
-
-        private async void BindData()
-        {
-            Task taskName = Task.Run(() => { TBA_ComboboxPickDestinationAccountHolderName.ItemsSource = Buffer.Customers.Where(item => item.Id != sourceCustomer.Id).ToList(); ; });
-            await taskName;
-        }
-
-        private async Task<List<Customer>> GetCustomersListAsync(ObservableCollection<Customer> source, uint excludeId)
-        {
-            List<Customer> result = new List<Customer>();
-            Task taskName = Task.Run(() => {
-                var sampleSource = new ObservableCollection<Customer>(source.ToList());
-                result = new List<Customer>(sampleSource.Where(item => item.Id != excludeId).ToList());
-            });
-            await taskName;
-            return result;
+            //Task t1 = new Task(() => 
+            //{
+            //    Thread.Sleep(10000);
+            //    customerList = new ObservableCollection<Customer>(Buffer.Customers.Where(item => item.Id != sourceCustomer.Id).ToList());
+            //});
+            //t1.Start();
+            //t1.Wait();
+            //TBA_ComboboxPickDestinationAccountHolderName.ItemsSource = customerList;
         }
 
         private void TBA_ComboboxPickDestinationAccountHolderName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            beneficiaryCustomer = TBA_ComboboxPickDestinationAccountHolderName.SelectedItem as Customer;
-            TBA_ListViewDestinationAccountPicker.ItemsSource = new ObservableCollection<Account>(Buffer.Accounts.Where
-                (
-                    item =>
-                    (item.CustomerId == beneficiaryCustomer.Id) &&
-                    (item.CustomerId != sourceCustomer.Id) &&
-                    (item.Active == true)
-                )
-                );
-            beneficiaryAccount = null;
-            TBA_ListViewDestinationAccountPicker.UnselectAll();
+            try
+            {
+                beneficiaryCustomer = TBA_ComboboxPickDestinationAccountHolderName.SelectedItem as Customer;
+                if (beneficiaryCustomer != null)
+                {
+                    TBA_ListViewDestinationAccountPicker.ItemsSource = new ObservableCollection<Account>(Buffer.Accounts.Where
+                    (
+                        item =>
+                        (item.CustomerId == beneficiaryCustomer.Id) &&
+                        (item.CustomerId != sourceCustomer.Id) &&
+                        (item.Active == true)
+                    ));
+                }
+                beneficiaryAccount = null;
+                TBA_ListViewDestinationAccountPicker.UnselectAll();
+            }
+            catch
+            {
+                return;
+            }
         }
 
         private void TBA_PreviewInputAmountText(object sender, TextCompositionEventArgs e)
@@ -112,6 +115,55 @@ namespace app16
                         MessageBox.Show(this, $"Accounnt {exception.SourceAccount.Number} has insufficient funds", "Out of balance", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
+            }
+        }
+
+        private void TBA_ComboboxPickDestinationAccountHolderName_DropDownOpened(object sender, System.EventArgs e)
+        {
+            return;
+            if (customerList == null)
+            {
+                loadCustomersList = new Task<List<Customer>>(() =>
+                {
+                    return Buffer.Customers.Where(item => item.Id != sourceCustomer.Id).ToList();
+                });
+                loadCustomersList.Start();
+                loadCustomersList.Wait();
+                TBA_ComboboxPickDestinationAccountHolderName.ItemsSource = loadCustomersList.Result;
+            }
+            //TBA_ComboboxPickDestinationAccountHolderName.ItemsSource = GetCustomersListAsync(Buffer.Customers, sourceCustomer.Id).Result;
+        }
+
+        private async Task<List<Customer>> GetCustomersListAsync(ObservableCollection<Customer> source, uint excludeId)
+        {
+            List<Customer> result = new List<Customer>();
+            //Task taskName = Task.Run(() => {
+            //    var sampleSource = new ObservableCollection<Customer>(source.ToList());
+            //    result = new List<Customer>(sampleSource.Where(item => item.Id != excludeId).ToList());
+            //});
+            //await taskName;
+            await Task.Run(() =>
+            {
+                var sampleSource = new ObservableCollection<Customer>(source.ToList());
+                result = new List<Customer>(sampleSource.Where(item => item.Id != excludeId).ToList());
+            }
+                );
+            return result;
+        }
+
+        private Task<List<Customer>> loadCustomersList;
+
+        private void TBA_ComboboxPickDestinationAccountHolderName_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (customerList == null)
+            {
+                loadCustomersList = new Task<List<Customer>>(() =>
+                {
+                    return Buffer.Customers.Where(item => item.Id != sourceCustomer.Id).ToList();
+                });
+                loadCustomersList.Start();
+                loadCustomersList.Wait();
+                TBA_ComboboxPickDestinationAccountHolderName.ItemsSource = loadCustomersList.Result;
             }
         }
     }

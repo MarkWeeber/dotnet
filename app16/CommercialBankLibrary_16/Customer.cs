@@ -172,7 +172,7 @@ namespace CommercialBankLibrary_16
         }
         public override string ToString()
         {
-            return "Customer: " + firstName.ToString() + " " + lastName.ToString();
+            return Id.ToString() + " " + firstName.ToString() + " " + lastName.ToString();
         }
     }
     public static class RandomCustomerDetails

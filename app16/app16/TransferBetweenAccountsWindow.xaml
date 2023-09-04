@@ -160,7 +160,10 @@
                     Width="180"
                     Height="25"
                     Margin="0 0 30 7"
+                    IsEditable="True"
+                    Loaded="TBA_ComboboxPickDestinationAccountHolderName_Loaded"
                     SelectionChanged="TBA_ComboboxPickDestinationAccountHolderName_SelectionChanged"
+                    
                     />
                 <TextBlock
                     Grid.Row="1"
