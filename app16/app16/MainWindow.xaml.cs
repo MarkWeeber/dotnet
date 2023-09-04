@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -6,9 +7,12 @@ using System.ComponentModel;
 using CommercialBankLibrary_16;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace app16
 {
+    public enum ListViewPagingMode { First = 1, Next = 2, Previous = 3, Last =4 }
+
     public partial class MainWindow : Window
     {
         private User user;
@@ -16,6 +20,9 @@ namespace app16
         private GridViewColumnHeader listViewSortCol = null;
         private SortAdorner listViewSortAdorner = null;
         private LoadingPopUp loadingPopUp = null;
+        private int customerListViewCurrentPageIndex = 1;
+        private int customerListViewPageSize = 20;
+        private int customerListViewLastPageNumber = 0;
 
         public MainWindow()
         {
@@ -35,10 +42,31 @@ namespace app16
 
         private void BindListData()
         {
-            ListViewCustomers.ItemsSource = Buffer.Customers;
+            BindPaging(ListViewCustomers, Buffer.Customers, customerListViewCurrentPageIndex);
             ListViewTransactionHistory.ItemsSource = Buffer.Transactions;
             ListViewCustomersChangeLog.ItemsSource = Buffer.CustomersChangeLog;
             ListViewAccountsSatesLog.ItemsSource = Buffer.AccountsStatesLog;
+        }
+
+        public void RefreshCustomersListView()
+        {
+            BindPaging(ListViewCustomers, Buffer.Customers, customerListViewCurrentPageIndex);
+        }
+
+        private void BindPaging<T>(ListView listView, ObservableCollection<T> collection, int page)
+        {
+            int allowedRange = customerListViewPageSize;
+            int maxCount = collection.Count;
+            customerListViewLastPageNumber = maxCount / customerListViewPageSize + (int)System.Math.Ceiling((float)maxCount % customerListViewPageSize / customerListViewPageSize);
+            if (page >= customerListViewLastPageNumber)
+            {
+                int remainder = maxCount % customerListViewPageSize;
+                page = customerListViewLastPageNumber;
+                allowedRange = remainder > 0 ? remainder : customerListViewPageSize;
+            }
+            customerListViewCurrentPageIndex = page;
+            CustomerListViewCurrentPage.Text = page.ToString();
+            listView.ItemsSource = collection.ToList().GetRange((page - 1) * customerListViewPageSize, allowedRange);
         }
 
         private void CustomersListViewColumnHeader_Click(object sender, RoutedEventArgs e)
@@ -86,7 +114,7 @@ namespace app16
 
         private void AddNewCustomer_Click(object sender, RoutedEventArgs e)
         {
-            AddNewCustomer addNewCustomer = new AddNewCustomer();
+            AddNewCustomer addNewCustomer = new AddNewCustomer(this);
             addNewCustomer.ShowDialog();
         }
 
@@ -136,6 +164,35 @@ namespace app16
         private void LoadingPopUpClose()
         {
             loadingPopUp.Close();
+        }
+
+        private void CustomerListViewFirstPage_Click(object sender, RoutedEventArgs e)
+        {
+            customerListViewCurrentPageIndex = 1;
+            BindPaging(ListViewCustomers, Buffer.Customers, customerListViewCurrentPageIndex);
+        }
+
+        private void CustomerListViewNextPage_Click(object sender, RoutedEventArgs e)
+        {
+            customerListViewCurrentPageIndex++;
+            BindPaging(ListViewCustomers, Buffer.Customers, customerListViewCurrentPageIndex);
+        }
+
+        private void CustomerListViewPreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            customerListViewCurrentPageIndex--;
+            if (customerListViewCurrentPageIndex < 1)
+            {
+                customerListViewCurrentPageIndex = 1;
+            }
+            BindPaging(ListViewCustomers, Buffer.Customers, customerListViewCurrentPageIndex);
+        }
+
+        private void CustomerListViewLastPage_Click(object sender, RoutedEventArgs e)
+        {
+            int maxCount = Buffer.Customers.Count;
+            customerListViewLastPageNumber = maxCount / customerListViewPageSize + (int)System.Math.Ceiling((float)maxCount % customerListViewPageSize / customerListViewPageSize);
+            BindPaging(ListViewCustomers, Buffer.Customers, customerListViewLastPageNumber);
         }
     }
 }

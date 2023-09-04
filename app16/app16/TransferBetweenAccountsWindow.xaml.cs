@@ -4,7 +4,9 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Threading.Tasks;
 using CommercialBankLibrary_16;
+using System.Collections.Generic;
 
 namespace app16
 {
@@ -32,7 +34,25 @@ namespace app16
             TBA_TextBlockSourceAccountBalance.Text = sourceAccount.Balance.ToString();
             TBA_TextBlockMaxAllowedAmount.Text = "Max Allowed: " + sourceAccount.Balance.ToString();
             // maping combobox
-            TBA_ComboboxPickDestinationAccountHolderName.ItemsSource = Buffer.Customers.Where(item => item.Id != sourceCustomer.Id).ToList();
+            //TBA_ComboboxPickDestinationAccountHolderName.ItemsSource = Buffer.Customers.Where(item => item.Id != sourceCustomer.Id).ToList();
+            TBA_ComboboxPickDestinationAccountHolderName.ItemsSource = GetCustomersListAsync(Buffer.Customers, sourceCustomer.Id).Result;
+        }
+
+        private async void BindData()
+        {
+            Task taskName = Task.Run(() => { TBA_ComboboxPickDestinationAccountHolderName.ItemsSource = Buffer.Customers.Where(item => item.Id != sourceCustomer.Id).ToList(); ; });
+            await taskName;
+        }
+
+        private async Task<List<Customer>> GetCustomersListAsync(ObservableCollection<Customer> source, uint excludeId)
+        {
+            List<Customer> result = new List<Customer>();
+            Task taskName = Task.Run(() => {
+                var sampleSource = new ObservableCollection<Customer>(source.ToList());
+                result = new List<Customer>(sampleSource.Where(item => item.Id != excludeId).ToList());
+            });
+            await taskName;
+            return result;
         }
 
         private void TBA_ComboboxPickDestinationAccountHolderName_SelectionChanged(object sender, SelectionChangedEventArgs e)

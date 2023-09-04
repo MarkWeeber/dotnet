@@ -8,9 +8,12 @@ namespace app16
     public partial class AddNewCustomer : Window
     {
         private List<TextBox> InputFields;
-        public AddNewCustomer()
+        private MainWindow mainWindow;
+
+        public AddNewCustomer(MainWindow mainWindow)
         {
             InitializeComponent();
+            this.mainWindow = mainWindow;
             InputFields = new List<TextBox>() { InputNewFirstName, InputNewLastName, InputNewMiddleName, InputNewPhone, InputNewPassportNumber, InputNewPassportSeries };
         }
 
@@ -48,6 +51,7 @@ namespace app16
                 newCustomer.MainNonDepositAccountId = new NonDepositAccount(newCustomer.Id, Currency.RUB).Id;
                 Buffer.SaveCustomers();
                 Buffer.SaveAccounts();
+                mainWindow.RefreshCustomersListView();
                 this.Close();
             }
         }
@@ -81,6 +85,7 @@ namespace app16
                 newCustomer.MainNonDepositAccountId = new NonDepositAccount(newCustomer.Id, Currency.RUB).Id;
                 Buffer.SaveCustomers();
                 Buffer.SaveAccounts();
+                mainWindow.RefreshCustomersListView();
                 foreach (var item in InputFields)
                 {
                     item.Text = "";
