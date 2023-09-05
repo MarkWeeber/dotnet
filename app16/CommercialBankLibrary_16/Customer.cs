@@ -89,6 +89,7 @@ namespace CommercialBankLibrary_16
         public static uint incrementor;
         public uint Id { get; }
         private string firstName;
+        public string Credentials { get { return firstName.ToString() + " " + lastName.ToString(); } }
         public string FirstName { get { return firstName; } set { SetField(ref firstName, value, "FirstName"); } }
         private string lastName;
         public string LastName { get { return lastName; } set { SetField(ref lastName, value, "LastName"); } }

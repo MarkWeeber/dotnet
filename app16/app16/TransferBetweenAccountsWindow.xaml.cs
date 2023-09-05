@@ -7,7 +7,6 @@ using System.Windows.Input;
 using System.Threading.Tasks;
 using CommercialBankLibrary_16;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace app16
 {
@@ -19,7 +18,6 @@ namespace app16
         private Customer sourceCustomer;
         private Customer beneficiaryCustomer;
         private CustomerManageWindow customerManageWindow;
-        private ObservableCollection<Customer> customerList;
 
         public TransferBetweenAccountsWindow(Account account, CustomerManageWindow customerManageWindow)
         {
@@ -36,17 +34,6 @@ namespace app16
             TBA_TextBlockSourceAccountCurrency.Text = sourceAccount.Currency.ToString();
             TBA_TextBlockSourceAccountBalance.Text = sourceAccount.Balance.ToString();
             TBA_TextBlockMaxAllowedAmount.Text = "Max Allowed: " + sourceAccount.Balance.ToString();
-            // maping combobox
-
-            //TBA_ComboboxPickDestinationAccountHolderName.ItemsSource = Buffer.Customers.Where(item => item.Id != sourceCustomer.Id).ToList();
-            //Task t1 = new Task(() => 
-            //{
-            //    Thread.Sleep(10000);
-            //    customerList = new ObservableCollection<Customer>(Buffer.Customers.Where(item => item.Id != sourceCustomer.Id).ToList());
-            //});
-            //t1.Start();
-            //t1.Wait();
-            //TBA_ComboboxPickDestinationAccountHolderName.ItemsSource = customerList;
         }
 
         private void TBA_ComboboxPickDestinationAccountHolderName_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -118,53 +105,43 @@ namespace app16
             }
         }
 
-        private void TBA_ComboboxPickDestinationAccountHolderName_DropDownOpened(object sender, System.EventArgs e)
+        private async void TBA_ComboboxPickDestinationAccountHolderName_DropDownOpened(object sender, System.EventArgs e)
         {
-            return;
-            if (customerList == null)
+            if (TBA_ComboboxPickDestinationAccountHolderName.Items.Count > 0)
             {
-                loadCustomersList = new Task<List<Customer>>(() =>
-                {
-                    return Buffer.Customers.Where(item => item.Id != sourceCustomer.Id).ToList();
-                });
-                loadCustomersList.Start();
-                loadCustomersList.Wait();
-                TBA_ComboboxPickDestinationAccountHolderName.ItemsSource = loadCustomersList.Result;
+                return;
             }
-            //TBA_ComboboxPickDestinationAccountHolderName.ItemsSource = GetCustomersListAsync(Buffer.Customers, sourceCustomer.Id).Result;
+            Task<List<Customer>> loadData = Task.Run(() =>
+            {
+                return Buffer.Customers.Where(item => item.Id != sourceCustomer.Id).ToList();
+            });
+            TBA_ComboboxPickDestinationAccountHolderName.ItemsSource = await loadData;
         }
 
-        private async Task<List<Customer>> GetCustomersListAsync(ObservableCollection<Customer> source, uint excludeId)
+        private void TBA_ComboboxPickDestinationAccountHolderName_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            List<Customer> result = new List<Customer>();
-            //Task taskName = Task.Run(() => {
-            //    var sampleSource = new ObservableCollection<Customer>(source.ToList());
-            //    result = new List<Customer>(sampleSource.Where(item => item.Id != excludeId).ToList());
-            //});
-            //await taskName;
-            await Task.Run(() =>
+            string tx = TBA_ComboboxPickDestinationAccountHolderName.Text;
+            if (tx.Length > 0)
             {
-                var sampleSource = new ObservableCollection<Customer>(source.ToList());
-                result = new List<Customer>(sampleSource.Where(item => item.Id != excludeId).ToList());
+                FilterDropDownList(tx);
             }
-                );
-            return result;
+            else
+            {
+                LoadDefaultDropDownList();
+            }
         }
 
-        private Task<List<Customer>> loadCustomersList;
-
-        private void TBA_ComboboxPickDestinationAccountHolderName_Loaded(object sender, RoutedEventArgs e)
+        private void LoadDefaultDropDownList()
         {
-            if (customerList == null)
-            {
-                loadCustomersList = new Task<List<Customer>>(() =>
-                {
-                    return Buffer.Customers.Where(item => item.Id != sourceCustomer.Id).ToList();
-                });
-                loadCustomersList.Start();
-                loadCustomersList.Wait();
-                TBA_ComboboxPickDestinationAccountHolderName.ItemsSource = loadCustomersList.Result;
-            }
+            TBA_ComboboxPickDestinationAccountHolderName.ItemsSource = Buffer.Customers.Where(item => item.Id != sourceCustomer.Id).ToList();
+        }
+
+        private void FilterDropDownList(string filterText)
+        {
+            TBA_ComboboxPickDestinationAccountHolderName.ItemsSource = Buffer.Customers.Where(item =>
+            item.Id != sourceCustomer.Id &&
+            item.FirstName.Contains(filterText)
+            ).ToList();
         }
     }
 }

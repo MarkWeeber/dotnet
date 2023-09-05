@@ -2,14 +2,15 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Data;
 using System.Text.RegularExpressions;
 using CommercialBankLibrary_16;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace app16
 {
-    /// <summary>
-    /// Логика взаимодействия для TransferBetweenCustomersWindow.xaml
-    /// </summary>
     public partial class TransferBetweenCustomersWindow : Window
     {
         private float transferAmount = -1f;
@@ -21,7 +22,6 @@ namespace app16
         {
             InitializeComponent();
             // maping main combobox
-            TBC_ComboBoxSourceCustomer.ItemsSource = Buffer.Customers;
             TBC_ComboBoxBeneficiaryCustomer.IsEnabled = false;
         }
 
@@ -66,11 +66,23 @@ namespace app16
 
         private void TBC_ComboBoxSourceCustomer_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            sourceCustomer = TBC_ComboBoxSourceCustomer.SelectedItem as Customer;
-            sourceAccount = Buffer.Accounts.Where(item => item.Id == sourceCustomer.MainNonDepositAccountId).ToList()[0];
-            UpdateSourceAccountIndicators();
-            TBC_ComboBoxBeneficiaryCustomer.IsEnabled = true;
-            TBC_ComboBoxBeneficiaryCustomer.ItemsSource = Buffer.Customers.Where(item => item.Id != sourceCustomer.Id);
+            try
+            {
+                sourceCustomer = TBC_ComboBoxSourceCustomer.SelectedItem as Customer;
+                if (sourceCustomer != null)
+                {
+                    sourceAccount = Buffer.Accounts.Where(item => item.Id == sourceCustomer.MainNonDepositAccountId).ToList()[0];
+                    UpdateSourceAccountIndicators();
+                    TBC_ComboBoxBeneficiaryCustomer.SelectedIndex = -1;
+                    TBC_ComboBoxBeneficiaryCustomer.ItemsSource = null;
+                    TBC_ComboBoxBeneficiaryCustomer.IsEnabled = true;
+                    TBC_ComboBoxBeneficiaryCustomer_DropDownOpened(sender, e);
+                }
+            }
+            catch
+            {
+                return;
+            }
             //TBC_ComboBoxBeneficiaryCustomer.SelectedItem = null;
             
         }
@@ -112,6 +124,32 @@ namespace app16
             TBC_TextBlockBeneficiaryAccoundNumber.Text = "XXXXXX";
             TBC_TextBlockBeneficiaryAccoundCurrency.Text = "XXXXXX";
             TBC_TextBlockBeneficiaryAccoundBalance.Text = "XXXXXX";
+        }
+
+        private async void TBC_ComboBoxSourceCustomer_DropDownOpened(object sender, System.EventArgs e)
+        {
+            if (TBC_ComboBoxSourceCustomer.Items.Count > 0)
+            {
+                return;
+            }
+            Task<List<Customer>> loadData = Task.Run(() =>
+            {
+                return Buffer.Customers.ToList();
+            });
+            TBC_ComboBoxSourceCustomer.ItemsSource = await loadData;
+        }
+
+        private async void TBC_ComboBoxBeneficiaryCustomer_DropDownOpened(object sender, System.EventArgs e)
+        {
+            if (TBC_ComboBoxBeneficiaryCustomer.Items.Count > 0)
+            {
+                return;
+            }
+            Task<List<Customer>> loadData = Task.Run(() =>
+            {
+                return Buffer.Customers.Where(item => item.Id != sourceCustomer.Id).ToList();
+            });
+            TBC_ComboBoxBeneficiaryCustomer.ItemsSource = await loadData;
         }
     }
 }

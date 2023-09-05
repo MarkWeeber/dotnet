@@ -42,7 +42,12 @@
                 VerticalAlignment="Center"
                 Margin="0 0 20 0"
                 Height="25"
-                Width="160" SelectionChanged="TBC_ComboBoxSourceCustomer_SelectionChanged"
+                Width="160"
+                SelectionChanged="TBC_ComboBoxSourceCustomer_SelectionChanged"
+                IsEditable="True"
+                IsTextSearchEnabled="True"
+                TextSearch.TextPath="Credentials"
+                DropDownOpened="TBC_ComboBoxSourceCustomer_DropDownOpened"
                 />
             <TextBlock
                 Grid.Row="0"
@@ -62,7 +67,13 @@
                 VerticalAlignment="Center"
                 Margin="0 0 20 0"
                 Height="25"
-                Width="140" SelectionChanged="TBC_ComboBoxBeneficiaryCustomer_SelectionChanged"
+                Width="140"
+                IsEditable="True"
+                IsTextSearchEnabled="True"
+                TextSearch.TextPath="Credentials"
+                DisplayMemberPath="Credentials"
+                SelectionChanged="TBC_ComboBoxBeneficiaryCustomer_SelectionChanged"
+                DropDownOpened="TBC_ComboBoxBeneficiaryCustomer_DropDownOpened"
                 />
             <TextBlock
                 Grid.Row="1"

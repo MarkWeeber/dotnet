@@ -11,8 +11,6 @@ using System.Diagnostics;
 
 namespace app16
 {
-    public enum ListViewPagingMode { First = 1, Next = 2, Previous = 3, Last =4 }
-
     public partial class MainWindow : Window
     {
         private User user;
