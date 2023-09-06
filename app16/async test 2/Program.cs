@@ -12,15 +12,15 @@ namespace async_test_2
             Console.WriteLine("Main Start");
             Task t1 = new Task(SomeMethod);
             t1.Start();
-            t1.Wait();
+            //t1.Wait();
             Task t2 = new Task(SomeMethod2);
             t2.Start();
-            t2.Wait();
+            //t2.Wait();
             //SomeMethod();
             //AsyncMethod1();
             //AsyncMethod2();
             //Task1();
-            //Thread.Sleep(1000);
+            Thread.Sleep(10000);
             Console.WriteLine($"Main End, x = {x}");
         }
 

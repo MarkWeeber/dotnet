@@ -126,17 +126,18 @@ namespace app16
             TBC_TextBlockBeneficiaryAccoundBalance.Text = "XXXXXX";
         }
 
+        private int delay = 0;
+
         private async void TBC_ComboBoxSourceCustomer_DropDownOpened(object sender, System.EventArgs e)
         {
             if (TBC_ComboBoxSourceCustomer.Items.Count > 0)
             {
                 return;
             }
-            Task<List<Customer>> loadData = Task.Run(() =>
+            foreach (Customer item in Buffer.Customers)
             {
-                return Buffer.Customers.ToList();
-            });
-            TBC_ComboBoxSourceCustomer.ItemsSource = await loadData;
+                TBC_ComboBoxSourceCustomer.Items.Add(await Task.Run(() => {return item;}));
+            }
         }
 
         private async void TBC_ComboBoxBeneficiaryCustomer_DropDownOpened(object sender, System.EventArgs e)
@@ -145,11 +146,14 @@ namespace app16
             {
                 return;
             }
-            Task<List<Customer>> loadData = Task.Run(() =>
+            foreach (Customer item in Buffer.Customers)
             {
-                return Buffer.Customers.Where(item => item.Id != sourceCustomer.Id).ToList();
-            });
-            TBC_ComboBoxBeneficiaryCustomer.ItemsSource = await loadData;
+                if (item.Id == sourceCustomer.Id)
+                {
+                    continue;
+                }
+                TBC_ComboBoxBeneficiaryCustomer.Items.Add(await Task.Run(() => item));
+            }
         }
     }
 }

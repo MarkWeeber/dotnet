@@ -8,8 +8,11 @@ namespace Async_Test_Console_App
     {
         static async Task Main(string[] args)
         {
+            await TestAsync();
             Console.WriteLine("Running async methods");
-            await Task.WhenAll(Program.RunAB(), Program.RunBA());
+            return;
+            //Console.WriteLine("Running async methods");
+            //await Task.WhenAll(Program.RunAB(), Program.RunBA());
             //Task<int> taskName = Task.Run(() =>
             //{
             //    int ans = 0;
@@ -23,6 +26,20 @@ namespace Async_Test_Console_App
             //Console.WriteLine("NEXT UP");
             //int x = await taskName;
             //Console.WriteLine($" {x}");
+        }
+
+        private async static Task TestAsync()
+        {
+            Console.WriteLine("Async start");
+            for (int i = 0; i < 10; i++)
+            {
+                await Task.Run(() =>
+                {
+                    Task.Delay(10000);
+                    Console.WriteLine($"Task {i} Finished");
+                });
+            }
+            Console.WriteLine("Async end");
         }
 
         private static async void Test()

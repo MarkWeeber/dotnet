@@ -71,7 +71,6 @@
                 IsEditable="True"
                 IsTextSearchEnabled="True"
                 TextSearch.TextPath="Credentials"
-                DisplayMemberPath="Credentials"
                 SelectionChanged="TBC_ComboBoxBeneficiaryCustomer_SelectionChanged"
                 DropDownOpened="TBC_ComboBoxBeneficiaryCustomer_DropDownOpened"
                 />
